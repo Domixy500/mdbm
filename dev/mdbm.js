@@ -2,9 +2,9 @@ const mdbm = (function () {
   const data = Object.create(null);
 
   function generateId() {
-    const lastId = data.settings.field("lastId");
+    const lastId = settings().field("lastId");
     const nextId = lastId + 1;
-    data.settings.set("lastId", nextId);
+    settings().set("lastId", nextId);
     return nextId.toString(36);
   }
 
