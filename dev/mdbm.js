@@ -1,6 +1,6 @@
 const mdbm = (function () {
   function test() {
-    message("test");
+    message("test2");
   }
 
   return Object.freeze({
