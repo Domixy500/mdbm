@@ -1,6 +1,9 @@
+import { myExport } from "/module.js";
+
+
 const mdbm = (function () {
   function test() {
-    message("test2");
+    message(myExport.test());
   }
 
   return Object.freeze({
