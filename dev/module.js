@@ -1,1 +1,7 @@
-import { myExport } from "/modules/my-module.js";
+function test() {
+  return "mod";
+}
+
+const myExport = {"test": test};
+
+export { myExport };
