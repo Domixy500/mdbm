@@ -1,12 +1,15 @@
 const mdbm = (function () {
-  const settings = initSettings();
+  const data = Object.create(null);
 
-  function initSettings() {
-    let settingsEntry;
+  function generateId() {
+    const lastId = data.settings.field("lastId");
+    const nextId = lastId + 1;
+    data.settings.set("lastId", nextId);
+    return nextId.toString(36);
   }
 
-  function getId() {
-
+  function settings() {
+    return data.settings || libByName("mdbm").entries()[0];
   }
 
   function test() {
@@ -14,6 +17,7 @@ const mdbm = (function () {
   }
 
   return Object.freeze({
+    "generateId": generateId,
     "test": test
   });
 }());
