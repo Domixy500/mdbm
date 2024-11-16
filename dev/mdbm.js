@@ -4,6 +4,6 @@ const mdbm = (function () {
   }
 
   return Object.freeze({
-    test
+    "test": test
   });
 }());
