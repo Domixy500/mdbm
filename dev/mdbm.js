@@ -1,5 +1,5 @@
-import { myExport } from "/module.js";
-
+//import { myExport } from "/module.js";
+const myExport = require('./module.js');
 
 const mdbm = (function () {
   function test() {
