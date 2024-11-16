@@ -4,4 +4,6 @@ function test() {
 
 const myExport = {"test": test};
 
-export { myExport };
+//export { myExport };
+
+module.exports = myExport;
