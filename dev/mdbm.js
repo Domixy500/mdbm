@@ -19,7 +19,7 @@ const mdbm = (function () {
         R.map(template),
         Object.freeze
     )({
-        "byIdType": "SELECT id FROM \"${}\" WHERE \"mdbm.id\" = \"${id}\""
+        "byIdType": "SELECT id FROM \"${type}\" WHERE \"mdbm.id\" = \"${id}\""
     });
     
     
