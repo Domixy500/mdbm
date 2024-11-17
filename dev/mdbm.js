@@ -15,37 +15,42 @@ const mdbm = (function () {
             (notUsed, key) => values[key] || ""
         );
     });
-    const query = (function () {
-        function byIdType(id, type) {
-            const select = "SELECT id FROM \"";
-            return select.concat(
-                type,
-                "\" WHERE \"mdbm.id\" = \"",
-                id,
-                "\""
-            );
-        }
+    const query = R.pipe(
+        R.map(template),
+        Object.freeze
+    )({
+        "byIdType": "SELECT id FROM \"${}\" WHERE \"mdbm.id\" = \"${id}\""
+    });
+    
+    
+    // (function () {
+    //     return Object.freeze(R.map(template, {
 
-        return Object.freeze(R.map({
-            "byIdType": byIdType
-        }, R.curry));
-    }());
-    const findOrCreateInterface = R.curry(
-        function (id, type) {
+    //     }));
+    // }());
+    
+    // (function () {
+
+    //     return Object.freeze(R.map({
+    //         "byIdType": byIdType
+    //     }, R.curry));
+    // }());
+    // const findOrCreateInterface = R.curry(
+    //     function (id, type) {
           
-        }
-    );
-    const interfaceQuery = R.curry(
-        function (id, type) {
-            const select = "SELECT id FROM \"";
-            return select.concat(
-                type,
-                "\" WHERE \"mdbm.id\" = \"",
-                id,
-                "\""
-            );
-        }
-    );
+    //     }
+    // );
+    // const interfaceQuery = R.curry(
+    //     function (id, type) {
+    //         const select = "SELECT id FROM \"";
+    //         return select.concat(
+    //             type,
+    //             "\" WHERE \"mdbm.id\" = \"",
+    //             id,
+    //             "\""
+    //         );
+    //     }
+    // );
 
     function entriesBySql(query) {
         return sql(query).asEntries();
@@ -85,6 +90,6 @@ const mdbm = (function () {
     return Object.freeze({
         "generateId": generateId,
         "interfaces": interfaces,
-        "template": template
+        "query": query
     });
 }());
