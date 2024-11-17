@@ -19,6 +19,8 @@ const mdbm = (function () {
             );
         }
     );
+    const splitMulitList = R.split(", ");
+
 
     function entriesBySql(query) {
         return sql(query).asEntries();
@@ -36,8 +38,8 @@ const mdbm = (function () {
     }
 
     function interfaceNames(e) {
-        log(new Array(e.field("mdbm.interfaces")))
-        return new Array(e.field("mdbm.interfaces"));
+        log(splitMulitList(e.field("mdbm.interfaces")))
+        return splitMulitList(e.field("mdbm.interfaces"));
     }
 
     function interfaces(e) {
