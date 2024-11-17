@@ -8,6 +8,21 @@
 
 const mdbm = (function () {
     const data = Object.create(null);
+    const query = (function () {
+        function byIdType(id, type) {
+            const select = "SELECT id FROM \"";
+            return select.concat(
+                type,
+                "\" WHERE \"mdbm.id\" = \"",
+                id,
+                "\""
+            );
+        }
+
+        return Object.freeze(R.map({
+            "byIdType": byIdType
+        }, R.curry));
+    }());
     const findOrCreateInterface = R.curry(
         function (id, type) {
           
