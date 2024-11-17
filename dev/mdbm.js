@@ -8,6 +8,13 @@
 
 const mdbm = (function () {
     const data = Object.create(null);
+    const template = R.curry(function (pattern, values) {
+        const regex = new RegExp("\\$\\{(.*?)\\}", "g");
+        return pattern.replace(
+            regex,
+            (notUsed, key) => values[key] || ""
+        );
+    });
     const query = (function () {
         function byIdType(id, type) {
             const select = "SELECT id FROM \"";
@@ -77,6 +84,7 @@ const mdbm = (function () {
 
     return Object.freeze({
         "generateId": generateId,
-        "interfaces": interfaces
+        "interfaces": interfaces,
+        "template": template
     });
 }());
