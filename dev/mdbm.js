@@ -38,7 +38,7 @@ const mdbm = (function () {
         return R.pipe(
             interfaceNames,
             R.map(interfaceQuery(id)),
-            R.map(entryBySql)
+            //R.map(entryBySql)
         )(e);
     }
 
