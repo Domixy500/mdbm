@@ -8,12 +8,16 @@ const mdbm = (function () {
     return nextId.toString(36);
   }
 
+  function settings() {
+    return data.settings || libByName("mdbm").entries()[0];
+  }
+
   function typeNames(e) {
     return Array(e.field("mdbm.types"));
   }
 
-  function settings() {
-    return data.settings || libByName("mdbm").entries()[0];
+  function types(names, id) {
+    
   }
 
   function test() {
