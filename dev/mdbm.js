@@ -8,6 +8,11 @@
 
 const mdbm = (function () {
     const data = Object.create(null);
+    const findOrCreateInterface = R.curry(
+        function (id, type) {
+          
+        }
+    );
     const interfaceQuery = R.curry(
         function (id, type) {
             const select = "SELECT id FROM \"";
@@ -47,7 +52,7 @@ const mdbm = (function () {
         return R.pipe(
             interfaceNames,
             R.map(interfaceQuery(id)),
-            R.map(entryBySql)
+            R.map(findOrCreateInterface(id))
         )(e);
     }
 
