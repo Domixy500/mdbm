@@ -10,7 +10,13 @@ const mdbm = (function () {
     const data = Object.create(null);
     const interfaceQuery = R.curry(
         function (id, type) {
-            return `SELECT id FROM "${type}" WHERE "mdbm.id" = "${id}"`;
+            const select = "SELECT id FROM \"";
+            return select.concat(
+                type,
+                "\" WHERE \"mdbm.id\" = \"",
+                id,
+                "\""
+            );
         }
     );
 
@@ -37,7 +43,7 @@ const mdbm = (function () {
         const id = e.field("mdbm.id");
         return R.pipe(
             interfaceNames,
-            R.map(interfaceQuery(id)),
+            R.map(interfaceQuery(id))
             //R.map(entryBySql)
         )(e);
     }
