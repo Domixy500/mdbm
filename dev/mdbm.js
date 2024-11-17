@@ -36,6 +36,7 @@ const mdbm = (function () {
     }
 
     function interfaceNames(e) {
+        log(new Array(e.field("mdbm.interfaces")))
         return new Array(e.field("mdbm.interfaces"));
     }
 
