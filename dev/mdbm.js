@@ -1,31 +1,53 @@
+/*jslint*/
+/*global
+    libByName
+    message
+    R
+    sql
+*/
+
 const mdbm = (function () {
-  const data = Object.create(null);
+    const data = Object.create(null);
+    const interfaceQuery = R.curry(
+        function (id, type) {
+            return `SELECT id FROM ${type} WHERE mdbm.id = '${id}'`;
+        }
+    );
 
-  function generateId() {
-    const lastId = settings().field("lastId");
-    const nextId = lastId + 1;
-    settings().set("lastId", nextId);
-    return nextId.toString(36);
-  }
+    function entriesBySql(query) {
+        return sql(query).asEntries();
+    }
 
-  function settings() {
-    return data.settings || libByName("mdbm").entries()[0];
-  }
+    function entryBySql(query) {
+        return entriesBySql(query)[0];
+    }
 
-  function typeNames(e) {
-    return Array(e.field("mdbm.types"));
-  }
+    function generateId() {
+        const lastId = settings().field("lastId");
+        const nextId = lastId + 1;
+        settings().set("lastId", nextId);
+        return nextId.toString(36);
+    }
 
-  function types(names, id) {
-    
-  }
+    function interfaceNames(e) {
+        return new Array(e.field("mdbm.interfaces"));
+    }
 
-  function test() {
-    message("abc");
-  }
+    function interfaces(e) {
+        const id = e.field("mdbm.id");
+        return R.pipe(
+            interfaceNames,
+            R.map(interfaceQuery(id)),
+            R.map(entryBySql)
+        )(e);
+    }
 
-  return Object.freeze({
-    "generateId": generateId,
-    "test": test
-  });
+    function settings() {
+        return data.settings || libByName("mdbm").entries()[0];
+    }
+
+    return Object.freeze({
+        "generateId": generateId,
+        "interfaces": interfaces
+    });
 }());
