@@ -21,36 +21,12 @@ const mdbm = (function () {
     )({
         "byIdType": "SELECT id FROM \"${type}\" WHERE \"mdbm.id\" = \"${id}\""
     });
-    
-    
-    // (function () {
-    //     return Object.freeze(R.map(template, {
-
-    //     }));
-    // }());
-    
-    // (function () {
-
-    //     return Object.freeze(R.map({
-    //         "byIdType": byIdType
-    //     }, R.curry));
-    // }());
-    // const findOrCreateInterface = R.curry(
-    //     function (id, type) {
-          
-    //     }
-    // );
-    // const interfaceQuery = R.curry(
-    //     function (id, type) {
-    //         const select = "SELECT id FROM \"";
-    //         return select.concat(
-    //             type,
-    //             "\" WHERE \"mdbm.id\" = \"",
-    //             id,
-    //             "\""
-    //         );
-    //     }
-    // );
+    const interfaceQuery = R.curry(
+        (id, type) => query.byIdType({
+            "id": id,
+            "type": type
+        })
+    );
 
     function entriesBySql(query) {
         return sql(query).asEntries();
