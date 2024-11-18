@@ -8,6 +8,12 @@
 
 const mdbm = (function () {
     const data = Object.create(null);
+    const interfaceQuery = R.curry(
+        (id, type) => query.byIdType({
+            "id": id,
+            "type": type
+        })
+    );
     const template = R.curry(function (pattern, values) {
         const regex = new RegExp("\\$\\{(.*?)\\}", "g");
         return pattern.replace(
@@ -18,12 +24,6 @@ const mdbm = (function () {
     const query = R.map(template, {
         "byIdType": "SELECT id FROM \"${type}\" WHERE \"mdbm.id\" = \"${id}\""
     });
-    const interfaceQuery = R.curry(
-        (id, type) => query.byIdType({
-            "id": id,
-            "type": type
-        })
-    );
 
     function entriesBySql(query) {
         return sql(query).asEntries();
