@@ -15,10 +15,7 @@ const mdbm = (function () {
             (notUsed, key) => values[key] || ""
         );
     });
-    const query = R.pipe(
-        R.map(template),
-        Object.freeze
-    )({
+    const query = R.map(template, {
         "byIdType": "SELECT id FROM \"${type}\" WHERE \"mdbm.id\" = \"${id}\""
     });
     const interfaceQuery = R.curry(
