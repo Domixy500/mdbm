@@ -7,62 +7,44 @@
 */
 
 const mdbm = (function () {
-    const data = Object.create(null);
-    const interfaceQuery = R.curry(
-        (id, type) => query.byIdType({
-            "id": id,
-            "type": type
-        })
-    );
-    const template = R.curry(function (pattern, values) {
-        const regex = new RegExp("\\$\\{(.*?)\\}", "g");
-        return pattern.replace(
-            regex,
-            (notUsed, key) => values[key] || ""
-        );
-    });
-    const query = R.map(template, {
-        "byIdType": "SELECT id FROM \"${type}\" WHERE \"mdbm.id\" = \"${id}\""
-    });
+    const query = (function () {
+        const definition = {
+            "byIdType": {
+                parameters: function (id, type) {
+                    return {"id": id, "type": type};
+                },
+                pattern: "SELECT id FROM \"${type}\""
+                + " WHERE \"mdbm.id\" = \"${id}\""
+            }
+        };
 
-    function entriesBySql(query) {
-        return sql(query).asEntries();
-    }
+        const template = R.curry(function (pattern, values) {
+            const regex = new RegExp("\\$\\{(.*?)\\}", "g");
+            return pattern.replace(
+                regex,
+                (match, key) => values[key] || match
+            );
+        });
 
-    function entryBySql(query) {
-        return entriesBySql(query)[0];
-    }
+        function makeQuery(queryDefinition) {
+            const {
+                parameters,
+                pattern
+            } = queryDefinition;
+            const numberOfParameters = parameters.length;
 
-    function generateId() {
-        const lastId = settings().field("lastId");
-        const nextId = lastId + 1;
-        settings().set("lastId", nextId);
-        return nextId.toString(36);
-    }
+            return R.curryN(numberOfParameters, function (...values) {
+                return template(
+                    pattern,
+                    parameters(...values)
+                );
+            });
+        }
 
-    function interfaceNames(e) {
-        return R.map(
-            R.identity,
-            e.field("mdbm.interfaces")
-        );
-    }
-
-    function interfaces(e) {
-        const id = e.field("mdbm.id");
-        return R.pipe(
-            interfaceNames,
-            R.map(interfaceQuery(id)),
-            R.map(findOrCreateInterface(id))
-        )(e);
-    }
-
-    function settings() {
-        return data.settings || libByName("mdbm").entries()[0];
-    }
+        return R.map(makeQuery, definition);
+    }());
 
     return Object.freeze({
-        "generateId": generateId,
-        "interfaces": interfaces,
         "query": query
     });
 }());
