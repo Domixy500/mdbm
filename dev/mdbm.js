@@ -31,15 +31,24 @@ const mdbm = (function () {
                 parameters,
                 pattern
             } = queryDefinition;
-            const numberOfParameters = parameters.length;
 
-            return R.curryN(numberOfParameters, function (...values) {
-                return template(
-                    pattern,
-                    parameters(...values)
-                );
-            });
+            return template(pattern)(parameters);
         }
+
+        // function makeQuery(queryDefinition) {
+        //     const {
+        //         parameters,
+        //         pattern
+        //     } = queryDefinition;
+        //     const numberOfParameters = parameters.length;
+
+        //     return R.curryN(numberOfParameters, function (...values) {
+        //         return template(
+        //             pattern,
+        //             parameters(...values)
+        //         );
+        //     });
+        // }
 
         return R.map(makeQuery, definition);
     }());
