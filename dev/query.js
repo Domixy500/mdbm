@@ -1,4 +1,4 @@
-/*jslint*/
+/*jslint indent2*/
 /*global
     R
 */
