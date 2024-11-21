@@ -4,15 +4,15 @@
 */
 
 const query = (function () {
-    const definition = {
+    const definitions = {
         byIdType: {
-            parameters: function (id, type) {
+            values: function (id, type) {
                 return {"id": id, "type": type};
             },
             pattern: "SELECT id FROM \"${type}\" WHERE \"mdbm.id\" = \"${id}\""
         }
     };
-    const template = R.curry(function (pattern, values) {
+    const makeTemplate = R.curry(function (pattern, values) {
         const regex = new RegExp("\\$\\{(.*?)\\}", "g");
         return pattern.replace(
             regex,
@@ -20,13 +20,18 @@ const query = (function () {
         );
     });
 
-    const q = (t, values) => R.curry(R.pipe(
+    const make = (template, values) => R.curry(R.pipe(
         values,
-        t
+        template
     ));
-    const qFromDef = function (def) {
-        return q(template(def.pattern), def.parameters);
+
+    const from = function (definition) {
+        const {pattern, values} = definition;
+        return make(
+          template(pattern),
+          values
+        );
     };
 
-    return R.map(qFromDef, definition);
+    return R.map(from, definition);
 }());
