@@ -17,7 +17,7 @@ const mdbm = (function () {
         
         function displayName(e) {
             const body = e.field("mdbmDisplayName");
-            const calculateDisplayName = new Function("o", e.field("mdbmDisplayName")); //jslint-ignore-line
+            const calculateDisplayName = new Function("e", e.field("mdbmDisplayName")); //jslint-ignore-line
             return calculateDisplayName(e);
         }
 
