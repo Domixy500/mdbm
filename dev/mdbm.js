@@ -10,8 +10,12 @@ const mdbm = (function () {
             e.set("mdbmId", nextId());
             return e;
         }
-
+        
         function displayName(e) {
+            return e.field("mdbmId");
+        }
+        
+        function displayName2(e) {
             const calculateDisplayName = new Function("o", e.field("mdbmDisplayName")); //jslint-ignore-line
             return calculateDisplayName(e);
         }
