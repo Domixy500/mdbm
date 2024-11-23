@@ -12,7 +12,7 @@ const mdbm = (function () {
         }
         
         function displayName(e) {
-            return e.field("mdbmId") + " - " + e.field("Name");
+            return e.field("mdbmId") + " - " + e.field("Name2");
         }
         
         function displayName2(e) {
