@@ -12,10 +12,7 @@ const mdbm = (function () {
         }
 
         function displayName(e) {
-            const calculateDisplayName = new Function( //jslint-ignore-line
-                "e",
-                e.field("mddbmDisplayName")
-            );
+            const calculateDisplayName = new Function("e", e.field("mddbmDisplayName")); //jslint-ignore-line
             return calculateDisplayName(e);
         }
 
