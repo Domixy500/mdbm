@@ -11,8 +11,17 @@ const mdbm = (function () {
             return e;
         }
 
+        function displayName(e) {
+            const calculateDisplayName = new Function( //jslint-ignore-line
+                "e",
+                e.field("mddbmDisplayName")
+            );
+            return calculateDisplayName(e);
+        }
+
         return Object.freeze({
-            "afterCreation": afterCreation
+            "afterCreation": afterCreation,
+            "displayName": displayName
         });
     }());
     const query = (function () {
