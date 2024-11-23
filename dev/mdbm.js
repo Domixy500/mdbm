@@ -25,7 +25,7 @@ const mdbm = (function () {
     const query = (function () {
         const definitions = {
             byIdType: {
-                pattern: "SELECT id FROM \"${type}\" WHERE \"mdbm.id\" = \"${id}\"", //jslint-ignore-line
+                pattern: "SELECT id FROM \"${type}\" WHERE \"mdbmId\" = \"${id}\"", //jslint-ignore-line
                 values: function (id, type) {
                     return {"id": id, "type": type};
                 }
