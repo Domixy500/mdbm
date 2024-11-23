@@ -26,7 +26,9 @@ const query = (function () {
         );
     };
 
-    return R.map(queryFrom, definitions);
+    return Object.freeze(
+        R.map(queryFrom, definitions)
+    );
 }());
 
 function template(pattern) {

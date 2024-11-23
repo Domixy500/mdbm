@@ -1,9 +1,19 @@
 /*jslint*/
 /*global
+    libByName
     R
 */
 
 const mdbm = (function () {
+    const mdbmObject = (function () {
+        function afterCreation(e) {
+            e.set("mddbmId", nextId());
+        }
+
+        return Object.freeze({
+            "afterCreation": afterCreation
+        });
+    }());
     const query = (function () {
         const definitions = {
             byIdType: {
@@ -27,8 +37,20 @@ const mdbm = (function () {
             );
         };
 
-        return R.map(queryFrom, definitions);
+        return Object.freeze(
+            R.map(queryFrom, definitions)
+        );
     }());
+
+    function nextId() {
+        const id = settings().field("lastId") + 1;
+        settings().set("lastId", id);
+        return id.toString(36);
+    }
+
+    function settings() {
+        return libByName("mdbm").entries()[0];
+    }
 
     function template(pattern) {
         return function (values) {
@@ -41,7 +63,9 @@ const mdbm = (function () {
         };
     }
 
+
     return Object.freeze({
+        "object": mdbmObject,
         "query": query
     });
 }());
