@@ -5,7 +5,7 @@
 
 const mdbmObject = (function () {
     function afterCreation(e) {
-        e.set("mddbmId", nextId());
+        e.set("mdbmId", nextId());
     }
 
     return Object.freeze({
