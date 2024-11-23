@@ -11,13 +11,9 @@ const mdbm = (function () {
             return e;
         }
         
-        function displayName2(e) {
-            return e.field("mdbmId") + " - " + e.field("Name2") + " - " + e.field("Name");
-        }
-        
         function displayName(e) {
             const body = e.field("mdbmDisplayName");
-            const calculateDisplayName = new Function("e", e.field("mdbmDisplayName")); //jslint-ignore-line
+            const calculateDisplayName = new Function("o", body); //jslint-ignore-line
             return calculateDisplayName(e);
         }
 
