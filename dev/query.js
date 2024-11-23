@@ -29,14 +29,13 @@ const query = (function () {
     return R.map(queryFrom, definitions);
 }());
 
-const template = R.curry(function (pattern, values) {
-    const regex = new RegExp("\\$\\{(.*?)\\}", "g");
-    const replacer = function (match, key) {
-        return values[key] || match;
-    };
+function template(pattern) {
+    return function (values) {
+        const regex = new RegExp("\\$\\{(.*?)\\}", "g");
+        const replacer = function (match, key) {
+            return values[key] || match;
+        };
 
-    return pattern.replace(
-        regex,
-        replacer
-    );
-});
+        return pattern.replace(regex, replacer);
+    };
+}
