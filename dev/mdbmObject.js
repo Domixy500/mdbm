@@ -33,9 +33,9 @@ const mdbmObject = (function () {
         const id = e.field("mdbmId");
         return R.pipe(
             interfaceNames,
-            R.map(query.byIdType(id))
-            //R.map(findOrCreateInterface(id))
-        );
+            R.map(query.byIdType(id)),
+            R.map(getInterface)
+        )(e);
     }
 
     return Object.freeze({
