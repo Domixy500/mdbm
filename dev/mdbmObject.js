@@ -1,22 +1,47 @@
 /*jslint*/
 /*global
     libByName
+    R
 */
 
 const mdbmObject = (function () {
     function afterCreation(e) {
+        interfaces(e);
+        return e;
+    }
+
+    function beforeCreation(e) {
         e.set("mdbmId", nextId());
         return e;
     }
 
     function displayName(e) {
-        const calculateDisplayName = new Function("o", e.field("mdbmDisplayName")); //jslint-ignore-line
+        const body = e.field("mdbmDisplayName");
+        const calculateDisplayName = new Function("o", body); //jslint-ignore-line
         return calculateDisplayName(e);
+    }
+
+    function interfaceNames(e) {
+        return R.map(
+            R.identity,
+            e.field("mdbmInterfaces")
+        );
+    }
+
+    function interfaces(e) {
+        const id = e.field("mdbm.id");
+        return R.pipe(
+            interfaceNames
+            //R.map(interfaceQuery(id)),
+            //R.map(findOrCreateInterface(id))
+        );
     }
 
     return Object.freeze({
         "afterCreation": afterCreation,
-        "displayName": displayName
+        "beforeCreation": beforeCreation,
+        "displayName": displayName,
+        "interfaces": interfaces
     });
 }());
 
