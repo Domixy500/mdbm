@@ -2,9 +2,37 @@
 /*global
     libByName
     R
+    query
 */
 
 const mdbm = (function () {
+    const query = (function () {
+        const definitions = {
+            byIdType: {
+                pattern: "SELECT id FROM \"${type}\" WHERE \"mdbmId\" = \"${id}\"", //jslint-ignore-line
+                values: function (id, type) {
+                    return {"id": id, "type": type};
+                }
+            }
+        };
+
+        const makeQuery = (template, values) => R.curry(R.pipe(
+            values,
+            template
+        ));
+
+        const queryFrom = function (definition) {
+            const {pattern, values} = definition;
+            return makeQuery(
+                template(pattern),
+                values
+            );
+        };
+
+        return Object.freeze(
+            R.map(queryFrom, definitions)
+        );
+    }());
     const mdbmObject = (function () {
         function afterCreation(e) {
             interfaces(e);
@@ -32,8 +60,8 @@ const mdbm = (function () {
         function interfaces(e) {
             const id = e.field("mdbmId");
             return R.pipe(
-                interfaceNames
-                //R.map(interfaceQuery(id)),
+                interfaceNames,
+                R.map(query.byIdType(id))
                 //R.map(findOrCreateInterface(id))
             );
         }
@@ -44,33 +72,6 @@ const mdbm = (function () {
             "displayName": displayName,
             "interfaces": interfaces
         });
-    }());
-    const query = (function () {
-        const definitions = {
-            byIdType: {
-                pattern: "SELECT id FROM \"${type}\" WHERE \"mdbmId\" = \"${id}\"", //jslint-ignore-line
-                values: function (id, type) {
-                    return {"id": id, "type": type};
-                }
-            }
-        };
-
-        const makeQuery = (template, values) => R.curry(R.pipe(
-            values,
-            template
-        ));
-
-        const queryFrom = function (definition) {
-            const {pattern, values} = definition;
-            return makeQuery(
-                template(pattern),
-                values
-            );
-        };
-
-        return Object.freeze(
-            R.map(queryFrom, definitions)
-        );
     }());
 
     function nextId() {

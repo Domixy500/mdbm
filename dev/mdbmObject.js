@@ -2,6 +2,7 @@
 /*global
     libByName
     R
+    query
 */
 
 const mdbmObject = (function () {
@@ -31,8 +32,8 @@ const mdbmObject = (function () {
     function interfaces(e) {
         const id = e.field("mdbmId");
         return R.pipe(
-            interfaceNames
-            //R.map(interfaceQuery(id)),
+            interfaceNames,
+            R.map(query.byIdType(id))
             //R.map(findOrCreateInterface(id))
         );
     }
