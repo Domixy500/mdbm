@@ -30,7 +30,7 @@ const mdbm = (function () {
         }
     
         function interfaces(e) {
-            const id = e.field("mdbm.id");
+            const id = e.field("mdbmId");
             return R.pipe(
                 interfaceNames
                 //R.map(interfaceQuery(id)),
