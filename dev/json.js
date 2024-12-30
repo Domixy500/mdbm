@@ -14,7 +14,7 @@ function fromJson(json) {
     return JSON.parse(json, (key, value) => {
         if (value && value._isFunction) {
             // Convert the string back into a function
-            return eval(`(${value.value})`); // Convert string back to function
+            return eval("(" + value.value + ")"); // Convert string back to function
         }
         return value; // Leave other values unchanged
     });
