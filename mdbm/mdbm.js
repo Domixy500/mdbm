@@ -33,7 +33,7 @@ function mdbmObject(e) {
     function eventCreateInit() {
         e.set("mdbmData", {});
         e.set(
-            "mdbmCurrenLibrary",
+            "mdbmCurrentLibrary",
             lib().title
         );
     }
