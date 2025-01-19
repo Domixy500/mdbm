@@ -10,12 +10,44 @@ function mdbmObject(e) {
         return e.field("mdbmData")[0];
     }
     
-    function eventCreateInit() {
-        e.set("mdbmData", {});
+    function entries() {
+        
     }
     
+    function entryIds() {
+        const stored = data().entryIds;
+        const ids = (
+            stored === ""
+            ? entryIdsNew()
+            : JSON.parse(stored)
+        );
+        return ids;
+    }
+    
+    function entryIdsNew() {
+        return R.fromPairs(
+            libraries().map((x) => [x, null])
+        );
+    }
+    
+    function eventCreateInit() {
+        e.set("mdbmData", {});
+        e.set(
+            "mdbmCurrenLibrary",
+            lib().title
+        );
+    }
+
+    function eventCreateBefore() {
+        
+    }
+
     function id() {
         return data().id;
+    }
+    
+    function libraries() {
+        return data().libraries.split(",");
     }
     
     return {
