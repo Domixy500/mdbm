@@ -25,16 +25,17 @@ function mdbmObject(e) {
     }
     
     function entryIdsNew() {
-        return R.fromPairs(
+        const ids = R.fromPairs(
             libraries().map((x) => [x, null])
         );
+        e.set()
     }
     
-    function eventCreateInit() {
+    function eventCreateInit(currentLibrary) {
         e.set("mdbmData", {});
         e.set(
             "mdbmCurrentLibrary",
-            lib().title
+            currentLibrary
         );
     }
 
