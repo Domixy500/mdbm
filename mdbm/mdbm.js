@@ -77,6 +77,7 @@ function mdbmObject(e) {
     return {
         "event": {
             "create": {
+                "before": eventCreateBefore,
                 "init": eventCreateInit
             }
         },
