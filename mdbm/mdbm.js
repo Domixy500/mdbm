@@ -34,7 +34,10 @@ function mdbmObject(e) {
             ? entryIdsNew()
             : JSON.parse(stored)
         );
-        setData("entryIds", ids);
+        setData(
+            "entryIds",
+            JSON.stringify(ids)
+        );
         return ids;
     }
     
