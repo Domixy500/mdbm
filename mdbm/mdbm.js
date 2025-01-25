@@ -57,7 +57,7 @@ function mdbmObject(e) {
     }
 
     function eventCreateBefore() {
-        
+        entryIds();
     }
 
     function id() {
