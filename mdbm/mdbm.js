@@ -73,13 +73,14 @@ function mdbmObject(e) {
     }
     
     function setData(key, value) {
-        const mdbmData = Array.from(e.field("mdbmData"));
+        //const mdbmData = Array.from(e.field("mdbmData"));
+        const mdbmData = [];
         mdbmData[0][key] = value;
         log(JSON.stringify(mdbmData, null, 2))
         log(Array.isArray(mdbmData))
         e.set(
             "mdbmData",
-            [{"entryIds": "a"}]
+            mdbmData
         );
     }
     
