@@ -73,8 +73,8 @@ function mdbmObject(e) {
     }
     
     function setData(key, value) {
-        const mdbmData = data();
-        mdbmData[key] = value;
+        const mdbmData = e.field("mdbmData");
+        mdbmData[0][key] = value;
         e.set("mdbmData", mdbmData);
     }
     
