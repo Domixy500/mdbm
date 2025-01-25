@@ -33,6 +33,7 @@ function mdbmObject(e) {
             ? entryIdsNew()
             : JSON.parse(stored)
         );
+        setData("entryIds", ids);
         return ids;
     }
     
@@ -40,7 +41,7 @@ function mdbmObject(e) {
         const ids = R.fromPairs(
             libraries().map((x) => [x, null])
         );
-        e.set()
+        return ids;
     }
     
     function eventCreateInit(currentLibrary) {
@@ -65,6 +66,12 @@ function mdbmObject(e) {
     
     function libraries() {
         return data().libraries.split(",");
+    }
+    
+    function setData(key, value) {
+        const mdbmData = data();
+        mdbmData[key] = value;
+        e.set("mdbmData", mdbmData);
     }
     
     return {
