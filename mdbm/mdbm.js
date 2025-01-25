@@ -79,7 +79,10 @@ function mdbmObject(e) {
         log(Array.isArray(mdbmData))
         mdbmData[0][key] = value;
         log(JSON.stringify(mdbmData, null, 2))
-        e.set("mdbmData", mdbmData);
+        e.set(
+            "mdbmData",
+            Array.from(mdbmData)
+        );
     }
     
     return {
