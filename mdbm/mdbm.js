@@ -29,6 +29,7 @@ function mdbmObject(e) {
     
     function entryIds() {
         const stored = data().entryIds;
+        log(stored)
         const ids = (
             stored === ""
             ? entryIdsNew()
