@@ -38,6 +38,7 @@ function mdbmObject(e) {
             "entryIds",
             JSON.stringify(ids)
         );
+        log(ids)
         return ids;
     }
     
