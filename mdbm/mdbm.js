@@ -29,7 +29,6 @@ function mdbmObject(e) {
     
     function entryIds() {
         const stored = data().entryIds;
-        log(stored)
         const ids = (
             stored === ""
             ? entryIdsNew()
@@ -39,7 +38,6 @@ function mdbmObject(e) {
             "entryIds",
             JSON.stringify(ids)
         );
-        log(ids)
         return ids;
     }
     
@@ -76,9 +74,9 @@ function mdbmObject(e) {
     
     function setData(key, value) {
         const mdbmData = Array.from(e.field("mdbmData"));
-        log(Array.isArray(mdbmData))
         mdbmData[0][key] = value;
         log(JSON.stringify(mdbmData, null, 2))
+        log(Array.isArray(mdbmData))
         e.set(
             "mdbmData",
             mdbmData
