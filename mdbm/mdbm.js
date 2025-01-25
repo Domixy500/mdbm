@@ -2,9 +2,9 @@
 /*global*/
 
 function mdbmCommon() {
-    function errorIfUndefined(variables) {
+    function errorIfUndefined(msg, variables) {
         if (variables.some(isUndefined)) {
-            throw "Variable not defined";
+            throw new Error(msg);
         }
     }
     
@@ -44,9 +44,10 @@ function mdbmObject(e) {
     }
     
     function eventCreateInit(currentLibrary) {
-        mdbm.common.errorIfUndefined([
-            currentLibrary
-        ]);
+        mdbm.common.errorIfUndefined(
+            "eventCreateInit: currentLibrary is not defined",
+            [currentLibrary]
+        );
         e.set("mdbmData", {});
         e.set(
             "mdbmCurrentLibrary",
