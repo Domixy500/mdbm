@@ -81,7 +81,7 @@ function mdbmObject(e) {
         log(JSON.stringify(mdbmData, null, 2))
         e.set(
             "mdbmData",
-            Array.from(mdbmData)
+            mdbmData
         );
     }
     
