@@ -85,7 +85,9 @@ function mdbmObject(e) {
     };
 }
 
-const mdbm = {
-    "common": mdbmCommon(),
-    "object": mdbmObject
+function mdbm() {
+    return {
+        "common": mdbmCommon(),
+        "object": mdbmObject
+    };
 };
