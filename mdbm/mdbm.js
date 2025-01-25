@@ -76,6 +76,7 @@ function mdbmObject(e) {
     
     function setData(key, value) {
         const mdbmData = e.field("mdbmData");
+        log(Array.isArray(mdbmData))
         mdbmData[0][key] = value;
         log(JSON.stringify(mdbmData, null, 2))
         e.set("mdbmData", mdbmData);
