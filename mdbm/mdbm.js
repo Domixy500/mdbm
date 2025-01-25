@@ -2,7 +2,17 @@
 /*global*/
 
 function mdbmCommon() {
-    return {};
+    function errorIfUndefined(variables) {
+        return variables.some(isUndefined);
+    }
+    
+    function isUndefined(variables) {
+        return variable === undefined
+    }
+    
+    return {
+        "errorIfUndefined": errorIfUndefined
+    };
 }
 
 function mdbmObject(e) {
@@ -32,6 +42,9 @@ function mdbmObject(e) {
     }
     
     function eventCreateInit(currentLibrary) {
+        mdbm.common.errorIfUndefined([
+            currentLibrary
+        ]);
         e.set("mdbmData", {});
         e.set(
             "mdbmCurrentLibrary",
