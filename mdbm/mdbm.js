@@ -3,10 +3,12 @@
 
 function mdbmCommon() {
     function errorIfUndefined(variables) {
-        return variables.some(isUndefined);
+        if (variables.some(isUndefined)) {
+            throw "Variable not defined";
+        }
     }
     
-    function isUndefined(variables) {
+    function isUndefined(variable) {
         return variable === undefined
     }
     
