@@ -79,7 +79,7 @@ function mdbmObject(e) {
         log(Array.isArray(mdbmData))
         e.set(
             "mdbmData",
-            mdbmData
+            [{}]
         );
     }
     
