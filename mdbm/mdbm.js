@@ -18,6 +18,7 @@ function mdbmCommon() {
 }
 
 function mdbmObject(e) {
+    const common = mdbmCommon();
     function data() {
         return e.field("mdbmData")[0];
     }
@@ -45,7 +46,7 @@ function mdbmObject(e) {
     }
     
     function eventCreateInit(currentLibrary) {
-        mdbm.common.errorIfUndefined(
+        common.errorIfUndefined(
             "eventCreateInit: currentLibrary is not defined",
             [currentLibrary]
         );
@@ -87,7 +88,6 @@ function mdbmObject(e) {
 
 function mdbm() {
     return {
-        "common": mdbmCommon(),
         "object": mdbmObject
     };
 };
