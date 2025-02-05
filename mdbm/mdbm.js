@@ -78,12 +78,10 @@ function mdbmObject(e) {
             "eventCreateInit: currentLibrary is not defined",
             [currentLibrary]
         );
-        data("a", "b");
-        //e.set("mdbmData", [{}]);
-        //e.set(
-        //    "mdbmCurrentLibrary",
-        //    currentLibrary
-        //);
+        e.set(
+            "mdbmCurrentLibrary",
+            currentLibrary
+        );
     }
     
     return {
