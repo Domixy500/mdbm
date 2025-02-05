@@ -46,8 +46,7 @@ function mdbmCommon() {
         "isUndefined": isUndefined,
         "json": {
             "parse": jsonParse,
-            "stringify" jsonStringify
-            
+            "stringify": jsonStringify
         }
     };
 }
