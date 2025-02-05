@@ -63,6 +63,12 @@ function mdbmObject(e) {
         } else {
             const mdbmData = data();
             mdbmData[key] = value;
+            e.set(
+                "mdbmData",
+                common.json.stringify(
+                    mdbmData
+                )
+            );
             return mdbmData;
         }
     }
@@ -72,11 +78,7 @@ function mdbmObject(e) {
             "eventCreateInit: currentLibrary is not defined",
             [currentLibrary]
         );
-        log(common.json.stringify(data()))
-        log(data().libraries)
-        log(common.json.stringify(data(
-            "a", "b"
-        )))
+        data("a", "b");
         //e.set("mdbmData", [{}]);
         //e.set(
         //    "mdbmCurrentLibrary",
