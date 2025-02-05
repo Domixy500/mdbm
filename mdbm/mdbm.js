@@ -60,6 +60,10 @@ function mdbmObject(e) {
             return common.json.parse(
                 e.field("mdbmData")
             );
+        } else {
+            const mdbmData = data();
+            mdbmData[key] = value;
+            return mdbmData;
         }
     }
 
@@ -69,6 +73,10 @@ function mdbmObject(e) {
             [currentLibrary]
         );
         log(common.json.stringify(data()))
+        log(data().libraries)
+        log(common.json.stringify(data(
+            "a", "b"
+        )))
         //e.set("mdbmData", [{}]);
         //e.set(
         //    "mdbmCurrentLibrary",
