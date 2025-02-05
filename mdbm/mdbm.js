@@ -72,6 +72,28 @@ function mdbmObject(e) {
             return mdbmData;
         }
     }
+    
+    function entryIds() {
+        const stored = data().entryIds;
+        const ids = (
+            stored === undefined
+            ? entryIdsNew()
+            : JSON.parse(stored)
+        );
+        data("entryIds", ids);
+        return ids;
+    }
+    
+    function entryIdsNew() {
+        const ids = R.fromPairs(
+            libraries().map((x) => [x, null])
+        );
+        return ids;
+    }
+    
+    function eventCreateBefore() {
+        entryIds();
+    }
 
     function eventCreateInit(currentLibrary) {
         common.errorIfUndefined(
@@ -84,10 +106,15 @@ function mdbmObject(e) {
         );
     }
     
+    function libraries() {
+        return data().libraries;
+    }
+    
+    
     return {
         "event": {
             "create": {
-                "before": "eventCreateBefore",
+                "before": eventCreateBefore,
                 "init": eventCreateInit
             }
         },
