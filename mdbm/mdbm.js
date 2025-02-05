@@ -80,9 +80,13 @@ function mdbmObject(e) {
             ? entryIdsNew()
             : JSON.parse(stored)
         );
-        log(data());
+        log(common.json.stringify(
+            data()
+        ));
         data("entryIds", ids);
-        log(data());
+        log(common.json.stringify(
+            data()
+        ));
         return ids;
     }
     
