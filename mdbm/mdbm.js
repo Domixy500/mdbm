@@ -80,7 +80,9 @@ function mdbmObject(e) {
             ? entryIdsNew()
             : JSON.parse(stored)
         );
+        log(data());
         data("entryIds", ids);
+        log(data());
         return ids;
     }
     
@@ -92,7 +94,7 @@ function mdbmObject(e) {
     }
     
     function eventCreateBefore() {
-        entryIds();
+        return entryIds();
     }
 
     function eventCreateInit(currentLibrary) {
