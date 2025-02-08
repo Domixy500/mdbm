@@ -58,7 +58,10 @@ function mdbmObject(e) {
             return e.field("mdbmData")[0];
         } else {
             const mdbmData = data();
+            log(Object.keys(e.field("mdbmData")))
+            common.log(mdbmData);
             mdbmData[key] = value;
+            common.log(mdbmData);
             e.set(
                 "mdbmData",
                 [common.json.stringify(
@@ -89,6 +92,7 @@ function mdbmObject(e) {
     function eventCreateBefore() {
         log("data");
         common.log(data());
+        log("dataSet");
         data("entryIds", "A");
         common.log(data());
         // log(result);
