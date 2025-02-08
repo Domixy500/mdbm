@@ -20,7 +20,7 @@ function mdbmCommon() {
     }
 
     function jsonParse(str) {
-        log(str)
+        log(str);
         return JSON.parse(str);
     }
 
@@ -57,23 +57,23 @@ function mdbmObject(e) {
         const paras = [key, value];
         if (paras.some(common.isUndefined)) {
             return common.json.parse(
-                e.field("mdbmData")
+                e.field("mdbmData")[0]
             );
         } else {
             const mdbmData = data();
             mdbmData[key] = value;
             e.set(
                 "mdbmData",
-                common.json.stringify(
+                [common.json.stringify(
                     mdbmData
-                )
+                )]
             );
             return mdbmData;
         }
     }
 
     function entryIds() {
-        log("2")
+        log("2");
         const stored = data().entryIds;
         log(stored);
         common.log(stored);
@@ -97,8 +97,9 @@ function mdbmObject(e) {
     }
 
     function eventCreateBefore() {
-        log("1")
+        log("1");
         const result = entryIds();
+        log(result);
     }
 
     function eventCreateInit(currentLibrary) {
