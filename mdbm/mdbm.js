@@ -89,17 +89,11 @@ function mdbmObject(e) {
         return ids;
     }
 
-    function entryIdsNew() {
-        const ids = R.fromPairs(
-            libraries().map((x) => [x, null])
-        );
-        return ids;
-    }
-
     function eventCreateBefore() {
         log("1");
-        const result = entryIds();
-        log(result);
+        common.log(data());
+        // const result = entryIds();
+        // log(result);
     }
 
     function eventCreateInit(currentLibrary) {
