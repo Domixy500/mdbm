@@ -82,7 +82,7 @@ function mdbmObject(e) {
             log(JSON.stringify(mdbmData));
             e.set(
                 "mdbmData",
-                mdbmData
+                [mdbmData]
             );
             return mdbmData;
         }
