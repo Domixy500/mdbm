@@ -20,7 +20,6 @@ function mdbmCommon() {
     }
 
     function jsonParse(str) {
-        log(str);
         return JSON.parse(str);
     }
 
@@ -56,20 +55,19 @@ function mdbmObject(e) {
     function data(key, value) {
         const paras = [key, value];
         if (paras.some(common.isUndefined)) {
-            return common.json.parse(
-                e.field("mdbmData")[0]
-            );
-        } else {
-            const mdbmData = data();
-            mdbmData[key] = value;
-            e.set(
-                "mdbmData",
-                [common.json.stringify(
-                    mdbmData
-                )]
-            );
-            return mdbmData;
+            return e.field("mdbmData")[0];
         }
+        // else {
+        //     const mdbmData = data();
+        //     mdbmData[key] = value;
+        //     e.set(
+        //         "mdbmData",
+        //         [common.json.stringify(
+        //             mdbmData
+        //         )]
+        //     );
+        //     return mdbmData;
+        // }
     }
 
     // function entryIds() {
