@@ -69,10 +69,8 @@ function mdbmObject(e) {
 
     function entryIds() {
         const stored = data().entryIds;
-        log(stored)
-        log(typeof stored)
         const ids = (
-            stored === undefined
+            stored === ""
             ? entryIdsNew()
             : common.json.parse(stored)
         );
