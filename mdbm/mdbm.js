@@ -61,7 +61,7 @@ function mdbmObject(e) {
             const newData = Object.create({});
             newData[key] = value;
             log(JSON.stringify(mdbmData));
-            mdbmData.push(newData);
+            mdbmData["1"] = newData;
             log(JSON.stringify(mdbmData));
             e.set(
                 "mdbmData",
@@ -89,8 +89,6 @@ function mdbmObject(e) {
     // }
 
     function eventCreateBefore() {
-        log("data");
-        common.log(data()[0]);
         log("dataSet");
         data("entryIds", "A");
         common.log(data());
