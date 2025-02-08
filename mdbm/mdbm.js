@@ -72,25 +72,25 @@ function mdbmObject(e) {
         }
     }
 
-    function entryIds() {
-        log("2");
-        const stored = data().entryIds;
-        log(stored);
-        common.log(stored);
-        const ids = (
-            stored === undefined
-            ? entryIdsNew()
-            : common.json.parse(stored)
-        );
-        data(
-            "entryIds",
-            common.json.stringify(ids)
-        );
-        return ids;
-    }
+    // function entryIds() {
+    //     log("2");
+    //     const stored = data().entryIds;
+    //     log(stored);
+    //     common.log(stored);
+    //     const ids = (
+    //         stored === undefined
+    //         ? entryIdsNew()
+    //         : common.json.parse(stored)
+    //     );
+    //     data(
+    //         "entryIds",
+    //         common.json.stringify(ids)
+    //     );
+    //     return ids;
+    // }
 
     function eventCreateBefore() {
-        log("1");
+        log("data");
         common.log(data());
         // const result = entryIds();
         // log(result);
@@ -108,9 +108,9 @@ function mdbmObject(e) {
         );
     }
 
-    function libraries() {
-        return data().libraries.split(",");
-    }
+    // function libraries() {
+    //     return data().libraries.split(",");
+    // }
 
     return {
         "event": {
