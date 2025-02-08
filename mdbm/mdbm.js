@@ -84,7 +84,7 @@ function mdbmObject(e) {
             setResult.push(mdbmData);
             e.set(
                 "mdbmData",
-                setResult
+                [{}]
             );
             return mdbmData;
         }
