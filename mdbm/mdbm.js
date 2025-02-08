@@ -52,34 +52,13 @@ function mdbmCommon() {
 function mdbmObject(e) {
     const common = mdbmCommon();
 
-    // function data(key, value) {
-    //     const paras = [key, value];
-    //     if (paras.some(common.isUndefined)) {
-    //         return e.field("mdbmData");
-    //     } else {
-    //         const mdbmData = data();
-    //         const newData = Object.create({});
-    //         newData[key] = value;
-    //         log(JSON.stringify(mdbmData));
-    //         mdbmData["1"] = newData;
-    //         log(JSON.stringify(mdbmData));
-    //         e.set(
-    //             "mdbmData",
-    //             mdbmData
-    //         );
-    //         return mdbmData;
-    //     }
-    // }
-
     function data(key, value) {
         const paras = [key, value];
         if (paras.some(common.isUndefined)) {
             return e.field("mdbmData")[0];
         } else {
             const mdbmData = data();
-            log(JSON.stringify(mdbmData));
             mdbmData[key] = value;
-            log(JSON.stringify(mdbmData));
             e.set(
                 "mdbmData",
                 JSON.stringify([mdbmData])
@@ -88,27 +67,33 @@ function mdbmObject(e) {
         }
     }
 
-    // function entryIds() {
-    //     log("2");
-    //     const stored = data().entryIds;
-    //     log(stored);
-    //     common.log(stored);
-    //     const ids = (
-    //         stored === undefined
-    //         ? entryIdsNew()
-    //         : common.json.parse(stored)
-    //     );
-    //     data(
-    //         "entryIds",
-    //         common.json.stringify(ids)
-    //     );
-    //     return ids;
-    // }
+    function entryIds() {
+        const stored = data().entryIds;
+        log(stored)
+        log(typeof stored)
+        const ids = (
+            stored === undefined
+            ? entryIdsNew()
+            : common.json.parse(stored)
+        );
+        data(
+            "entryIds",
+            common.json.stringify(ids)
+        );
+        return ids;
+    }
+
+    function entryIdsNew() {
+        const ids = R.fromPairs(
+            libraries().map((x) => [x, null])
+        );
+        return ids;
+    }
 
     function eventCreateBefore() {
-        log("dataSet");
-        data("entryIds", "A");
-        common.log(data());
+        entryIds();
+        // data("entryIds", "A");
+        // common.log(data());
         // log(result);
     }
 
@@ -124,9 +109,9 @@ function mdbmObject(e) {
         );
     }
 
-    // function libraries() {
-    //     return data().libraries.split(",");
-    // }
+    function libraries() {
+        return data().libraries.split(",");
+    }
 
     return {
         "event": {
