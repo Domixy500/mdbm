@@ -52,16 +52,33 @@ function mdbmCommon() {
 function mdbmObject(e) {
     const common = mdbmCommon();
 
+    // function data(key, value) {
+    //     const paras = [key, value];
+    //     if (paras.some(common.isUndefined)) {
+    //         return e.field("mdbmData");
+    //     } else {
+    //         const mdbmData = data();
+    //         const newData = Object.create({});
+    //         newData[key] = value;
+    //         log(JSON.stringify(mdbmData));
+    //         mdbmData["1"] = newData;
+    //         log(JSON.stringify(mdbmData));
+    //         e.set(
+    //             "mdbmData",
+    //             mdbmData
+    //         );
+    //         return mdbmData;
+    //     }
+    // }
+
     function data(key, value) {
         const paras = [key, value];
         if (paras.some(common.isUndefined)) {
-            return e.field("mdbmData");
+            return e.field("mdbmData")[0];
         } else {
             const mdbmData = data();
-            const newData = Object.create({});
-            newData[key] = value;
             log(JSON.stringify(mdbmData));
-            mdbmData["1"] = newData;
+            mdbmData[key] = value;
             log(JSON.stringify(mdbmData));
             e.set(
                 "mdbmData",
