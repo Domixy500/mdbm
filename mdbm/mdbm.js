@@ -2,7 +2,20 @@
 /*global*/
 
 function mdbmCommon() {
-    return {};
+    function errorIfUndefined(msg, variables) {
+        if (variables.some(isUndefined)) {
+            throw new Error(msg);
+        }
+    }
+
+    function isUndefined(variable) {
+        return variable === undefined;
+    }
+
+    return {
+        "errorIfUndefined": errorIfUndefined,
+        "isUndefined": isUndefined
+    };
 }
 
 function mdbmObject(e) {
