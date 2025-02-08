@@ -1,9 +1,14 @@
 /*jslint*/
 /*global
+    log
     R
 */
 
 function mdbmCommon() {
+    function commonLog(obj) {
+        log(jsonStringify(obj));
+    }
+
     function errorIfUndefined(msg, variables) {
         if (variables.some(isUndefined)) {
             throw new Error(msg);
@@ -39,7 +44,8 @@ function mdbmCommon() {
         "json": {
             "parse": jsonParse,
             "stringify": jsonStringify
-        }
+        },
+        "log": commonLog
     };
 }
 
@@ -67,6 +73,8 @@ function mdbmObject(e) {
 
     function entryIds() {
         const stored = data().entryIds;
+        log(stored);
+        common.log(stored);
         const ids = (
             stored === undefined
             ? entryIdsNew()
@@ -87,7 +95,7 @@ function mdbmObject(e) {
     }
 
     function eventCreateBefore() {
-        entryIds();
+        common.log(entryIds());
     }
 
     function eventCreateInit(currentLibrary) {
