@@ -20,6 +20,7 @@ function mdbmCommon() {
     }
 
     function jsonParse(str) {
+        log(str)
         return JSON.parse(str);
     }
 
@@ -72,6 +73,7 @@ function mdbmObject(e) {
     }
 
     function entryIds() {
+        log("2")
         const stored = data().entryIds;
         log(stored);
         common.log(stored);
@@ -95,7 +97,8 @@ function mdbmObject(e) {
     }
 
     function eventCreateBefore() {
-        common.log(entryIds());
+        log("1")
+        const result = entryIds();
     }
 
     function eventCreateInit(currentLibrary) {
