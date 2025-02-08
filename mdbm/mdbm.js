@@ -14,9 +14,32 @@ function mdbmCommon() {
         return variable === undefined;
     }
 
+    function jsonParse(str) {
+        return JSON.parse(str);
+    }
+
+    function jsonStringify(obj) {
+        return JSON.stringify(
+            obj,
+            null,
+            2
+        );
+    }
+
+    // function replaceAll(str, searchValue, replaceValue) {
+    //     return str.replace(
+    //         new RegExp(searchValue, "g"),
+    //         replaceValue
+    //     );
+    // }
+
     return {
         "errorIfUndefined": errorIfUndefined,
-        "isUndefined": isUndefined
+        "isUndefined": isUndefined,
+        "json": {
+            "parse": jsonParse,
+            "stringify": jsonStringify
+        }
     };
 }
 
@@ -47,11 +70,11 @@ function mdbmObject(e) {
         const ids = (
             stored === undefined
             ? entryIdsNew()
-            : JSON.parse(stored)
+            : common.json.parse(stored)
         );
         data(
             "entryIds",
-            JSON.stringify(ids)
+            common.json.stringify(ids)
         );
         return ids;
     }
