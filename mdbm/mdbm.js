@@ -55,18 +55,17 @@ function mdbmObject(e) {
     function data(key, value) {
         const paras = [key, value];
         if (paras.some(common.isUndefined)) {
-            return e.field("mdbmData")[0];
+            return e.field("mdbmData");
         } else {
             const mdbmData = data();
-            log(Object.keys(e.field("mdbmData")))
-            common.log(mdbmData);
-            mdbmData[key] = value;
-            common.log(mdbmData);
+            const newData = Object.create({});
+            newData[key] = value;
+            log(JSON.stringify(mdbmData));
+            mdbmData.push(newData);
+            log(JSON.stringify(mdbmData));
             e.set(
                 "mdbmData",
-                [common.json.stringify(
-                    mdbmData
-                )]
+                mdbmData
             );
             return mdbmData;
         }
@@ -91,7 +90,7 @@ function mdbmObject(e) {
 
     function eventCreateBefore() {
         log("data");
-        common.log(data());
+        common.log(data()[0]);
         log("dataSet");
         data("entryIds", "A");
         common.log(data());
