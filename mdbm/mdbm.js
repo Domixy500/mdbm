@@ -80,11 +80,9 @@ function mdbmObject(e) {
             log(JSON.stringify(mdbmData));
             mdbmData[key] = value;
             log(JSON.stringify(mdbmData));
-            const setResult = [];
-            setResult.push(mdbmData);
             e.set(
                 "mdbmData",
-                [{}]
+                JSON.stringify[mdbmData]
             );
             return mdbmData;
         }
