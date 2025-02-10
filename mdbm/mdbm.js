@@ -57,8 +57,10 @@ function mdbmHelper() {
         return newEntry;
     }
 
-    function getEntry(libraryName, id) {
+    function getEntry(id, libraryName) {
         const library = libByName(libraryName);
+        log(library.title)
+        log(library)
         return library.findById(id);
     }
 
@@ -167,7 +169,7 @@ function mdbmObject(e) {
     }
 
     function getEntries() {
-        return R.map(
+        return R.mapObjIndexed(
             helper.getEntry,
             entryIds()
         );
