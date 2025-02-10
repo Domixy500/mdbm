@@ -59,6 +59,7 @@ function mdbmHelper() {
 
     function getEntry(id, libraryName) {
         const library = libByName(libraryName);
+        log(library.findById(id));
         return library.findById(id);
     }
 
