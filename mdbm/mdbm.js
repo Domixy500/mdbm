@@ -49,7 +49,7 @@ function mdbmHelper() {
         data = data || {};
         const newEntry = library.create(data);
         newEntry.set("mdbmCurrentLibrary", libraryName);
-        return entry;
+        return newEntry;
     }
 
     return {
@@ -83,6 +83,16 @@ function mdbmObject(e) {
     }
 
     function entryIds() {
+        const updatedEntryIds = R.pipe(
+            readEntryIds,
+            addMissingLibraries,
+            setCurrentLibraryId,
+            createMissingEntries
+        )(data().entryIds);
+        data(
+            "entryIds",
+            common.json.stringify(updatedEntryIds)
+        );
 
         function createMissingEntries(input) {
             return R.mapObjIndexed(createMissingEntry, input);
@@ -125,12 +135,7 @@ function mdbmObject(e) {
             return ids;
         }
 
-        return R.pipe(
-            readEntryIds,
-            addMissingLibraries,
-            setCurrentLibraryId,
-            createMissingEntries
-        )(data().entryIds);
+        return updatedEntryIds;
         // const stored = data().entryIds;
         // const ids = (
         //     stored === ""
