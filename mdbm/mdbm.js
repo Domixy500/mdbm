@@ -97,6 +97,8 @@ function mdbmObject(e) {
         }
 
         function addMissingLibraries(input) {
+            common.log(input);
+            common.log(newEntryIds(libraries()));
             return R.merge(
                 newEntryIds(libraries()),
                 input
