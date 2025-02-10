@@ -59,8 +59,6 @@ function mdbmHelper() {
 
     function getEntry(id, libraryName) {
         const library = libByName(libraryName);
-        log(library.title)
-        log(library)
         return library.findById(id);
     }
 
@@ -190,8 +188,7 @@ function mdbmObject(e) {
             getFields(),
             ["mdbmCurrentLibrary"]
         );
-        log(fields);
-        common.log(fields);
+        common.log(entryIds());
         const otherEntries = getEntries();
         common.log(otherEntries);
     }
