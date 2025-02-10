@@ -91,19 +91,17 @@ function mdbmObject(e) {
         function createMissingEntry(value, key) {
             return (
                 value === null
-                ? helper.createEntry(key).id
+                ? helper.create.entry(key).id
                 : value
             );
         }
 
         function addMissingLibraries(input) {
-            common.log(input);
-            common.log(newEntryIds(libraries()));
-            // return R.merge(
-            //     newEntryIds(libraries()),
-            //     input
-            // );
-            return Object.assign({}, input, newEntryIds(libraries()));
+            return Object.assign(
+                {},
+                input,
+                newEntryIds(libraries())
+            );
         }
 
         function newEntryIds(newLibraries) {
