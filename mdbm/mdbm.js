@@ -139,7 +139,8 @@ function mdbmObject(e) {
     }
 
     function eventCreateBefore() {
-        common.log(entryIds());
+        entryIds();
+        sync();
     }
 
     function eventCreateInit(currentLibrary) {
@@ -154,8 +155,17 @@ function mdbmObject(e) {
         );
     }
 
+    function getFields() {
+        return libByName(currentLibrary()).fields();
+    }
+
     function libraries() {
         return data().libraries.split(",");
+    }
+
+    function sync() {
+        const fields = getFields();
+        log(fields);
     }
 
     return {
@@ -165,7 +175,8 @@ function mdbmObject(e) {
                 "init": eventCreateInit
             }
         },
-        "id": "id"
+        "id": "id",
+        "sync": sync
     };
 }
 
