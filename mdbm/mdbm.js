@@ -1,5 +1,6 @@
 /*jslint*/
 /*global
+    libByName
     log
     R
 */
@@ -31,13 +32,6 @@ function mdbmCommon() {
         );
     }
 
-    // function replaceAll(str, searchValue, replaceValue) {
-    //     return str.replace(
-    //         new RegExp(searchValue, "g"),
-    //         replaceValue
-    //     );
-    // }
-
     return {
         "errorIfUndefined": errorIfUndefined,
         "isUndefined": isUndefined,
@@ -49,8 +43,29 @@ function mdbmCommon() {
     };
 }
 
+function mdbmHelper() {
+    function createEntry(libraryName, data) {
+        const library = libByName(libraryName);
+        data = data || {};
+        const newEntry = library.create(data);
+        newEntry.set("mdbmCurrentLibrary", libraryName);
+        return entry;
+    }
+
+    return {
+        "create": {
+            "entry": createEntry
+        }
+    };
+}
+
 function mdbmObject(e) {
+    const helper = mdbmHelper();
     const common = mdbmCommon();
+
+    function currentLibrary() {
+        return e.field("mdbmCurrentLibrary");
+    }
 
     function data(key, value) {
         const paras = [key, value];
@@ -68,25 +83,72 @@ function mdbmObject(e) {
     }
 
     function entryIds() {
-        const stored = data().entryIds;
-        const ids = (
-            stored === ""
-            ? entryIdsNew()
-            : common.json.parse(stored)
-        );
-        data(
-            "entryIds",
-            common.json.stringify(ids)
-        );
-        return ids;
+
+        function createMissingEntries(input) {
+            return R.mapObjIndexed(createMissingEntry, input);
+        }
+
+        function createMissingEntry(value, key) {
+            return (
+                value === null
+                ? helper.createEntry(key).id
+                : value
+            );
+        }
+
+        function addMissingLibraries(input) {
+            return R.merge(
+                newEntryIds(libraries()),
+                input
+            );
+        }
+
+        function newEntryIds(newLibraries) {
+            return R.fromPairs(
+                newLibraries.map((x) => [x, null])
+            );
+        }
+
+        function readEntryIds(input) {
+            return (
+                input === ""
+                ? {}
+                : common.json.parse(input)
+            );
+        }
+
+        function setCurrentLibraryId(ids) {
+            if (ids[currentLibrary()] === null) {
+                ids[currentLibrary()] = e.id;
+            }
+            return ids;
+        }
+
+        return R.pipe(
+            readEntryIds,
+            addMissingLibraries,
+            setCurrentLibraryId,
+            createMissingEntries
+        )(data().entryIds);
+        // const stored = data().entryIds;
+        // const ids = (
+        //     stored === ""
+        //     ? entryIdsNew()
+        //     : common.json.parse(stored)
+        // );
+        // data(
+        //     "entryIds",
+        //     common.json.stringify(ids)
+        // );
+        // return ids;
     }
 
-    function entryIdsNew() {
-        const ids = R.fromPairs(
-            libraries().map((x) => [x, null])
-        );
-        return ids;
-    }
+    // function entryIdsNew() {
+    //     const ids = R.fromPairs(
+    //         libraries().map((x) => [x, null])
+    //     );
+    //     return ids;
+    // }
 
     function eventCreateBefore() {
         entryIds();
