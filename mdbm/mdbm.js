@@ -16,6 +16,10 @@ function mdbmCommon() {
         }
     }
 
+    function excludeFrom(target, toExclude) {
+        return target.filter((item) => !toExclude.includes(item));
+    }
+
     function isUndefined(variable) {
         return variable === undefined;
     }
@@ -34,6 +38,7 @@ function mdbmCommon() {
 
     return {
         "errorIfUndefined": errorIfUndefined,
+        "excludeFrom": excludeFrom,
         "isUndefined": isUndefined,
         "json": {
             "parse": jsonParse,
@@ -52,10 +57,16 @@ function mdbmHelper() {
         return newEntry;
     }
 
+    function getEntry(libraryName, id) {
+        const library = libByName(libraryName);
+        return library.findById(id);
+    }
+
     return {
         "create": {
             "entry": createEntry
-        }
+        },
+        "getEntry": getEntry
     };
 }
 
@@ -155,8 +166,17 @@ function mdbmObject(e) {
         );
     }
 
+    function getEntries() {
+        return R.map(
+            helper.getEntry,
+            entryIds()
+        );
+    }
+
     function getFields() {
-        return libByName(currentLibrary()).fields();
+        return libByName(
+            currentLibrary()
+        ).fields();
     }
 
     function libraries() {
@@ -164,8 +184,14 @@ function mdbmObject(e) {
     }
 
     function sync() {
-        const fields = getFields();
+        const fields = common.excludeFrom(
+            getFields(),
+            ["mdbmCurrentLibrary"]
+        );
         log(fields);
+        common.log(fields);
+        const otherEntries = getEntries();
+        common.log(otherEntries);
     }
 
     return {
