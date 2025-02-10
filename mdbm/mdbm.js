@@ -136,31 +136,10 @@ function mdbmObject(e) {
         }
 
         return updatedEntryIds;
-        // const stored = data().entryIds;
-        // const ids = (
-        //     stored === ""
-        //     ? entryIdsNew()
-        //     : common.json.parse(stored)
-        // );
-        // data(
-        //     "entryIds",
-        //     common.json.stringify(ids)
-        // );
-        // return ids;
     }
 
-    // function entryIdsNew() {
-    //     const ids = R.fromPairs(
-    //         libraries().map((x) => [x, null])
-    //     );
-    //     return ids;
-    // }
-
     function eventCreateBefore() {
-        entryIds();
-        // data("entryIds", "A");
-        // common.log(data());
-        // log(result);
+        common.log(entryIds());
     }
 
     function eventCreateInit(currentLibrary) {
