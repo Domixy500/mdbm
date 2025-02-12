@@ -7,11 +7,11 @@ function mdbmCommon() {
             throw new Error(msg);
         }
     }
-    
+
     function isUndefined(variable) {
-        return variable === undefined
+        return variable === undefined;
     }
-    
+
     return {
         "errorIfUndefined": errorIfUndefined
     };
@@ -22,11 +22,11 @@ function mdbmObject(e) {
     function data() {
         return e.field("mdbmData")[0];
     }
-    
+
     function entries() {
-        
+
     }
-    
+
     function entryIds() {
         const stored = data().entryIds;
         const ids = (
@@ -40,14 +40,14 @@ function mdbmObject(e) {
         );
         return ids;
     }
-    
+
     function entryIdsNew() {
         const ids = R.fromPairs(
             libraries().map((x) => [x, null])
         );
         return ids;
     }
-    
+
     function eventCreateInit(currentLibrary) {
         common.errorIfUndefined(
             "eventCreateInit: currentLibrary is not defined",
@@ -67,11 +67,11 @@ function mdbmObject(e) {
     function id() {
         return data().id;
     }
-    
+
     function libraries() {
         return data().libraries.split(",");
     }
-    
+
     function setData(key, value) {
         //const mdbmData = Array.from(e.field("mdbmData"));
         const mdbmData = [{}];
@@ -83,7 +83,7 @@ function mdbmObject(e) {
             mdbmData
         );
     }
-    
+
     return {
         "event": {
             "create": {

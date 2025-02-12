@@ -1,0 +1,10 @@
+{
+	"runOnSave.commands": [
+        {
+            // Match any python files by path.
+            "match": ".*\\.js$",
+            "command": "jslint.lint",
+            "runIn": "vscode"
+        }
+    ]
+}
