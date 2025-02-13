@@ -84,7 +84,7 @@ function _mdbmObject(e) {
 
     const onCreate = {
         "before": () => updateObjectStructure(e),
-        "init": () => initObject(e)
+        "init": initObject(e)
     };
 
     return {
