@@ -5,9 +5,14 @@
 
 "use strict";
 
-function _mdbmFunctions () {
+function _mdbmFunctions() {
     function initObject(e, libraryName) {
         mdbmDataInit(e);
+        setData(e,
+            "mdbmCurrentLibrary",
+            currentLibrary
+        );
+        return e;
     }
 
     function mdbmDataInit(e) {
@@ -22,7 +27,7 @@ function _mdbmFunctions () {
     return Object.freeze(R.map(R.curry, {
         "initObject": initObject
     }));
-}());
+}
 
 function _mdbmObject(e) {
     const {
