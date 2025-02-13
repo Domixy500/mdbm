@@ -5,7 +5,7 @@
 
 "use strict";
 
-const mdbmHelper = (function () {
+function _mdbmFunctions () {
     function initObject(e, libraryName) {
         mdbmDataInit(e);
     }
@@ -27,7 +27,7 @@ const mdbmHelper = (function () {
 function _mdbmObject(e) {
     const {
         initObject
-    } = mdbmHelper();
+    } = _mdbmFunctions();
 
     return {
         "event": {
