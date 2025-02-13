@@ -5,51 +5,96 @@
 
 "use strict";
 
-const curryFreeze = function(obj) {
-    return Object.freeze(
-        R.map(R.curry, obj)
-    );
-} 
+// function curryFreeze(obj) {
+//     return Object.freeze(
+//         R.map(R.curry, obj)
+//     );
+// }
 
-function _mdbmCommon() {
-    
-}
+// function _mdbmCommon() {
+
+// }
 
 function _mdbmFunctions() {
-    function initObject(e, libraryName) {
+    // const entryIds = function
+    const initObject = R.curry(function (e, libraryName) {
         mdbmDataInit(e);
-        setData(e,
+        setData(
+            e,
             "mdbmCurrentLibrary",
             libraryName
         );
         return e;
-    }
+    });
+    const mdbmDataInit = (e) => setData(e, "mdbmData", [{}]);
 
-    function mdbmDataInit(e) {
-        setData(e, "mdbmData", [{}]);
-    }
-
-    function setData(e, field, value) {
-        e.set(field, value);
+    // function (e) {
+    //     setData(e, "mdbmData", [{}]);
+    // };
+    const setData = R.curry(function (e, fieldName, value) {
+        e.set(fieldName, value);
         return e;
-    }
+    });
+    const updateObjectStructure = function (e) {
+        return setData(e, "mdbmData", [{}]);
+        // return R.pipe(
+        //     // entryIds,
+        //     setData(e, "mdbmData", [{}])
+        // )(e);
+    };
 
-    return curryFreeze({
-        "initObject": initObject
+
+    // function entryIds(e) {
+    //     return R.pipe(
+    //         // readEntryIds,
+    //         // addMissingLibraries,
+    //         // setCurrentLibraryId,
+    //         // createMissingEntries
+    //     )(data().entryIds);
+    // }
+
+    // function field(e, fieldName) {
+    //     return e.field(fieldName);
+    // }
+
+    // function mdbmData(e) {
+    //     return field(e, "mdbmData")[0];
+    // }
+
+    // function mdbmDataField(e, fieldName) {
+    //     return mdbmData(e)[fieldName];
+    // }
+
+
+
+
+
+
+    return Object.freeze({
+        "initObject": initObject,
+        "updateObjectStructure": updateObjectStructure
     });
 }
 
 function _mdbmObject(e) {
     const {
-        initObject
+        initObject,
+        updateObjectStructure
     } = _mdbmFunctions();
+
+    const onCreate = {
+        "before": () => updateObjectStructure(e),
+        "init": () => initObject(e)
+    };
 
     return {
         "event": {
             "create": {
-                "init": initObject(e)
+                "before": onCreate.before,
+                "init": onCreate.init
             }
-        }
+        },
+        "onCreate": onCreate
     };
 }
 
