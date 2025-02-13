@@ -5,6 +5,16 @@
 
 "use strict";
 
+const curryFreeze = function(obj) {
+    return Object.freeze(
+        R.map(R.curry, obj)
+    );
+} 
+
+function _mdbmCommon() {
+    
+}
+
 function _mdbmFunctions() {
     function initObject(e, libraryName) {
         mdbmDataInit(e);
@@ -24,9 +34,9 @@ function _mdbmFunctions() {
         return e;
     }
 
-    return Object.freeze(R.map(R.curry, {
+    return curryFreeze({
         "initObject": initObject
-    }));
+    });
 }
 
 function _mdbmObject(e) {
