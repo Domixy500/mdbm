@@ -10,7 +10,7 @@ function _mdbmFunctions() {
         mdbmDataInit(e);
         setData(e,
             "mdbmCurrentLibrary",
-            currentLibrary
+            libraryName
         );
         return e;
     }
