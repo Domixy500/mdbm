@@ -5,8 +5,6 @@
 
 "use strict";
 
-R.placeholder = R.__; //jslint-ignore-line
-
 // function curryFreeze(obj) {
 //     return Object.freeze(
 //         R.map(R.curry, obj)
