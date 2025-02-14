@@ -5,6 +5,8 @@
 
 "use strict";
 
+R.placeholder = R.__; //jslint-ignore-line
+
 // function curryFreeze(obj) {
 //     return Object.freeze(
 //         R.map(R.curry, obj)
@@ -17,6 +19,9 @@
 
 function _mdbmFunctions() {
     // const entryIds = function
+    const field = R.curry(function (e, fieldName) {
+        return e.field(fieldName);
+    });
     const initObject = R.curry(function (e, libraryName) {
         mdbmDataInit(e);
         setData(
@@ -26,6 +31,10 @@ function _mdbmFunctions() {
         );
         return e;
     });
+    const mdbmData = function (e) {
+        log(field(e, "mdbmData"));
+        return field(e, "mdbmData");
+    };
     const mdbmDataInit = (e) => setData(e, "mdbmData", [{}]);
 
     // function (e) {
@@ -36,11 +45,11 @@ function _mdbmFunctions() {
         return e;
     });
     const updateObjectStructure = function (e) {
-        return setData(e, "mdbmData", [{}]);
-        // return R.pipe(
-        //     // entryIds,
-        //     setData(e, "mdbmData", [{}])
-        // )(e);
+        // return setData(e, "mdbmData", [{}]);
+        return R.pipe(
+            mdbmData,
+            setData(e, "mdbmData", [{}])
+        )(e);
     };
 
 
