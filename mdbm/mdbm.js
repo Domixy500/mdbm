@@ -32,7 +32,7 @@ function _mdbmFunctions() {
         return e;
     });
     const mdbmData = function (e) {
-        log(field(e, "mdbmData"));
+        log(JSON.stringify(field(e, "mdbmData")));
         return field(e, "mdbmData");
     };
     const mdbmDataInit = (e) => setData(e, "mdbmData", [{}]);
