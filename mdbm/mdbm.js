@@ -17,9 +17,6 @@
 
 function _mdbmFunctions() {
     // const entryIds = function
-    const field = R.curry(function (e, fieldName) {
-        return e.field(fieldName);
-    });
     const initObject = R.curry(function (e, libraryName) {
         mdbmDataInit(e);
         setData(
@@ -29,11 +26,17 @@ function _mdbmFunctions() {
         );
         return e;
     });
+
     const mdbmData = function (e) {
-        log(JSON.stringify(field(e, "mdbmData")));
-        return field(e, "mdbmData");
+        log(JSON.stringify(prop(e, "mdbmData")));
+        return prop(e, "mdbmData");
     };
+
     const mdbmDataInit = (e) => setData(e, "mdbmData", [{}]);
+
+    const prop = R.curry(function (e, fieldName) {
+        return e.field(fieldName);
+    });
 
     // function (e) {
     //     setData(e, "mdbmData", [{}]);
@@ -42,6 +45,7 @@ function _mdbmFunctions() {
         e.set(fieldName, value);
         return e;
     });
+
     const updateObjectStructure = function (e) {
         // return setData(e, "mdbmData", [{}]);
         return R.pipe(
