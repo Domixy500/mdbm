@@ -16,7 +16,18 @@
 // }
 
 function _mdbmFunctions() {
-    // const entryIds = function
+    // const entryIds = R.curry(function (e, data) {
+    //     return (
+    //          === ""
+    //         ? {}
+    //         : common.json.parse(input)
+    //     );
+    // }
+
+    const field = R.curry(function (e, fieldName) {
+        return e.field(fieldName);
+    });
+
     const initObject = R.curry(function (e, libraryName) {
         mdbmDataInit(e);
         setData(
@@ -28,15 +39,16 @@ function _mdbmFunctions() {
     });
 
     const mdbmData = function (e) {
-        log(JSON.stringify(prop(e, "mdbmData")));
-        return prop(e, "mdbmData");
+        return field(e, "mdbmData")[0];
     };
 
     const mdbmDataInit = (e) => setData(e, "mdbmData", [{}]);
 
-    const prop = R.curry(function (e, fieldName) {
-        return e.field(fieldName);
+    const mdbmDataSet = R.curry(function (e, data) {
+        setData(e, "mdbmData", JSON.stringify([data]));
+        return e;
     });
+
 
     // function (e) {
     //     setData(e, "mdbmData", [{}]);
@@ -46,11 +58,16 @@ function _mdbmFunctions() {
         return e;
     });
 
+    const updateEntryIds = R.curry(function (e, data) {
+
+        return data;
+    });
+
     const updateObjectStructure = function (e) {
-        // return setData(e, "mdbmData", [{}]);
         return R.pipe(
             mdbmData,
-            setData(e, "mdbmData", [{}])
+            updateEntryIds(e),
+            mdbmDataSet(e)
         )(e);
     };
 
@@ -99,12 +116,6 @@ function _mdbmObject(e) {
     };
 
     return {
-        "event": {
-            "create": {
-                "before": onCreate.before,
-                "init": onCreate.init
-            }
-        },
         "onCreate": onCreate
     };
 }
