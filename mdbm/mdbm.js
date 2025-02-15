@@ -33,14 +33,15 @@ const _mdbmField = (function () {
 }());
 
 const _mdbmObject = (function () {
-    const fields = _mdbmField.fromNames(["id"]);
-    const id = _mdbmField.fromName("id");
+    const fields = _mdbmField.fromNames(["mdbmCurrentLibrary"]);
+    const mdbmCurrentLibrary = _mdbmField.fromName("mdbmCurrentLibrary");
     // const fields = R.map(_mdbmField.fromName, {
     //     id: null
     // });
 
     function fromEntry(e) {
-        log(id);
+        log(mdbmCurrentLibrary(e)());
+        log(fields(e).mdbmCurrentLibrary());
         return 1;
     }
 
