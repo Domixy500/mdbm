@@ -30,15 +30,17 @@ const _mdbmField = (function () {
 }());
 
 const _mdbmObject = (function () {
-    const fields = _mdbmField.fromNames([
+    const getFields = _mdbmField.fromNames([
         "mdbmCurrentLibrary",
         "mdbmData"
     ]);
 
     function fromEntry(e) {
+        const fields = getFields(e);
+
         return Object.freeze({
-            mdbmCurrentLibrary: fields(e).mdbmCurrentLibrary,
-            mdbmData: fields(e).mdbmData
+            mdbmCurrentLibrary: fields.mdbmCurrentLibrary,
+            mdbmData: fields.mdbmData
         });
     }
 
