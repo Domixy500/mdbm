@@ -6,18 +6,29 @@
 "use strict";
 
 const _mdbmField = (function () {
-    function fromName(fieldName, e) {
+    const fromName = R.curry(field);
+    const fromNames = R.curry(fields);
+
+    function field(fieldName, e) {
         return function (newValue) {
             return (
                 newValue === undefined
                 ? e.field(fieldName)
-                : e.sete(fieldName, newValue)
+                : e.set(fieldName, newValue)
             );
         };
     }
 
+    function fields(fieldNames, e) {
+        const createField = fromName(e);
+        const fieldNameObject = R.zipObj(fieldNames, fieldNames);
+
+        return R.map(createField, fieldNameObject);
+    }
+
     return {
-        "fromName": R.curry(fromName)
+        "fromName": fromName,
+        "fromNames": fromNames
     };
 }());
 
