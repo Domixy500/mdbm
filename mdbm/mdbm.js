@@ -20,10 +20,10 @@ const _mdbmField = (function () {
     }
 
     function fields(fieldNames, e) {
-        const createField = fromName(e);
+        const entryField = fromName(e);
         const fieldNameObject = R.zipObj(fieldNames, fieldNames);
 
-        return R.map(createField, fieldNameObject);
+        return R.map(entryField, fieldNameObject);
     }
 
     return {
@@ -33,6 +33,7 @@ const _mdbmField = (function () {
 }());
 
 const _mdbmObject = (function () {
+    const fields = _mdbmField.fromNames(["id"]);
     const id = _mdbmField.fromName("id");
     // const fields = R.map(_mdbmField.fromName, {
     //     id: null
