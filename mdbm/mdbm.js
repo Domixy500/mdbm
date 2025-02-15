@@ -6,10 +6,7 @@
 "use strict";
 
 const _mdbmField = (function () {
-    const fromName = R.curry(field);
-    const fromNames = R.curry(fields);
-
-    function field(fieldName, e) {
+    const field = R.curry(function (e, fieldName) {
         return function (newValue) {
             return (
                 newValue === undefined
@@ -17,41 +14,41 @@ const _mdbmField = (function () {
                 : e.set(fieldName, newValue)
             );
         };
-    }
+    });
 
-    function fields(fieldNames, e) {
-        const entryField = fromName(e);
-        const fieldNameObject = R.zipObj(fieldNames, fieldNames);
+    const fields = R.curry(function (e, fieldNames) {
+        const entryField = field(e);
+        const entryFields = R.map(entryField, fieldNames);
 
-        return R.map(entryField, fieldNameObject);
-    }
+        return R.zipObj(fieldNames, entryFields);
+    });
 
-    return {
-        "fromName": fromName,
-        "fromNames": fromNames
-    };
+    return Object.freeze({
+        "fromName": R.flip(field),
+        "fromNames": R.flip(fields)
+    });
 }());
 
 const _mdbmObject = (function () {
-    const fields = _mdbmField.fromNames(["mdbmCurrentLibrary"]);
-    const mdbmCurrentLibrary = _mdbmField.fromName("mdbmCurrentLibrary");
-    // const fields = R.map(_mdbmField.fromName, {
-    //     id: null
-    // });
+    const fields = _mdbmField.fromNames([
+        "mdbmCurrentLibrary",
+        "mdbmData"
+    ]);
 
     function fromEntry(e) {
-        log(mdbmCurrentLibrary(e)());
-        log(fields(e).mdbmCurrentLibrary());
-        return 1;
+        return Object.freeze({
+            mdbmCurrentLibrary: fields(e).mdbmCurrentLibrary,
+            mdbmData: fields(e).mdbmData
+        });
     }
 
-    return {
+    return Object.freeze({
         "fromEntry": fromEntry
-    };
+    });
 }());
 
 function mdbm() {
-    return {
+    return Object.freeze({
         "object": _mdbmObject.fromEntry
-    };
+    });
 }
