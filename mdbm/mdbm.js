@@ -6,7 +6,6 @@
 "use strict";
 
 const _mdbmData = (function () {
-
     function entryIds(e, dataField) {
         function get() {
             const value = dataField()[0].entryIds;
