@@ -7,29 +7,51 @@
 
 const _mdbmData = (function () {
 
-    function entryIds(e) {
-        const data = mdbmData(e);
+    function entryIds(e, dataField) {
+        function get() {
+            const value = dataField()[0].entryIds;
+            return (
+                value === ""
+                ? {}
+                : JSON.parse(value)
+            );
+        }
+
+        function set(newValue) {
+            const data = dataField();
+            data.entryIds = JSON.stringify(newValue, null, 2);
+            dataField([data]);
+            return dataField();
+        }
 
         return function(newValue) {
             return (
                 newValue === undefined
-                ? data().entryIds
-                : data({"entryIds": newValue})
+                ? get()
+                : set(newValue)
             );
         };
     }
 
     function fromEntry(e) {
-
+        const dataField = _mdbmField.fromName("mdbmData")(e);
 
         return Object.freeze({
-            "entryIds": entryIds(e)
+            "entryIds": entryIds(e, dataField)
         });
     }
 
-    function mdbmData(e) {
-        return _mdbmField.fromName("mdbmData", e);
-    }
+    // function mdbmData(e) {
+    //     const dataField = _mdbmField.fromName("mdbmData")(e);
+
+    //     return Object.freeze({
+    //         "entryIds": entryIds(e, dataField)
+    //     });
+    // }
+
+    // function mdbmData(e) {
+    //     return _mdbmField.fromName("mdbmData", e);
+    // }
 
     return Object.freeze({
         "fromEntry": fromEntry
@@ -62,10 +84,10 @@ const _mdbmField = (function () {
 }());
 
 const _mdbmObject = (function () {
-    const fields = _mdbmField.fromNames([
-        "mdbmCurrentLibrary",
-        "mdbmData"
-    ]);
+    // const fields = _mdbmField.fromNames([
+    //     "mdbmCurrentLibrary",
+    //     "mdbmData"
+    // ]);
 
     // const initObject = R.curry(function (e, libraryName) {
     //     mdbmDataInit(e);
@@ -80,14 +102,14 @@ const _mdbmObject = (function () {
 
 
     function fromEntry(e) {
-        const {
-            mdbmCurrentLibrary,
-            mdbmData
-        } = fields(e);
+        // const {
+        //     mdbmCurrentLibrary,
+        //     mdbmData
+        // } = fields(e);
 
         return Object.freeze({
-            "mdbmCurrentLibrary": mdbmCurrentLibrary,
-            "mdbmData": mdbmData
+            "mdbmCurrentLibrary": "mdbmCurrentLibrary",
+            "mdbmData": "mdbmData"
         });
     }
 
@@ -99,14 +121,18 @@ const _mdbmObject = (function () {
     }
 
     function mdbmData(e) {
-        return function (newValue) {
-            return (
-                newValue === undefined
-                ? fields(e).mdbmData()[0]
-                : e.set("mdbmData", newValue)
-            );
-        };
+        return _mdbmData.fromEntry(e);
     }
+
+    // function mdbmData(e) {
+    //     return function (newValue) {
+    //         return (
+    //             newValue === undefined
+    //             ? fields(e).mdbmData()[0]
+    //             : e.set("mdbmData", newValue)
+    //         );
+    //     };
+    // }
 
     return Object.freeze({
         "fromEntry": fromEntry
