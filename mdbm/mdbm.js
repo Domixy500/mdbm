@@ -17,9 +17,9 @@ const _mdbmData = (function () {
         }
 
         function set(newValue) {
-            const data = dataField();
+            const data = dataField()[0];
             data.entryIds = JSON.stringify(newValue, null, 2);
-            dataField([data]);
+            dataField(JSON.stringify([data]));
             return dataField();
         }
 
