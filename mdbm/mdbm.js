@@ -5,60 +5,59 @@
 
 "use strict";
 
-const _mdbmData = (function () {
-    function entryIds(e, dataField) {
-        function get() {
-            const value = dataField()[0].entryIds;
-            return (
-                value === ""
-                ? {}
-                : JSON.parse(value)
-            );
-        }
+function _common() {
+    const json = {
+        "parse": (string) => JSON.parse(string),
+        "stringify": (object) => JSON.stringify(object, null, 2)
+    };
 
-        function set(newValue) {
-            const data = dataField()[0];
-            data.entryIds = JSON.stringify(newValue, null, 2);
-            dataField(JSON.stringify([data]));
-            return dataField();
-        }
+    return Object.freeze({
+        "json": json
+    });
+}
 
+function _mdbmData() {
+    // const getActions = {
+    //     "entryIds": _common().json.parse
+    // };
+    // const setActions = {
+    //     "entryIds": _common().json.stringify
+    // };
+
+    function fromEntry(e) {
+
+        return Object.freeze({
+            "type": type(e)
+        });
+    }
+
+    function getData(e, key) {
+        return _mdbmField(e, "mdbmField")()[0][key];
+    }
+
+    function setData(e, key, newValue) {
+        const data = _mdbmField(e, "mdbmField")()[0];
+        data[key] = newValue
+        _mdbmField(e, "mdbmField")()
+    }
+
+    function type(e) {
         return function(newValue) {
             return (
                 newValue === undefined
-                ? get()
-                : set(newValue)
+                ? getData(e, "type")
+                : setData(e, "type", newValue)
             );
         };
     }
 
-    function fromEntry(e) {
-        const dataField = _mdbmField.fromName("mdbmData")(e);
-
-        return Object.freeze({
-            "entryIds": entryIds(e, dataField)
-        });
-    }
-
-    // function mdbmData(e) {
-    //     const dataField = _mdbmField.fromName("mdbmData")(e);
-
-    //     return Object.freeze({
-    //         "entryIds": entryIds(e, dataField)
-    //     });
-    // }
-
-    // function mdbmData(e) {
-    //     return _mdbmField.fromName("mdbmData", e);
-    // }
-
     return Object.freeze({
         "fromEntry": fromEntry
     });
-}());
+}
 
 
-const _mdbmField = (function () {
+function _mdbmField() {
     const field = R.curry(function (e, fieldName) {
         return function (newValue) {
             return (
@@ -77,69 +76,27 @@ const _mdbmField = (function () {
     });
 
     return Object.freeze({
-        "fromName": R.flip(field),
-        "fromNames": R.flip(fields)
+        "fromName": field,
+        "fromNames": fields
     });
-}());
+}
 
-const _mdbmObject = (function () {
-    // const fields = _mdbmField.fromNames([
-    //     "mdbmCurrentLibrary",
-    //     "mdbmData"
-    // ]);
-
-    // const initObject = R.curry(function (e, libraryName) {
-    //     mdbmDataInit(e);
-    //     setData(
-    //         e,
-    //         "mdbmCurrentLibrary",
-    //         libraryName
-    //     );
-    //     return e;
-    // });
-
-
+function _mdbmObject() {
 
     function fromEntry(e) {
-        // const {
-        //     mdbmCurrentLibrary,
-        //     mdbmData
-        // } = fields(e);
 
         return Object.freeze({
-            "mdbmCurrentLibrary": "mdbmCurrentLibrary",
-            "mdbmData": "mdbmData"
+            "a": "a"
         });
     }
-
-    function init(e) {
-
-        return function (libraryName) {
-
-        };
-    }
-
-    function mdbmData(e) {
-        return _mdbmData.fromEntry(e);
-    }
-
-    // function mdbmData(e) {
-    //     return function (newValue) {
-    //         return (
-    //             newValue === undefined
-    //             ? fields(e).mdbmData()[0]
-    //             : e.set("mdbmData", newValue)
-    //         );
-    //     };
-    // }
 
     return Object.freeze({
         "fromEntry": fromEntry
     });
-}());
+}
 
 function mdbm() {
     return Object.freeze({
-        "object": _mdbmObject.fromEntry
+        "object": _mdbmObject().fromEntry
     });
 }
