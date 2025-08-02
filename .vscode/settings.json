@@ -1,0 +1,9 @@
+{
+	"runOnSave.commands": [
+        {
+            "languages": ["javascript"],
+            "command": "jslint.lint",
+            "runIn": "vscode"
+        }
+    ]
+}
