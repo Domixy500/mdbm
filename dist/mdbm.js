@@ -1,1 +1,1 @@
-var mdbm=function(n){"use strict";function t(n){return n.field("Type")}function e(n){return n.field(t(n))}return n.notify=function(n){message(n),log(n)},n.valueAsString=function(n){return log(`${t(n)}: ${typeof e(n)}`),e(n).toString()},n}({});
+var mdbm=function(n){"use strict";return n.notify=function(n){message(n),log(n)},n.valueAsString=function(n){return typeof function(n){return n.field(function(n){return n.field("Type")}(n))}(n)},n}({});

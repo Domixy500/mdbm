@@ -11,8 +11,8 @@ var mdbm = function(exports) {
         return e.field(type(e));
     }
     function valueAsString(e) {
-        log(`${type(e)}: ${typeof value(e)}`);
-        return value(e).toString();
+        const val = value(e);
+        return typeof val;
     }
     exports.notify = notify;
     exports.valueAsString = valueAsString;
