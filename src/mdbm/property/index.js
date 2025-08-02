@@ -15,7 +15,7 @@ function valueAsString(e) {
 }
 
 export {
-    type
+    type,
     value,
     valueAsString
 };
