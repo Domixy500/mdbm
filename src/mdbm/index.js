@@ -1,14 +1,7 @@
 /*jslint beta*/
-/*global
-    log
-    message
-*/
+/*global*/
 
-const notify = function (text) {
-    message("notify");
-    message(text);
-    log(text);
-};
+import {notify} from "../app";
 
 export {
     notify
