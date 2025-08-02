@@ -1,6 +1,7 @@
 var mdbm = function(exports) {
     "use strict";
     const notify = function(text) {
+        message("notify");
         message(text);
         log(text);
     };
