@@ -10,8 +10,8 @@ function value(e) {
 }
 
 function valueAsString(e) {
-    log(`${type(e)}: ${typeof value(e)}`);
-    return value(e).toString();
+    const val = value(e);
+    return typeof val;
 }
 
 export {
