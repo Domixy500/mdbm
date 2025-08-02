@@ -5,6 +5,7 @@
 */
 
 const notify = function (text) {
+    message("notify");
     message(text);
     log(text);
 };
