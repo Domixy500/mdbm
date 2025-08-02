@@ -1,0 +1,30 @@
+{
+  "name": "mdbm",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Domixy500/mdbm#readme",
+  "bugs": {
+    "url": "https://github.com/Domixy500/mdbm/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Domixy500/mdbm.git"
+  },
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "main": "dist/mdbm.js",
+  "scripts": {
+    "build": "rollup -c",
+    "unimported": "npx unimported"
+  },
+  "dependencies": {
+    "ramda": "^0.31.3"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.46.2",
+    "unimported": "^1.31.0"
+  }
+}
