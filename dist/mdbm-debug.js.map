@@ -1,0 +1,1 @@
+{"version":3,"file":"mdbm-debug.js","sources":["../src/mdbm/index.js"],"sourcesContent":["/*jslint beta*/\r\n/*global\r\n    message\r\n*/\r\n\r\nconst notify = function (text) {\r\n    message(text);\r\n};\r\n\r\nexport {\r\n    notify\r\n};\r\n"],"names":["notify","text","message"],"mappings":";;IAKK,MAACA,SAAS,SAAUC;QACrBC,QAAQD;AACZ;;;"}
