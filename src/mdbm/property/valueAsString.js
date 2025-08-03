@@ -20,7 +20,7 @@ function valueAsString(e) {
 
     return (
         hasConverter(propertyType)
-        ? stringConverter[type](e)
+        ? stringConverter[propertyType](e)
         : type
     );
 }
