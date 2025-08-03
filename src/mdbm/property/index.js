@@ -1,6 +1,11 @@
 /*jslint beta*/
 /*global*/
 
+const stringConverter = {
+    multiLine: value,
+    singleLine: value
+}
+
 function type(e) {
     return e.field("Type");
 }
@@ -10,8 +15,16 @@ function value(e) {
 }
 
 function valueAsString(e) {
-    const val = value(e);
-    return typeof val;
+    const propertyType = type(e);
+    const hasConverter = Object.keys(
+        stringConverter
+    ).includes(type);
+    
+    return (
+        hasConverter
+        ? stringConverter[type](e)
+        : type
+    );
 }
 
 export {
