@@ -2,9 +2,9 @@
 /*global*/
 
 import {notify} from "../app";
-import {valueAsString} from "./property";
+import {property} from "./property";
 
 export {
     notify,
-    valueAsString
+    property
 };
