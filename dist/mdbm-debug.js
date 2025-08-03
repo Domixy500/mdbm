@@ -4,20 +4,22 @@ var mdbm = function(exports) {
         message(text);
         log(text);
     };
-    const stringConverter = {
-        multiLine: value,
-        singleLine: value
-    };
     function type(e) {
         return e.field("Type");
     }
     function value(e) {
         return e.field(type(e));
     }
+    const stringConverter = {
+        multiLine: value,
+        singleLine: value
+    };
+    function hasConverter(key) {
+        return Object.keys(stringConverter).includes(key);
+    }
     function valueAsString(e) {
-        type(e);
-        const hasConverter = Object.keys(stringConverter).includes(type);
-        return hasConverter ? stringConverter[type](e) : type;
+        const propertyType = type(e);
+        return hasConverter(propertyType) ? stringConverter[type](e) : type;
     }
     exports.notify = notify;
     exports.valueAsString = valueAsString;
