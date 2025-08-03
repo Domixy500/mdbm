@@ -4,6 +4,10 @@ var mdbm = function(exports) {
         message(text);
         log(text);
     };
+    const stringConverter = {
+        multiLine: value,
+        singleLine: value
+    };
     function type(e) {
         return e.field("Type");
     }
@@ -11,8 +15,9 @@ var mdbm = function(exports) {
         return e.field(type(e));
     }
     function valueAsString(e) {
-        const val = value(e);
-        return typeof val;
+        type(e);
+        const hasConverter = Object.keys(stringConverter).includes(type);
+        return hasConverter ? stringConverter[type](e) : type;
     }
     exports.notify = notify;
     exports.valueAsString = valueAsString;

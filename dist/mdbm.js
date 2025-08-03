@@ -1,1 +1,1 @@
-var mdbm=function(n){"use strict";return n.notify=function(n){message(n),log(n)},n.valueAsString=function(n){return typeof function(n){return n.field(function(n){return n.field("Type")}(n))}(n)},n}({});
+var mdbm=function(n){"use strict";const e={multiLine:i,singleLine:i};function t(n){return n.field("Type")}function i(n){return n.field(t(n))}return n.notify=function(n){message(n),log(n)},n.valueAsString=function(n){return t(n),Object.keys(e).includes(t)?e[t](n):t},n}({});
