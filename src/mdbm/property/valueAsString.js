@@ -21,7 +21,7 @@ function valueAsString(e) {
     return (
         hasConverter(propertyType)
         ? stringConverter[propertyType](e)
-        : type
+        : propertyType
     );
 }
 
