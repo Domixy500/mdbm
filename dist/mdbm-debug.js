@@ -19,7 +19,7 @@ var mdbm = function(exports) {
     }
     function valueAsString(e) {
         const propertyType = type(e);
-        return hasConverter(propertyType) ? stringConverter[propertyType](e) : type;
+        return hasConverter(propertyType) ? stringConverter[propertyType](e) : propertyType;
     }
     exports.notify = notify;
     exports.valueAsString = valueAsString;
