@@ -7,8 +7,12 @@ var mdbm = function(exports) {
     function type(e) {
         return e.field("Type");
     }
-    function value(e) {
-        return e.field(type(e));
+    function value(e, newValue) {
+        const propertyType = type(e);
+        if (newValue !== undefined) {
+            e.set(propertyType, newValue);
+        }
+        return e.field(propertyType);
     }
     const stringConverter = {
         multiLine: value,
