@@ -25,8 +25,24 @@ var mdbm = function(exports) {
         const propertyType = type(e);
         return hasConverter(propertyType) ? stringConverter[propertyType](e) : propertyType;
     }
+    function fromEntry(e) {
+        const property = {
+            type: () => type(e),
+            value: newValue => value(e, newValue),
+            valueAsString: () => valueAsString(e)
+        };
+        return Object.freeze({
+            property: property
+        });
+    }
+    const property = {
+        fromEntry: fromEntry,
+        type: type,
+        value: value,
+        valueAsString: valueAsString
+    };
     exports.notify = notify;
-    exports.valueAsString = valueAsString;
+    exports.property = property;
     return exports;
 }({});
 //# sourceMappingURL=mdbm-debug.js.map
