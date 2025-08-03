@@ -6,9 +6,13 @@ import {type} from "./type";
 import {value} from "./value";
 import {valueAsString} from "./valueAsString";
 
-export {
+const property = {
     fromEntry,
     type,
     value,
     valueAsString
+};
+
+export {
+    property
 };
