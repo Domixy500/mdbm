@@ -44,10 +44,17 @@ var mdbm = function(exports) {
         value: value,
         valueAsString: valueAsString
     };
+    function addType(object, prototype) {
+        const basedOn = prototype.field("basedOn");
+        object.link("Type", prototype);
+        if (basedOn.length === 1) {
+            addType(e, basedOn[0]);
+        }
+    }
     function createObject(prototype) {
         const object = createEntry("Object");
         prototype.field("Attributes");
-        addTypes(object, prototype);
+        addType(object, prototype);
         setPrototype(object, prototype);
     }
     function setPrototype(object, prototype) {
