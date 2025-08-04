@@ -1,8 +1,25 @@
 /*jslint beta*/
 /*global*/
 
-function createObject(e) {
-    
+import {createEntry} from "../../app";
+
+function addType(object, prototype) {
+    const basedOn = prototype.field("basedOn");
+    object.link("Type", prototype);
+    if(basedOn.length === 1) {
+        addType(e, basedOn[0]);
+    }
+}
+
+function createObject(prototype) {
+    const object = createEntry("Object");
+    const attributes = prototype.field("Attributes");
+    addTypes(object, prototype);
+    setPrototype(object, prototype);
+}
+
+function setPrototype(object, prototype) {
+    object.set("Prototype", [prototype]);
 }
 
 export {
