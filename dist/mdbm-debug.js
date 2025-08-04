@@ -1,9 +1,12 @@
 var mdbm = function(exports) {
     "use strict";
-    const notify = function(text) {
+    function notify(text) {
         message(text);
         log(text);
-    };
+    }
+    function createEntry(libraryName) {
+        return libByName(libraryName).create({});
+    }
     function type(e) {
         return e.field("Type");
     }
@@ -41,8 +44,21 @@ var mdbm = function(exports) {
         value: value,
         valueAsString: valueAsString
     };
+    function createObject(prototype) {
+        const object = createEntry("Object");
+        prototype.field("Attributes");
+        addTypes(object, prototype);
+        setPrototype(object, prototype);
+    }
+    function setPrototype(object, prototype) {
+        object.set("Prototype", [ prototype ]);
+    }
+    const prototype = {
+        createObject: createObject
+    };
     exports.notify = notify;
     exports.property = property;
+    exports.prototype = prototype;
     return exports;
 }({});
 //# sourceMappingURL=mdbm-debug.js.map
