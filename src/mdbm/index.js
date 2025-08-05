@@ -3,10 +3,10 @@
 
 import {notify} from "../app";
 import {property} from "./property";
-import {prototype} from "./prototype";
+import {object} from "./object";
 
 export {
     notify,
     property,
-    prototype
+    object
 };

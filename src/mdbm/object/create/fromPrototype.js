@@ -11,7 +11,7 @@ function addType(object, prototype) {
     }
 }
 
-function createObject(prototype) {
+function fromPrototype(prototype) {
     const object = createEntry("Object");
     const attributes = prototype.field("Attributes");
     addType(object, prototype);
@@ -23,5 +23,5 @@ function setPrototype(object, prototype) {
 }
 
 export {
-    createObject
+    fromPrototype
 };
