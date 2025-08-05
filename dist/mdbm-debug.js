@@ -19,6 +19,7 @@ var mdbm = function(exports) {
         const object = createEntry("Object");
         addType(object, prototype);
         setPrototype(object, prototype);
+        return object;
     }
     function setPrototype(object, prototype) {
         object.set("Prototype", [ prototype ]);
