@@ -1,8 +1,15 @@
 /*jslint beta, node*/
 /*global*/
 
+import alias from "@rollup/plugin-alias";
+import {fileURLToPath} from "url";
+import path from "path";
 import resolve from "@rollup/plugin-node-resolve";
 import terser from "@rollup/plugin-terser";
+
+const __dirname = path.dirname( //jslint-ignore-line
+    fileURLToPath(import.meta.url)
+);
 
 const config = {
     input: "src/mdbm/index.js",
@@ -46,6 +53,12 @@ const config = {
         }
     ],
     plugins: [
+        alias({
+            entries: [{
+                find: "@app",
+                replacement: path.resolve(__dirname, "src/app")
+            }]
+        }),
         resolve({
             extensions: [".js"]
         })

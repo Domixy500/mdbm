@@ -3,10 +3,10 @@
 
 import {fromPrototype} from "./fromPrototype";
 
-const object = {
-    create
+const create = {
+    fromPrototype
 };
 
 export {
-    object
+    create
 };

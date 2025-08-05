@@ -1,12 +1,12 @@
 /*jslint beta*/
 /*global*/
 
-import {notify} from "../app";
-import {property} from "./property";
+import {notify} from "@app";
 import {object} from "./object";
+import {property} from "./property";
 
 export {
     notify,
-    property,
-    object
+    object,
+    property
 };
