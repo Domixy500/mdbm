@@ -1,0 +1,8 @@
+{
+  "aliases": {
+    "@app": ["src/app"]
+  },
+  "entry": [
+    "src/mdbm/index.js"
+  ]
+}
