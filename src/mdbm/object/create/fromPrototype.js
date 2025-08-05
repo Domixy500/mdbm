@@ -16,6 +16,8 @@ function fromPrototype(prototype) {
     const object = createEntry("Object");
     addType(object, prototype);
     setPrototype(object, prototype);
+    
+    return object;
 }
 
 function setPrototype(object, prototype) {
