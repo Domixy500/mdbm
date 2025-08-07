@@ -7,6 +7,13 @@ var mdbm = function(exports) {
     function createEntry(libraryName) {
         return libByName(libraryName).create({});
     }
+    function addAttribute(e, attr) {
+        const property = libByName("Property").create({});
+        property.set("Label", attr.field("Label"));
+        property.set("Type", attr.field("Type"));
+        property.set("Order", attr.field("Order"));
+        property.link("Object", e);
+    }
     function addType(object, prototype) {
         const basedOn = prototype.field("basedOn");
         object.link("Type", prototype);
@@ -15,10 +22,11 @@ var mdbm = function(exports) {
         }
     }
     function fromPrototype(prototype) {
-        prototype.field("Attributes");
+        const attributes = prototype.field("Attributes");
         const object = createEntry("Object");
         addType(object, prototype);
         setPrototype(object, prototype);
+        attributes.forEach(x => addAttribute(object, x));
         return object;
     }
     function setPrototype(object, prototype) {
