@@ -26,7 +26,7 @@ function fromPrototype(prototype) {
     setPrototype(object, prototype);
     attributes.forEach(
         (x) => addAttribute(object, x)
-    );
+        );
     
     return object;
 }
