@@ -53,8 +53,18 @@ var mdbm = function(exports) {
         }
         return pattern.replace(/\$\{([^}]+)\}/g, replacer);
     }
+    function id(e) {
+        return e.field("Id");
+    }
+    function fromEntry$1(e) {
+        return Object.freeze({
+            displayName: () => displayName(e),
+            id: () => id(e)
+        });
+    }
     const object = {
         displayName: displayName,
+        fromEntry: fromEntry$1,
         create: create
     };
     function type(e) {
