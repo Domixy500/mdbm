@@ -1,13 +1,19 @@
+/*jslint beta*/
+/*global*/
+
+function getPattern(e) {
+    return e.field("DisplayNamePattern");
+}
+
 function patternFromObject(e) {
-    return e.field("DisplayNamePattern") || patternFromPrototype(
-            e.field("Prototype")[0]
+    return getPattern(e) || patternFromPrototype(
+        e.field("Prototype")[0]
     );
 }
 
-
 function patternFromPrototype(e) {
-    return e.field("DisplayNamePattern") || patternFromPrototype(
-            e.field("basedOn")[0]
+    return getPattern(e) || patternFromPrototype(
+        e.field("basedOn")[0]
     );
 }
 

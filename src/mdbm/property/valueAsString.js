@@ -5,9 +5,15 @@ import {type} from "./type";
 import {value} from "./value";
 
 const stringConverter = {
+    calculated: calculate,
     multiLine: value,
     singleLine: value
 };
+
+function calculate(e) {
+    const object = e.field("Object");
+    return object.field("Id");
+}
 
 function hasConverter(key) {
     return Object.keys(
