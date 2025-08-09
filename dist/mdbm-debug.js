@@ -74,7 +74,7 @@ var mdbm = function(exports) {
     };
     function calculate(e) {
         const object = e.field("Object");
-        return object.field("Id");
+        return object.field("Id")[0];
     }
     function hasConverter(key) {
         return Object.keys(stringConverter).includes(key);
