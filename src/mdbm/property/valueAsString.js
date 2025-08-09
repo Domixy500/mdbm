@@ -12,7 +12,7 @@ const stringConverter = {
 
 function calculate(e) {
     const object = e.field("Object");
-    return object.field("Id");
+    return object.field("Id")[0];
 }
 
 function hasConverter(key) {
