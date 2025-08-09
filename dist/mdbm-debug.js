@@ -73,8 +73,8 @@ var mdbm = function(exports) {
         singleLine: value
     };
     function calculate(e) {
-        const object = e.field("Object");
-        return object.field("Id")[0];
+        const object = e.field("Object")[0];
+        return object.field("Id");
     }
     function hasConverter(key) {
         return Object.keys(stringConverter).includes(key);
