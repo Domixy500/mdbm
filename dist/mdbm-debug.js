@@ -1,40 +1,5 @@
 var mdbm = function(exports) {
     "use strict";
-    function notify(text) {
-        message(text);
-        log(text);
-    }
-    function createEntry(libraryName) {
-        return libByName(libraryName).create({});
-    }
-    function addAttribute(e, attr) {
-        const property = libByName("Property").create({});
-        property.set("Label", attr.field("Label"));
-        property.set("Type", attr.field("Type"));
-        property.set("Order", attr.field("Order"));
-        property.link("Object", e);
-    }
-    function addType(object, prototype) {
-        const basedOn = prototype.field("basedOn");
-        object.link("Type", prototype);
-        if (basedOn.length === 1) {
-            addType(object, basedOn[0]);
-        }
-    }
-    function fromPrototype(prototype) {
-        const attributes = prototype.field("Attributes");
-        const object = createEntry("Object");
-        addType(object, prototype);
-        setPrototype(object, prototype);
-        attributes.forEach(x => addAttribute(object, x));
-        return object;
-    }
-    function setPrototype(object, prototype) {
-        object.set("Prototype", [ prototype ]);
-    }
-    const create = {
-        fromPrototype: fromPrototype
-    };
     function getPattern(e) {
         return e.field("DisplayNamePattern");
     }
@@ -53,66 +18,23 @@ var mdbm = function(exports) {
         }
         return pattern.replace(/\$\{([^}]+)\}/g, replacer);
     }
+    function id$1(e) {
+        return e.field("Id");
+    }
+    function fromEntry(e) {
+        return Object.freeze({
+            displayName: () => displayName(e),
+            id: () => id$1(e)
+        });
+    }
     function id(e) {
         return e.field("Id");
     }
-    function fromEntry$1(e) {
-        return Object.freeze({
-            displayName: () => displayName(e),
-            id: () => id(e)
-        });
-    }
     const object = {
-        displayName: displayName,
-        fromEntry: fromEntry$1,
-        create: create
-    };
-    function type(e) {
-        return e.field("Type");
-    }
-    function value(e, newValue) {
-        const propertyType = type(e);
-        if (newValue !== undefined) {
-            e.set(propertyType, newValue);
-        }
-        return e.field(propertyType);
-    }
-    const stringConverter = {
-        calculated: calculate,
-        multiLine: value,
-        singleLine: value
-    };
-    function calculate(e) {
-        const object = e.field("Object")[0];
-        const func = new Function("e", "object", e.field("calculated"));
-        return func(e, object);
-    }
-    function hasConverter(key) {
-        return Object.keys(stringConverter).includes(key);
-    }
-    function valueAsString(e) {
-        const propertyType = type(e);
-        return hasConverter(propertyType) ? stringConverter[propertyType](e) : propertyType;
-    }
-    function fromEntry(e) {
-        const property = {
-            type: () => type(e),
-            value: newValue => value(e, newValue),
-            valueAsString: () => valueAsString(e)
-        };
-        return Object.freeze({
-            property: property
-        });
-    }
-    const property = {
         fromEntry: fromEntry,
-        type: type,
-        value: value,
-        valueAsString: valueAsString
+        id: id
     };
-    exports.notify = notify;
     exports.object = object;
-    exports.property = property;
     return exports;
 }({});
 //# sourceMappingURL=mdbm-debug.js.map
