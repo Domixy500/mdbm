@@ -18,17 +18,14 @@ var mdbm = function(exports) {
         }
         return pattern.replace(/\$\{([^}]+)\}/g, replacer);
     }
-    function id$1(e) {
+    function id(e) {
         return e.field("Id");
     }
     function fromEntry(e) {
         return Object.freeze({
             displayName: () => displayName(e),
-            id: () => id$1(e)
+            id: () => id(e)
         });
-    }
-    function id(e) {
-        return e.field("Id");
     }
     const object = {
         fromEntry: fromEntry,
