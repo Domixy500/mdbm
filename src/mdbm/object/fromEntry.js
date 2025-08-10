@@ -2,10 +2,7 @@
 /*global*/
 
 import {displayName} from "./displayName";
-
-function id(e) {
-    return e.field("Id");
-}
+import {id} from "./id";
 
 function fromEntry(e) {
     return Object.freeze({
