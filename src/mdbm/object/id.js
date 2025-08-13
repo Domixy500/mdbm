@@ -1,8 +1,8 @@
 /*jslint beta*/
 /*global*/
 
-function id(e) {
-    return e.field("Id");
+function id(objectEntry) {
+    return objectEntry.field("Id");
 }
 
 export {

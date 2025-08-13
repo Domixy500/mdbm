@@ -3,9 +3,9 @@
 
 import {id} from "./id";
 
-function baseObject(e) {
+function baseObject(objectEntry) {
     return {
-        id: () => id(e)
+        id: () => id(objectEntry)
     };
 }
 
