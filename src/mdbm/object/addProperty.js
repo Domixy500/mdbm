@@ -2,7 +2,7 @@
 /*global*/
 
 function addProperty(base, property) {
-    base[property.label] = property.value;
+    base[property.label()] = property.value;
     return base;
 }
 

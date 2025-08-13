@@ -2,20 +2,12 @@
 /*global*/
 
 function fromEntry(propertyEntry) {
-    // const label = () => label(propertyEntry);
-    // const value = () => propertyEntry.field("Value");
+    const label = () => label(propertyEntry);
+    const value = () => propertyEntry.field("Value");
     return Object.freeze({
-        label: () => label(propertyEntry),
-        value: () => value(propertyEntry)
+        label,
+        value
     });
-}
-
-function label(propertyEntry) {
-    return propertyEntry.field("Label");
-}
-
-function value(propertyEntry) {
-    return propertyEntry.field("Value");
 }
 
 export {
