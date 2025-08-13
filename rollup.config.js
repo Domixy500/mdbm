@@ -57,6 +57,9 @@ const config = {
             entries: [{
                 find: "@app",
                 replacement: path.resolve(__dirname, "src/app")
+            }, {
+                find: "@common",
+                replacement: path.resolve(__dirname, "src/common")
             }]
         }),
         resolve({
