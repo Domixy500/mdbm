@@ -12,9 +12,9 @@ var mdbm = function(exports) {
             id: () => id(e)
         };
     }
-    function fromEntry$1(e) {
-        const label = () => e.field("Label");
-        const value = () => e.field("Value");
+    function fromEntry$1(propertyEntry) {
+        const label = () => propertyEntry.field("Label");
+        const value = () => propertyEntry.field("Value");
         return Object.freeze({
             label: label,
             value: value
