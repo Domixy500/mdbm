@@ -1,14 +1,15 @@
 /*jslint beta*/
 /*global*/
 
-import {displayName} from "./displayName";
-import {id} from "./id";
+import {baseObject} from "./baseObject";
+import {mergeAndFreeze} from "@common";
 
 function fromEntry(e) {
-    return Object.freeze({
-        displayName: () => displayName(e),
-        id: () => id(e)
-    });
+    const base = baseObject(e);
+    const properties = 
+    return mergeAndFreeze(
+        base
+    );
 }
 
 export {
