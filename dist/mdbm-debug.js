@@ -13,7 +13,7 @@ var mdbm = function(exports) {
         };
     }
     function fromEntry$1(propertyEntry) {
-        const label = () => label();
+        const label = () => propertyEntry.field("Label");
         const value = () => propertyEntry.field("Value");
         return Object.freeze({
             label: label,
