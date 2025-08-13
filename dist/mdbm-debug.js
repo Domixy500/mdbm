@@ -1,7 +1,7 @@
 var mdbm = function(exports) {
     "use strict";
     function addProperty(base, property) {
-        base[property.label] = property.value;
+        base[property.label()] = property.value;
         return base;
     }
     function id(objectEntry) {
@@ -13,16 +13,12 @@ var mdbm = function(exports) {
         };
     }
     function fromEntry$1(propertyEntry) {
+        const label = () => label();
+        const value = () => propertyEntry.field("Value");
         return Object.freeze({
-            label: () => label(propertyEntry),
-            value: () => value(propertyEntry)
+            label: label,
+            value: value
         });
-    }
-    function label(propertyEntry) {
-        return propertyEntry.field("Label");
-    }
-    function value(propertyEntry) {
-        return propertyEntry.field("Value");
     }
     const property = {
         fromEntry: fromEntry$1
