@@ -4,12 +4,12 @@ var mdbm = function(exports) {
         base[property.label] = property.value;
         return base;
     }
-    function id(e) {
-        return e.field("Id");
+    function id(objectEntry) {
+        return objectEntry.field("Id");
     }
-    function baseObject(e) {
+    function baseObject(objectEntry) {
         return {
-            id: () => id(e)
+            id: () => id(objectEntry)
         };
     }
     function fromEntry$1(propertyEntry) {
