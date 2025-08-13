@@ -2,7 +2,7 @@
 /*global*/
 
 function fromEntry(propertyEntry) {
-    const label = () => label(propertyEntry);
+    const label = () => propertyEntry.field("Label");
     const value = () => propertyEntry.field("Value");
     return Object.freeze({
         label,
