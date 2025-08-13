@@ -5,10 +5,10 @@ import {addProperty} from "./addProperty";
 import {baseObject} from "./baseObject";
 import {properties} from "./properties";
 
-function fromEntry(e) {
-    const object = properties(e).reduce(
+function fromEntry(objectEntry) {
+    const object = properties(objectEntry).reduce(
         addProperty,
-        baseObject(e)
+        baseObject(objectEntry)
     );
     return object;
 }

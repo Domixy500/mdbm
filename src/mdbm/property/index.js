@@ -3,10 +3,10 @@
 
 import {fromEntry} from "./fromEntry";
 
-const object = {
+const property = {
     fromEntry
 };
 
 export {
-    object
+    property
 };

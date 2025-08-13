@@ -1,8 +1,13 @@
 /*jslint beta*/
 /*global*/
 
-function properties(e) {
-    return e.linksFrom("Property", "Object");
+import {property} from "../property";
+
+function properties(objectEntry) {
+    const propertyEntries = objectEntry.linksFrom("Property", "Object");
+    return propertyEntries.map(
+        property.fromEntry
+    );
 }
 
 export {

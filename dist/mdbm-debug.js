@@ -1,9 +1,7 @@
 var mdbm = function(exports) {
     "use strict";
-    function addProperty(base, e) {
-        const label = e.field("Label");
-        const value = () => e.field("Value");
-        base[label] = value;
+    function addProperty(base, property) {
+        base[property.label] = property.value;
         return base;
     }
     function id(e) {
@@ -14,11 +12,23 @@ var mdbm = function(exports) {
             id: () => id(e)
         };
     }
-    function properties(e) {
-        return e.linksFrom("Property", "Object");
+    function fromEntry$1(e) {
+        const label = () => e.field("Label");
+        const value = () => e.field("Value");
+        return Object.freeze({
+            label: label,
+            value: value
+        });
     }
-    function fromEntry(e) {
-        const object = properties(e).reduce(addProperty, baseObject(e));
+    const property = {
+        fromEntry: fromEntry$1
+    };
+    function properties(objectEntry) {
+        const propertyEntries = objectEntry.linksFrom("Property", "Object");
+        return propertyEntries.map(property.fromEntry);
+    }
+    function fromEntry(objectEntry) {
+        const object = properties(objectEntry).reduce(addProperty, baseObject(objectEntry));
         return object;
     }
     const object = {

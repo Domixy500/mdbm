@@ -1,10 +1,8 @@
 /*jslint beta*/
 /*global*/
 
-function addProperty(base, e) {
-    const label = e.field("Label");
-    const value = () => e.field("Value");
-    base[label] = value;
+function addProperty(base, property) {
+    base[property.label] = property.value;
     return base;
 }
 
