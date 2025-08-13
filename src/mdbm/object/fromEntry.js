@@ -1,15 +1,16 @@
 /*jslint beta*/
 /*global*/
 
+import {addProperty} from "./addProperty";
 import {baseObject} from "./baseObject";
-import {mergeAndFreeze} from "@common";
+import {properties} from "./properties";
 
 function fromEntry(e) {
-    const base = baseObject(e);
-    const properties = 
-    return mergeAndFreeze(
-        base
+    const object = properties(e).reduce(
+        addProperty,
+        baseObject(e)
     );
+    return object;
 }
 
 export {

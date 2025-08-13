@@ -1,35 +1,28 @@
 var mdbm = function(exports) {
     "use strict";
-    function getPattern(e) {
-        return e.field("DisplayNamePattern");
-    }
-    function patternFromObject(e) {
-        return getPattern(e) || patternFromPrototype(e.field("Prototype")[0]);
-    }
-    function patternFromPrototype(e) {
-        return getPattern(e) || patternFromPrototype(e.field("basedOn")[0]);
-    }
-    function displayName(e) {
-        const pattern = patternFromObject(e);
-        const properties = e.linksFrom("Property", "Object");
-        function replacer(_, fieldName) {
-            const property = properties.filter(x => x.field("Label") === fieldName)[0];
-            return property ? property.field("Value") : "";
-        }
-        return pattern.replace(/\$\{([^}]+)\}/g, replacer);
+    function addProperty(base, e) {
+        const label = e.field("Label");
+        const value = () => e.field("Value");
+        base[label] = value;
+        return base;
     }
     function id(e) {
         return e.field("Id");
     }
-    function fromEntry(e) {
-        return Object.freeze({
-            displayName: () => displayName(e),
+    function baseObject(e) {
+        return {
             id: () => id(e)
-        });
+        };
+    }
+    function properties(e) {
+        return e.linksFrom("Property", "Object");
+    }
+    function fromEntry(e) {
+        const object = properties(e).reduce(addProperty, baseObject(e));
+        return object;
     }
     const object = {
-        fromEntry: fromEntry,
-        id: id
+        fromEntry: fromEntry
     };
     exports.object = object;
     return exports;
