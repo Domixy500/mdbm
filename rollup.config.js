@@ -13,8 +13,9 @@ const __dirname = path.dirname( //jslint-ignore-line
 
 const config = {
     input: {
-        m: "src/easy/index.js",
-        mdbm: "src/mdbm/index.js"
+        "m": "src/easy/index.js",
+        "mdbm": "src/mdbm/index.js",
+        "mdbm-debug": "src/mdbm/index.js"
     },
     onwarn(warning, warn) {
         if (warning.code === "THIS_IS_UNDEFINED") {
@@ -24,9 +25,9 @@ const config = {
     },
     output: [
         {
-            file: "dist/mdbm-debug.js",
+            file: "dist/",
             format: "iife",
-            name: "mdbm",
+            name: "mdbm-debug",
             plugins: [
                 terser({
                     compress: false,
@@ -40,7 +41,7 @@ const config = {
             sourcemap: true
         },
         {
-            file: "dist/mdbm.js",
+            file: "dist/",
             format: "iife",
             name: "mdbm",
             plugins: [
