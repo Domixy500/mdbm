@@ -12,7 +12,10 @@ const __dirname = path.dirname( //jslint-ignore-line
 );
 
 const config = {
-    input: "src/mdbm/index.js",
+    input: {
+        m: "src/easy/index.js",
+        mdbm: "src/mdbm/index.js"
+    },
     onwarn(warning, warn) {
         if (warning.code === "THIS_IS_UNDEFINED") {
             return;
@@ -40,6 +43,21 @@ const config = {
             file: "dist/mdbm.js",
             format: "iife",
             name: "mdbm",
+            plugins: [
+                terser({
+                    format: {
+                        comments: false
+                    },
+                    mangle: {
+                        properties: false
+                    }
+                })
+            ]
+        },
+        {
+            file: "dist/easy.js",
+            format: "iife",
+            name: "m",
             plugins: [
                 terser({
                     format: {
