@@ -1,1 +1,1 @@
-var mdbm=function(e){"use strict";function n(e,n){return e[n.label()]=n.value,e}const t=function(e){return Object.freeze({label:()=>e.field("Label"),value:()=>e.field("Value")})};const r={fromEntry:function(e){const r=function(e){return e.linksFrom("Property","Object").map(t)}(e).reduce(n,function(e){return{id:()=>function(e){return e.field("Id")}(e)}}(e));return r}};return e.object=r,e}({});
+var mm=function(n){"use strict";return n.msg=function(n){message(n)},n}({});
