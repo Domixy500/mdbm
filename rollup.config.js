@@ -25,7 +25,7 @@ const config = {
     },
     output: [
         {
-            file: "dist/",
+            dir: "dist",
             format: "iife",
             name: "mdbm-debug",
             plugins: [
@@ -41,7 +41,7 @@ const config = {
             sourcemap: true
         },
         {
-            file: "dist/",
+            dir: "dist",
             format: "iife",
             name: "mdbm",
             plugins: [
@@ -56,7 +56,7 @@ const config = {
             ]
         },
         {
-            file: "dist/easy.js",
+            dir: "dist",
             format: "iife",
             name: "m",
             plugins: [
