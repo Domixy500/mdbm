@@ -1,1 +1,1 @@
-var mm=function(n){"use strict";return n.msg=function(n){message(n)},n}({});
+var mdbm=function(t){"use strict";const e={open:function(t){return t.set("Type",lib().title),t},post:function(t){return n(),t}};function n(t){return libByName("ObjectLink").create({})}const r={create:function(t){const n=libByName(t).create({libraryName:t});return e.post(n)},onCreate:e};return t.object=r,t}({});

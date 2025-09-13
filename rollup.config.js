@@ -23,7 +23,7 @@ const config = {
         {
             file: "dist/mdbm-debug.js",
             format: "iife",
-            name: "m",
+            name: "mdbm",
             plugins: [
                 terser({
                     compress: false,
@@ -39,7 +39,7 @@ const config = {
         {
             file: "dist/mdbm.js",
             format: "iife",
-            name: "mm",
+            name: "mdbm",
             plugins: [
                 terser({
                     format: {
