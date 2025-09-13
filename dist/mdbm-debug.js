@@ -5,14 +5,16 @@ var mdbm = function(exports) {
         post: post
     };
     function createObjectLink(libraryEntry) {
-        return libByName("ObjectLink").create({});
+        const linkEntry = libByName("ObjectLink").create({});
+        linkEntry.set("Object", [ libraryEntry ]);
+        return linkEntry;
     }
     function open(libraryEntry) {
         libraryEntry.set("Type", lib().title);
         return libraryEntry;
     }
     function post(libraryEntry) {
-        createObjectLink();
+        createObjectLink(libraryEntry);
         return libraryEntry;
     }
     function create(libraryName) {

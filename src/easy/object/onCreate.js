@@ -10,7 +10,9 @@ const onCreate = {
 };
 
 function createObjectLink(libraryEntry) {
-    return libByName("ObjectLink").create({});
+    const linkEntry = libByName("ObjectLink").create({});
+    linkEntry.set("Object", [libraryEntry]);
+    return linkEntry;
 }
 
 function open(libraryEntry) {
