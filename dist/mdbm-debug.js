@@ -11,7 +11,7 @@ var mdbm = function(exports) {
         return linkEntry;
     }
     function open(libraryEntry) {
-        libraryEntry.set("Type", lib().title);
+        libraryEntry.set("libraryName", lib().title);
         return libraryEntry;
     }
     function post(libraryEntry) {
