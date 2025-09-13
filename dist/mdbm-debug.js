@@ -7,6 +7,7 @@ var mdbm = function(exports) {
     function createObjectLink(libraryEntry) {
         const linkEntry = libByName("ObjectLink").create({});
         linkEntry.link("Object", libraryEntry);
+        linkEntry.set("libraryName", libraryEntry.field("libraryName"));
         return linkEntry;
     }
     function open(libraryEntry) {
