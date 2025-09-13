@@ -2,7 +2,9 @@
 /*global*/
 
 import {object} from "./object";
+import {objectLink} from "./objectLink";
 
 export {
-    object
+    object,
+    objectLink
 };
