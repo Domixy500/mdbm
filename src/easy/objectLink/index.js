@@ -3,6 +3,10 @@
 
 import {onLink} from "./onLink";
 
-export {
+const objectLink = {
     onLink
+};
+
+export {
+    objectLink
 };

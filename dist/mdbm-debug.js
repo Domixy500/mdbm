@@ -2,7 +2,7 @@ var mdbm = function(exports) {
     "use strict";
     const onCreate = {
         open: open,
-        post: post
+        post: post$1
     };
     function createObjectLink(libraryEntry) {
         const linkEntry = libByName("ObjectLink").create({});
@@ -14,7 +14,7 @@ var mdbm = function(exports) {
         libraryEntry.set("libraryName", lib().title);
         return libraryEntry;
     }
-    function post(libraryEntry) {
+    function post$1(libraryEntry) {
         createObjectLink(libraryEntry);
         return libraryEntry;
     }
@@ -28,7 +28,17 @@ var mdbm = function(exports) {
         create: create,
         onCreate: onCreate
     };
+    const onLink = {
+        post: post
+    };
+    function post() {
+        message(masterField());
+    }
+    const objectLink = {
+        onLink: onLink
+    };
     exports.object = object;
+    exports.objectLink = objectLink;
     return exports;
 }({});
 //# sourceMappingURL=mdbm-debug.js.map
