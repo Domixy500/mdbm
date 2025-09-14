@@ -26,7 +26,7 @@ var mdbm = function(exports) {
         const libraryType = type$1.fromName(libraryName);
         if (libraryType === undefined) {
             createType(libraryName);
-            message(`Type '${libraryName}' was created.`);
+            message("Type " + libraryName + " was created.");
         }
     }
     function createType(libraryName) {
@@ -67,6 +67,7 @@ var mdbm = function(exports) {
     }
     function post(e) {
         linkWithObject(e);
+        createMissingTypes(e);
     }
     const object = {
         onCreate: onCreate
