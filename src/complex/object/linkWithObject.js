@@ -10,6 +10,10 @@ function linkWithObject(e) {
         : newObjectEntry(e)
     );
     e.set(
+        "mdbm.Object",
+        objectEntry
+    );
+    e.set(
         "mdbm.Id",
         objectEntry.field("mdbm.Id")
     );
