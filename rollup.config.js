@@ -12,7 +12,7 @@ const __dirname = path.dirname( //jslint-ignore-line
 );
 
 const config = {
-    input: "src/complex/index.js",
+    input: "src/mdbm/index.js",
     onwarn(warning, warn) {
         if (warning.code === "THIS_IS_UNDEFINED") {
             return;
@@ -55,11 +55,11 @@ const config = {
     plugins: [
         alias({
             entries: [{
-                find: "@app",
-                replacement: path.resolve(__dirname, "src/app")
-            }, {
                 find: "@common",
                 replacement: path.resolve(__dirname, "src/common")
+            }, {
+                find: "@library",
+                replacement: path.resolve(__dirname, "src/library")
             }]
         }),
         resolve({
