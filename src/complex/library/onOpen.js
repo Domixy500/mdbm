@@ -21,7 +21,7 @@ function checkType() {
     const libraryType = type.fromName(libraryName);
     if (libraryType === undefined) {
         createType(libraryName);
-        message(`Type '${libraryName}' was created.`);
+        message("Type " + libraryName + " was created.");
     }
 }
 

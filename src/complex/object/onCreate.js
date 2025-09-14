@@ -17,6 +17,7 @@ function open(e) {
 
 function post(e) {
     linkWithObject(e);
+    createMissingTypes(e);
 }
 
 // function pre(e) {
