@@ -1,5 +1,7 @@
 /*jslint beta*/
-/*global*/
+/*global
+    message
+*/
 
 import {checkAccess} from "./checkAccess";
 import {type} from "@type";
@@ -14,6 +16,9 @@ function post(library) {
         type.create(
             library.title,
             type.find("Object")
+        );
+        message(
+            "Type " + library.title + " was created!"
         );
     }
 }
