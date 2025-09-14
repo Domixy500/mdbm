@@ -3,30 +3,24 @@
     lib
 */
 
+import {linkWithObject} from "./linkWithObject";
 import {type} from "../type";
 
 const onCreate = {
     open,
-    post,
-    pre
+    post
 };
 
 function open(e) {
-    setMdbmType(e, lib().title);
+    type.link(e, lib().title);
 }
 
-function post() {
-    
+function post(e) {
+    linkWithObject(e);
 }
 
-function pre(e) {
-    
-}
-
-function setMdbmType(e, typeName) {
-    const mdbmType = type.fromName(typeName);
-    e.set("mdbm.Type", mdbmType);
-}
+// function pre(e) {
+// }
 
 export {
     onCreate

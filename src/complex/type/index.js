@@ -4,13 +4,19 @@
 */
 
 const type = {
-    fromName
+    fromName,
+    link
 };
 
 function fromName(typeName) {
     return types().find(
         (e) => e.field("Name") === typeName
     );
+}
+
+function link(e, typeName) {
+    const mdbmType = fromName(typeName);
+    e.set("mdbm.Type", mdbmType);
 }
 
 function types() {
