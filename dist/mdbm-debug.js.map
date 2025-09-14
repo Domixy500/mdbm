@@ -1,1 +1,1 @@
-{"version":3,"file":"mdbm-debug.js","sources":["../src/library/index.js"],"sourcesContent":["/*jslint beta*/\r\n/*global*/\r\n\r\nconst library = {\r\n    onOpen\r\n};\r\n\r\nexport {\r\n    library\r\n};\r\n"],"names":["library","onOpen"],"mappings":";;IAGK,MAACA,UAAU;QACZC;;;;"}
+{"version":3,"file":"mdbm-debug.js","sources":["../src/library/index.js"],"sourcesContent":["/*jslint beta*/\n/*global*/\n\nconst library = {\n    onOpen\n};\n\nexport {\n    library\n};\n"],"names":["library","onOpen"],"mappings":";;IAGK,MAACA,UAAU;QACZC;;;;"}
