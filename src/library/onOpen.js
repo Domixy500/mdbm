@@ -2,6 +2,7 @@
 /*global*/
 
 import {checkAccess} from "./checkAccess";
+import {type} from "@type";
 
 const onOpen = {
     post
@@ -9,6 +10,12 @@ const onOpen = {
 
 function post(library) {
     checkAccess();
+    if (type.exists(library.title) === false) {
+        type.create(
+            library.title,
+            type.find("Object")
+        );
+    }
 }
 
 export {

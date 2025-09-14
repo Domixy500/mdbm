@@ -60,6 +60,9 @@ const config = {
             }, {
                 find: "@library",
                 replacement: path.resolve(__dirname, "src/library")
+            }, {
+                find: "@type",
+                replacement: path.resolve(__dirname, "src/type")
             }]
         }),
         resolve({

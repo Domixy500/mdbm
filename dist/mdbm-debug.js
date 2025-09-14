@@ -4,11 +4,38 @@ var mdbm = function(exports) {
         libByName("Object");
         libByName("mdbm.Type");
     }
+    function create(name, basedOn) {
+        const type = libByName("mdbm.Type").create({});
+        type.set("Name", name);
+        if (basedOn !== undefined) {
+            type.set("hasTypes", basedOn.field("hasTypes"));
+        }
+        type.link("hasTypes", type);
+        return type;
+    }
+    function entries() {
+        return libByName("mdbm.Type").entries();
+    }
+    function exists(name) {
+        return entries().some(e => e.field("Name") === name);
+    }
+    function find(name) {
+        return entries().find(e => e.field("Name") === name);
+    }
+    const type = {
+        create: create,
+        entries: entries,
+        exists: exists,
+        find: find
+    };
     const onOpen = {
         post: post
     };
     function post(library) {
         checkAccess();
+        if (type.exists(library.title) === false) {
+            type.create(library.title, type.find("Object"));
+        }
     }
     const library = {
         onOpen: onOpen
