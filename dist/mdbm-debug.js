@@ -35,6 +35,7 @@ var mdbm = function(exports) {
         checkAccess();
         if (type.exists(library.title) === false) {
             type.create(library.title, type.find("Object"));
+            message("Type " + library.title + " was created!");
         }
     }
     const library = {
