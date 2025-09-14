@@ -8,7 +8,7 @@ const type = {
 };
 
 function fromName(typeName) {
-    return types.find(
+    return types().find(
         (e) => e.field("Name") === typeName
     );
 }
