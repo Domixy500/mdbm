@@ -2,6 +2,7 @@ var mdbm = function(exports) {
     "use strict";
     function linkWithObject(e) {
         const objectEntry = typeName(e) === "Object" ? e : newObjectEntry(e);
+        e.set("mdbm.Object", objectEntry);
         e.set("mdbm.Id", objectEntry.field("mdbm.Id"));
     }
     function newObjectEntry(e) {
