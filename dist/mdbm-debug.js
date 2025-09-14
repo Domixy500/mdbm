@@ -1,23 +1,6 @@
 var mdbm = function(exports) {
     "use strict";
-    function linkWithObject(e) {
-        const objectEntry = typeName(e) === "Object" ? e : newObjectEntry(e);
-        e.set("mdbm.Object", objectEntry);
-        e.set("mdbm.Id", objectEntry.field("mdbm.Id"));
-    }
-    function newObjectEntry(e) {
-        const newObject = libByName("Object").create({});
-        newObject.link("mdbm.Type", type$1(e));
-        newObject.link("mdbm.Object", newObject);
-        return newObject;
-    }
-    function type$1(e) {
-        return e.field("mdbm.Type")[0];
-    }
-    function typeName(e) {
-        return type$1(e).field("Name");
-    }
-    const type = {
+    const type$1 = {
         fromName: fromName,
         link: link
     };
@@ -31,12 +14,56 @@ var mdbm = function(exports) {
     function types() {
         return libByName("mdbm.Type").entries();
     }
+    const onOpen = {
+        post: post$1
+    };
+    function checkLibraryAccess() {
+        libByName("Object");
+        libByName("mdbm.Type");
+    }
+    function checkType() {
+        const libraryName = lib().title;
+        const libraryType = type$1.fromName(libraryName);
+        if (libraryType === undefined) {
+            createType(libraryName);
+            message(`Type '${libraryName}' was created.`);
+        }
+    }
+    function createType(libraryName) {
+        const newType = libByName("mdbm.Type").create({});
+        newType.set("Name", libraryName);
+        return newType;
+    }
+    function post$1() {
+        checkLibraryAccess();
+        checkType();
+    }
+    const library = {
+        onOpen: onOpen
+    };
+    function linkWithObject(e) {
+        const objectEntry = typeName(e) === "Object" ? e : newObjectEntry(e);
+        e.set("mdbm.Object", objectEntry);
+        e.set("mdbm.Id", objectEntry.field("mdbm.Id"));
+    }
+    function newObjectEntry(e) {
+        const newObject = libByName("Object").create({});
+        newObject.link("mdbm.Type", type(e));
+        newObject.link("mdbm.Object", newObject);
+        return newObject;
+    }
+    function type(e) {
+        return e.field("mdbm.Type")[0];
+    }
+    function typeName(e) {
+        return type(e).field("Name");
+    }
     const onCreate = {
         open: open,
         post: post
     };
     function open(e) {
-        type.link(e, lib().title);
+        type$1.link(e, lib().title);
     }
     function post(e) {
         linkWithObject(e);
@@ -44,6 +71,7 @@ var mdbm = function(exports) {
     const object = {
         onCreate: onCreate
     };
+    exports.library = library;
     exports.object = object;
     return exports;
 }({});
