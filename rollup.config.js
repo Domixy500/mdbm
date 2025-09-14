@@ -12,7 +12,7 @@ const __dirname = path.dirname( //jslint-ignore-line
 );
 
 const config = {
-    input: "src/easy/index.js",
+    input: "src/complex/index.js",
     onwarn(warning, warn) {
         if (warning.code === "THIS_IS_UNDEFINED") {
             return;
