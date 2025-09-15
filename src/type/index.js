@@ -6,13 +6,15 @@ import {entries} from "./entries";
 import {exists} from "./exists";
 import {find} from "./find";
 import {isMissing} from "./isMissing";
+import {onCreate} from "./onCreate.js";
 
 const type = {
     create,
     entries,
     exists,
     find,
-    isMissing
+    isMissing,
+    onCreate
 };
 
 export {
