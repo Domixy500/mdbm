@@ -4,14 +4,23 @@
 import {find} from "./find";
 
 const onCreate = {
-    open
+    open,
+    post
 };
 
 function open(e) {
-    const objectTypeEntry = find("Object");
-    if (objectTypeEntry !== undefined) {
-        e.link("hasTypes", objectTypeEntry);
-    }
+    e.set(
+        "hasTypes",
+        find("Object")
+    );
+}
+
+function post(e) {
+    e.link(
+        "hasTypes",
+        find("Object")
+    );
+    return e;
 }
 
 export {
