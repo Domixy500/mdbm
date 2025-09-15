@@ -55,11 +55,11 @@ const config = {
     plugins: [
         alias({
             entries: [{
-                find: "@common",
-                replacement: path.resolve(__dirname, "src/common")
-            }, {
                 find: "@library",
                 replacement: path.resolve(__dirname, "src/library")
+            }, {
+                find: "@objec",
+                replacement: path.resolve(__dirname, "src/object")
             }, {
                 find: "@type",
                 replacement: path.resolve(__dirname, "src/type")

@@ -1,12 +1,21 @@
 /*jslint beta*/
-/*global*/
+/*global
+    cancel
+    lib
+*/
+
+import {type} from "@type";
 
 const onCreate = {
     open
 };
 
-function open() {
-    // checkType with lib()
+function open(e) {
+    const library = lib();
+    if (type.isMissing(library.title)) {
+        cancel();
+        throw "Type '" + library.title + "' is not defined!";
+    }
 }
 
 export {
