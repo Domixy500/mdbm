@@ -13,8 +13,9 @@ const onCreate = {
 function open(e) {
     const library = lib();
     if (type.isMissing(library.title)) {
-        cancel();
-        throw "Type '" + library.title + "' is not defined!";
+        library.show();
+        //throw ("Type '" + library.title + "' is not defined!"
+        //);
     }
 }
 
