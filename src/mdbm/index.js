@@ -2,7 +2,9 @@
 /*global*/
 
 import {library} from "@library";
+import {object} from "@object";
 
 export {
-    library
+    library,
+    object
 };
