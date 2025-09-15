@@ -22,20 +22,23 @@ var mdbm = function(exports) {
     function find(name) {
         return entries().find(e => e.field("Name") === name);
     }
+    function isMissing(name) {
+        return !exists(name);
+    }
     const type = {
         create: create,
         entries: entries,
         exists: exists,
-        find: find
+        find: find,
+        isMissing: isMissing
     };
     const onOpen = {
         post: post
     };
     function post(library) {
         checkAccess();
-        if (type.exists(library.title) === false) {
-            type.create(library.title, type.find("Object"));
-            message("Type " + library.title + " was created!");
+        if (type.isMissing(library.title)) {
+            throw "Type '" + library.title + "' is not defined!";
         }
     }
     const library = {
