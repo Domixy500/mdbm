@@ -26,13 +26,15 @@ var mdbm = function(exports) {
         return !exists(name);
     }
     const onCreate$1 = {
-        open: open$1
+        open: open$1,
+        post: post$1
     };
     function open$1(e) {
-        const objectTypeEntry = find("Object");
-        if (objectTypeEntry !== undefined) {
-            e.link("hasTypes", objectTypeEntry);
-        }
+        e.set("hasTypes", find("Object"));
+    }
+    function post$1(e) {
+        e.link("hasTypes", find("Object"));
+        return e;
     }
     const type = {
         create: create,
