@@ -1,4 +1,4 @@
-var mdbm = function(exports, _object) {
+var mdbm = function(exports) {
     "use strict";
     function checkAccess() {
         libByName("Object");
@@ -44,13 +44,21 @@ var mdbm = function(exports, _object) {
     const library = {
         onOpen: onOpen
     };
-    Object.defineProperty(exports, "object", {
-        enumerable: true,
-        get: function() {
-            return _object.object;
+    const onCreate = {
+        open: open
+    };
+    function open(e) {
+        const library = lib();
+        if (type.isMissing(library.title)) {
+            cancel();
+            throw "Type '" + library.title + "' is not defined!";
         }
-    });
+    }
+    const object = {
+        onCreate: onCreate
+    };
     exports.library = library;
+    exports.object = object;
     return exports;
-}({}, _object);
+}({});
 //# sourceMappingURL=mdbm-debug.js.map
