@@ -50,8 +50,7 @@ var mdbm = function(exports) {
     function open(e) {
         const library = lib();
         if (type.isMissing(library.title)) {
-            cancel();
-            throw "Type '" + library.title + "' is not defined!";
+            library.show();
         }
     }
     const object = {
