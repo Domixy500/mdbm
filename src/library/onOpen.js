@@ -12,14 +12,12 @@ const onOpen = {
 
 function post(library) {
     checkAccess();
-    if (type.exists(library.title) === false) {
-        type.create(
-            library.title,
-            type.find("Object")
-        );
-        message(
-            "Type " + library.title + " was created!"
-        );
+    if (type.isMissing(library.title)) {
+        //type.create(
+            //library.title,
+            //type.find("Object")
+        //);
+        throw "Type '" + library.title + "' is not defined!";
     }
 }
 
