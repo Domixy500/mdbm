@@ -68,6 +68,7 @@ var mdbm = function(exports) {
     };
     exports.library = library;
     exports.object = object;
+    exports.type = type;
     return exports;
 }({});
 //# sourceMappingURL=mdbm-debug.js.map
