@@ -1,4 +1,4 @@
-var mdbm = function(exports) {
+var mdbm = function(exports, _object) {
     "use strict";
     function checkAccess() {
         libByName("Object");
@@ -44,7 +44,13 @@ var mdbm = function(exports) {
     const library = {
         onOpen: onOpen
     };
+    Object.defineProperty(exports, "object", {
+        enumerable: true,
+        get: function() {
+            return _object.object;
+        }
+    });
     exports.library = library;
     return exports;
-}({});
+}({}, _object);
 //# sourceMappingURL=mdbm-debug.js.map
