@@ -25,12 +25,22 @@ var mdbm = function(exports) {
     function isMissing(name) {
         return !exists(name);
     }
+    const onCreate$1 = {
+        open: open$1
+    };
+    function open$1(e) {
+        const objectTypeEntry = find("Object");
+        if (objectTypeEntry !== undefined) {
+            e.link("hasTypes", objectTypeEntry);
+        }
+    }
     const type = {
         create: create,
         entries: entries,
         exists: exists,
         find: find,
-        isMissing: isMissing
+        isMissing: isMissing,
+        onCreate: onCreate$1
     };
     const onOpen = {
         post: post
