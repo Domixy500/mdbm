@@ -13,11 +13,7 @@ const onOpen = {
 function post(library) {
     checkAccess();
     if (type.isMissing(library.title)) {
-        //type.create(
-            //library.title,
-            //type.find("Object")
-        //);
-        throw "Type '" + library.title + "' is not defined!";
+        message("Type '" + library.title + "' is not defined!");
     }
 }
 

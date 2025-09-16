@@ -4,7 +4,7 @@
     lib
 */
 
-import {type} from "@type";
+import {library} from "@library";
 
 const onCreate = {
     open,
@@ -12,12 +12,13 @@ const onCreate = {
 };
 
 function open(e) {
-    const library = lib();
-    if (type.isMissing(library.title)) {
-        library.show();
-        //throw ("Type '" + library.title + "' is not defined!"
-        //);
-    }
+    
+    // const library = lib();
+    // if (type.isMissing(library.title)) {
+    //     library.show();
+    //     //throw ("Type '" + library.title + "' is not defined!"
+    //     //);
+    // }
 }
 
 function post(e) {
