@@ -7,7 +7,8 @@
 import {type} from "@type";
 
 const onCreate = {
-    open
+    open,
+    post
 };
 
 function open(e) {
@@ -17,6 +18,10 @@ function open(e) {
         //throw ("Type '" + library.title + "' is not defined!"
         //);
     }
+}
+
+function post(e) {
+    
 }
 
 export {
