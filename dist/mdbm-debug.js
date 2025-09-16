@@ -27,12 +27,12 @@ var mdbm = function(exports) {
     }
     const onCreate$1 = {
         open: open$1,
-        post: post$1
+        post: post$2
     };
     function open$1(e) {
         e.set("hasTypes", find("Object"));
     }
-    function post$1(e) {
+    function post$2(e) {
         e.link("hasTypes", find("Object"));
         return e;
     }
@@ -45,9 +45,9 @@ var mdbm = function(exports) {
         onCreate: onCreate$1
     };
     const onOpen = {
-        post: post
+        post: post$1
     };
-    function post(library) {
+    function post$1(library) {
         checkAccess();
         if (type.isMissing(library.title)) {
             throw "Type '" + library.title + "' is not defined!";
@@ -57,7 +57,8 @@ var mdbm = function(exports) {
         onOpen: onOpen
     };
     const onCreate = {
-        open: open
+        open: open,
+        post: post
     };
     function open(e) {
         const library = lib();
@@ -65,6 +66,7 @@ var mdbm = function(exports) {
             library.show();
         }
     }
+    function post(e) {}
     const object = {
         onCreate: onCreate
     };
