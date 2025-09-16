@@ -50,7 +50,7 @@ var mdbm = function(exports) {
     function post$1(library) {
         checkAccess();
         if (type.isMissing(library.title)) {
-            throw "Type '" + library.title + "' is not defined!";
+            message("Type '" + library.title + "' is not defined!");
         }
     }
     const library = {
@@ -60,12 +60,7 @@ var mdbm = function(exports) {
         open: open,
         post: post
     };
-    function open(e) {
-        const library = lib();
-        if (type.isMissing(library.title)) {
-            library.show();
-        }
-    }
+    function open(e) {}
     function post(e) {}
     const object = {
         onCreate: onCreate
