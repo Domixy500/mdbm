@@ -16,11 +16,11 @@ var mdbm = function(exports) {
     function entries() {
         return libByName("mdbm.Type").entries();
     }
-    function exists(name) {
-        return entries().some(e => e.field("Name") === name);
+    function find(typeName) {
+        return libByName("mdbm.Type").findByKey(typeName);
     }
-    function find(name) {
-        return entries().find(e => e.field("Name") === name);
+    function exists(typeName) {
+        return find(typeName) !== null;
     }
     function isMissing(name) {
         return !exists(name);

@@ -1,12 +1,14 @@
 /*jslint beta*/
 /*global*/
 
-import {entries} from "./entries";
+// import {entries} from "./entries";
+import {find} from "./find";
 
-function exists(name) {
-    return entries().some(
-        (e) => e.field("Name") === name
-    );
+function exists(typeName) {
+    return find(typeName) !== null;
+    // return entries().some(
+    //     (e) => e.field("Name") === name
+    // );
 }
 
 export {

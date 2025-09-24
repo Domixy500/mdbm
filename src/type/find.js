@@ -1,12 +1,15 @@
 /*jslint beta*/
-/*global*/
+/*global
+    libByName
+*/
 
-import {entries} from "./entries";
+// import {entries} from "./entries";
 
-function find(name) {
-    return entries().find(
-        (e) => e.field("Name") === name
-    );
+function find(typeName) {
+    return libByName("mdbm.Type").findByKey(typeName);
+    // return entries().find(
+    //     (e) => e.field("Name") === name
+    // );
 }
 
 export {
