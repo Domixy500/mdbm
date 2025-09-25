@@ -48,7 +48,8 @@ var mdbm = function(exports) {
     const type = {
         check: check,
         create: create,
-        isMissing: isMissing
+        isMissing: isMissing,
+        onCreate: onCreate$1
     };
     const onOpen = {
         post: post$1
