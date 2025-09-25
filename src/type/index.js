@@ -12,7 +12,8 @@ import {onCreate} from "./onCreate.js";
 const type = {
     check,
     create,
-    isMissing
+    isMissing,
+    onCreate
 };
 
 export {
