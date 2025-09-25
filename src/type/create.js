@@ -16,7 +16,7 @@ function create(typeName, baseType) {
             baseType.field("hasTypes")
         );
     }
-    onCreate.post(typeEntry);
+    //onCreate.post(typeEntry);
     return typeEntry;
 }
 
