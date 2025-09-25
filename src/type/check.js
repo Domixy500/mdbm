@@ -1,11 +1,11 @@
 /*jslint beta*/
 /*global*/
 
-import {isDefined} from "./isDefined";
+import {isMissing} from "./isMissing";
 
 function check(typeName) {
-    if (isDefined(typeName) === false) {
-        throw
+    if (isMissing(typeName)) {
+        throw `Type '${typeName}' does not exist!`;
     }
 }
 
