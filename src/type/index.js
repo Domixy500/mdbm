@@ -10,7 +10,9 @@ import {isMissing} from "./isMissing";
 import {onCreate} from "./onCreate.js";
 
 const type = {
-    check
+    check,
+    create,
+    isMissing
 };
 
 export {

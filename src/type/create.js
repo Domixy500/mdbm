@@ -3,14 +3,21 @@
     libByName
 */
 
-function create(name, basedOn) {
-    const type = libByName("mdbm.Type").create({});
-    type.set("Name", name);
-    if (basedOn !== undefined) {
-        type.set("hasTypes", basedOn.field("hasTypes"));
+import {onCreate} from "./onCreate";
+
+function create(typeName, baseType) {
+    const typeEntry = libByName("mdbm.Type").create({});
+    typeEntry.set("Name", typeName);
+    if (baseType === undefined) {
+        onCreate.open(typeEntry);
+    } else {
+        typeEntry.set(
+            "hasTypes",
+            baseType.field("hasTypes")
+        );
     }
-    type.link("hasTypes", type);
-    return type;
+    onCreate.post(typeEntry);
+    return typeEntry;
 }
 
 export {
