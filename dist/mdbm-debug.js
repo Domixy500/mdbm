@@ -40,7 +40,6 @@ var mdbm = function(exports) {
         } else {
             typeEntry.set("hasTypes", baseType.field("hasTypes"));
         }
-        onCreate$1.post(typeEntry);
         return typeEntry;
     }
     const type = {
