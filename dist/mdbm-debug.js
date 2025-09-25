@@ -4,18 +4,6 @@ var mdbm = function(exports) {
         libByName("Object");
         libByName("mdbm.Type");
     }
-    function create(name, basedOn) {
-        const type = libByName("mdbm.Type").create({});
-        type.set("Name", name);
-        if (basedOn !== undefined) {
-            type.set("hasTypes", basedOn.field("hasTypes"));
-        }
-        type.link("hasTypes", type);
-        return type;
-    }
-    function entries() {
-        return libByName("mdbm.Type").entries();
-    }
     function find(typeName) {
         return libByName("mdbm.Type").findByKey(typeName);
     }
@@ -25,24 +13,13 @@ var mdbm = function(exports) {
     function isMissing(name) {
         return !exists(name);
     }
-    const onCreate$1 = {
-        open: open$1,
-        post: post$2
-    };
-    function open$1(e) {
-        e.set("hasTypes", find("Object"));
-    }
-    function post$2(e) {
-        e.link("hasTypes", find("Object"));
-        return e;
+    function check(typeName) {
+        if (isMissing(typeName)) {
+            throw `Type '${typeName}' does not exist!`;
+        }
     }
     const type = {
-        create: create,
-        entries: entries,
-        exists: exists,
-        find: find,
-        isMissing: isMissing,
-        onCreate: onCreate$1
+        check: check
     };
     const onOpen = {
         post: post$1
