@@ -4,7 +4,7 @@
 import {find} from "./find";
 
 function exists(typeName) {
-    return find(typeName) !== null;
+    return find(typeName) !== undefined;
 }
 
 export {
