@@ -4,11 +4,14 @@ var mdbm = function(exports) {
         libByName("Object");
         libByName("mdbm.Type");
     }
+    function entries() {
+        return libByName("mdbm.Type").entries();
+    }
     function find(typeName) {
-        return libByName("mdbm.Type").findByKey(typeName);
+        return entries().find(e => e.field("Name") === typeName);
     }
     function exists(typeName) {
-        return find(typeName) !== null;
+        return find(typeName) !== undefined;
     }
     function isMissing(name) {
         return !exists(name);
