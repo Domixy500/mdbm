@@ -24,6 +24,13 @@ var mdbm = function(exports) {
             throw msg.isMissing(typeName);
         }
     }
+    function addType(typeEntry, typeName) {
+        const hasTypes = typeEntry.field("hasTypes");
+        const hasTypeNames = hasTypes.map(x => e.field("Name"));
+        if (hasTypeNames.includes(typeName)) {
+            typeEntry.link("hasTypes", find(typeName));
+        }
+    }
     const onCreate$1 = {
         open: open$1,
         post: post$2
@@ -32,7 +39,8 @@ var mdbm = function(exports) {
         e.set("hasTypes", find("Object"));
     }
     function post$2(e) {
-        e.link("hasTypes", find("Object"));
+        addType(e, "Object");
+        addType(e, e.field("Name"));
         return e;
     }
     function create(typeName, baseType) {
