@@ -13,9 +13,12 @@ var mdbm = function(exports) {
     function isMissing(name) {
         return !exists(name);
     }
+    const msg = {
+        isMissing: x => "Type '" + x + "' does not exist!"
+    };
     function check(typeName) {
         if (isMissing(typeName)) {
-            throw `Type '${typeName}' does not exist!`;
+            throw msg.isMissing(typeName);
         }
     }
     const type = {
