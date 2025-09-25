@@ -3,9 +3,13 @@
 
 import {isMissing} from "./isMissing";
 
+const msg = {
+    isMissing: (x) => "Type '" + x + "' does not exist!"
+};
+
 function check(typeName) {
     if (isMissing(typeName)) {
-        throw `Type '${typeName}' does not exist!`;
+        throw msg.isMissing(typeName);
     }
 }
 
