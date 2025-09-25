@@ -21,8 +21,32 @@ var mdbm = function(exports) {
             throw msg.isMissing(typeName);
         }
     }
+    const onCreate$1 = {
+        open: open$1,
+        post: post$2
+    };
+    function open$1(e) {
+        e.set("hasTypes", find("Object"));
+    }
+    function post$2(e) {
+        e.link("hasTypes", find("Object"));
+        return e;
+    }
+    function create(typeName, baseType) {
+        const typeEntry = libByName("mdbm.Type").create({});
+        typeEntry.set("Name", typeName);
+        if (baseType === undefined) {
+            onCreate$1.open(typeEntry);
+        } else {
+            typeEntry.set("hasTypes", baseType.field("hasTypes"));
+        }
+        onCreate$1.post(typeEntry);
+        return typeEntry;
+    }
     const type = {
-        check: check
+        check: check,
+        create: create,
+        isMissing: isMissing
     };
     const onOpen = {
         post: post$1
