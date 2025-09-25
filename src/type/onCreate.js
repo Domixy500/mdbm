@@ -1,11 +1,12 @@
 /*jslint beta*/
 /*global*/
 
+import {addType} from "./addType";
 import {find} from "./find";
 
 const onCreate = {
     open,
-    post
+post
 };
 
 function open(e) {
@@ -16,10 +17,8 @@ function open(e) {
 }
 
 function post(e) {
-    e.link(
-        "hasTypes",
-        find("Object")
-    );
+    addType(e, "Object");
+    addType(e, e.field("Name"));
     return e;
 }
 
