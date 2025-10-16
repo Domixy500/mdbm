@@ -8,8 +8,7 @@ function addType(typeEntry, typeName) {
     const hasTypeNames = hasTypes.map(
         (e) => e.field("Name")
     );
-    message(hasTypeNames)
-    if (hasTypeNames.includes(typeName)) {
+    if (!hasTypeNames.includes(typeName)) {
         typeEntry.link(
             "hasTypes",
             find(typeName)
