@@ -13,15 +13,18 @@ var mdbm = function(exports) {
     function exists(typeName) {
         return find(typeName) !== undefined;
     }
-    function isMissing(name) {
+    function isMissing$1(name) {
         return !exists(name);
     }
-    const msg = {
-        isMissing: x => "Type '" + x + "' does not exist!"
+    const messages = {
+        isMissing: isMissing
     };
+    function isMissing(x) {
+        return "Type '" + x + "' does not exist!";
+    }
     function check(typeName) {
-        if (isMissing(typeName)) {
-            throw msg.isMissing(typeName);
+        if (isMissing$1(typeName)) {
+            throw messages.isMissing(typeName);
         }
     }
     function addType(typeEntry, typeName) {
@@ -44,6 +47,12 @@ var mdbm = function(exports) {
         return e;
     }
     function create(typeName, baseTypeName) {
+        if (exists(typeName)) {
+            throw messages.existsAlready(typeName);
+        }
+        return createType(typeName, baseTypeName);
+    }
+    function createType(typeName, baseTypeName) {
         const typeEntry = libByName("mdbm.Type").create({});
         typeEntry.set("Name", typeName);
         if (baseTypeName === undefined) {
@@ -57,7 +66,7 @@ var mdbm = function(exports) {
     const type = {
         check: check,
         create: create,
-        isMissing: isMissing,
+        isMissing: isMissing$1,
         onCreate: onCreate$1
     };
     const onOpen = {
