@@ -7,17 +7,17 @@ import {exists} from "./exists";
 import {messages} from "./messages";
 import {onCreate} from "./onCreate";
 
-function create(typeName, baseTypeName) {
+function create(typeName, baseType) {
     if (exists(typeName)) {
         throw messages.existsAlready(typeName);
     }
-    return createType(typeName, baseTypeName);
+    return createType(typeName, baseType);
 }
 
-function createType(typeName, baseTypeName) {
+function createType(typeName, baseType) {
     const typeEntry = libByName("mdbm.Type").create({});
     typeEntry.set("Name", typeName);
-    if (baseTypeName === undefined) {
+    if (baseType === undefined) {
         onCreate.open(typeEntry);
     } else {
         typeEntry.set(
