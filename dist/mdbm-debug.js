@@ -88,7 +88,9 @@ var mdbm = function(exports) {
     };
     function open(e, libraryName) {
         if (type.isMissing(libraryName)) {
-            throw type.messages.isMissing(libraryName);
+            message(type.messages.isMissing(libraryName));
+            cancel();
+            exit();
         }
     }
     function post(e) {}
