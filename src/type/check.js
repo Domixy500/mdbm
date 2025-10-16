@@ -2,14 +2,11 @@
 /*global*/
 
 import {isMissing} from "./isMissing";
-
-const msg = {
-    isMissing: (x) => "Type '" + x + "' does not exist!"
-};
+import {messages} from "./messages";
 
 function check(typeName) {
     if (isMissing(typeName)) {
-        throw msg.isMissing(typeName);
+        throw messages.isMissing(typeName);
     }
 }
 
