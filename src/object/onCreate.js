@@ -13,7 +13,9 @@ const onCreate = {
 
 function open(e, libraryName) {
     if (type.isMissing(libraryName)) {
-        throw type.messages.isMissing(libraryName);
+        message(type.messages.isMissing(libraryName));
+        cancel();
+        exit();
     }
 
     // const library = lib();
