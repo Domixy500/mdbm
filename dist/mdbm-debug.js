@@ -27,6 +27,7 @@ var mdbm = function(exports) {
     function addType(typeEntry, typeName) {
         const hasTypes = typeEntry.field("hasTypes");
         const hasTypeNames = hasTypes.map(e => e.field("Name"));
+        message(hasTypeNames);
         if (hasTypeNames.includes(typeName)) {
             typeEntry.link("hasTypes", find(typeName));
         }
@@ -43,10 +44,10 @@ var mdbm = function(exports) {
         addType(e, e.field("Name"));
         return e;
     }
-    function create(typeName, baseType) {
+    function create(typeName, baseTypeName) {
         const typeEntry = libByName("mdbm.Type").create({});
         typeEntry.set("Name", typeName);
-        if (baseType === undefined) {
+        if (baseTypeName === undefined) {
             onCreate$1.open(typeEntry);
         } else {
             typeEntry.set("hasTypes", baseType.field("hasTypes"));
