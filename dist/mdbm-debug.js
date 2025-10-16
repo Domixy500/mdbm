@@ -46,16 +46,16 @@ var mdbm = function(exports) {
         addType(e, e.field("Name"));
         return e;
     }
-    function create(typeName, baseTypeName) {
+    function create(typeName, baseType) {
         if (exists(typeName)) {
             throw messages.existsAlready(typeName);
         }
-        return createType(typeName, baseTypeName);
+        return createType(typeName, baseType);
     }
-    function createType(typeName, baseTypeName) {
+    function createType(typeName, baseType) {
         const typeEntry = libByName("mdbm.Type").create({});
         typeEntry.set("Name", typeName);
-        if (baseTypeName === undefined) {
+        if (baseType === undefined) {
             onCreate$1.open(typeEntry);
         } else {
             typeEntry.set("hasTypes", baseType.field("hasTypes"));
