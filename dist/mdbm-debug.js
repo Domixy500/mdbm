@@ -67,6 +67,7 @@ var mdbm = function(exports) {
         check: check,
         create: create,
         isMissing: isMissing$1,
+        messages: messages,
         onCreate: onCreate$1
     };
     const onOpen = {
@@ -85,7 +86,11 @@ var mdbm = function(exports) {
         open: open,
         post: post
     };
-    function open(e) {}
+    function open(e, libraryName) {
+        if (type.isMissing(libraryName)) {
+            throw type.messages.isMissing(libraryName);
+        }
+    }
     function post(e) {}
     const object = {
         onCreate: onCreate
