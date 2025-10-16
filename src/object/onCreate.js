@@ -4,15 +4,18 @@
     lib
 */
 
-import {library} from "@library";
+import {type} from "@type";
 
 const onCreate = {
     open,
     post
 };
 
-function open(e) {
-    
+function open(e, libraryName) {
+    if (type.isMissing(libraryName)) {
+        throw type.messages.isMissing(libraryName);
+    }
+
     // const library = lib();
     // if (type.isMissing(library.title)) {
     //     library.show();
