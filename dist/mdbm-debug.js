@@ -17,8 +17,12 @@ var mdbm = function(exports) {
         return !exists(name);
     }
     const messages = {
+        alreadyExists: alreadyExists,
         isMissing: isMissing
     };
+    function alreadyExists(x) {
+        return "Type '" + x + "' does already exist!";
+    }
     function isMissing(x) {
         return "Type '" + x + "' does not exist!";
     }
