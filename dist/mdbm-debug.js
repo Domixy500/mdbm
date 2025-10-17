@@ -86,12 +86,13 @@ var mdbm = function(exports) {
         open: open,
         post: post
     };
-    function open(e, library) {
-        if (type.isMissing(library.title)) {
-            library.show();
-            throw type.messages.isMissing(library.title);
+    function open(e, activeLibrary) {
+        const libraryName = activeLibrary.title;
+        if (type.isMissing(libraryName)) {
+            activeLibrary.show();
+            throw type.messages.isMissing(libraryName);
         }
-        e.set("mdbm.Type", library.title);
+        e.set("mdbm.Type", libraryName);
     }
     function post(e) {}
     const object = {
