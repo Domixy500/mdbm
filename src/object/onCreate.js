@@ -11,19 +11,13 @@ const onCreate = {
     post
 };
 
-function open(e, library) {
-    if (type.isMissing(library.title)) {
-        library.show();
-        throw type.messages.isMissing(library.title);
+function open(e, activeLibrary) {
+    const libraryName = activeLibrary.title;
+    if (type.isMissing(libraryName)) {
+        activeLibrary.show();
+        throw type.messages.isMissing(libraryName);
     }
-    e.set("mdbm.Type", library.title);
-
-    // const library = lib();
-    // if (type.isMissing(library.title)) {
-    //     library.show();
-    //     //throw ("Type '" + library.title + "' is not defined!"
-    //     //);
-    // }
+    e.set("mdbm.Type", libraryName);
 }
 
 function post(e) {
