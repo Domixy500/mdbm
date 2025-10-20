@@ -26,10 +26,10 @@ function post(e) {
 }
 
 function setIdsObject(e) {
-    const idsObject = type.idsObject(typeName(e));
+    const ids = type.emptyIds(typeName(e));
     e.set(
         "mdbm.Ids",
-        JSON.stringify(idsObject, null,)
+        JSON.stringify(ids, null, 2)
     );
 }
 
