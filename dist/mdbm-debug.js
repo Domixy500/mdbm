@@ -86,6 +86,9 @@ var mdbm = function(exports) {
     const library = {
         onOpen: onOpen
     };
+    function typeName(e) {
+        return e.field("mdbm.Type");
+    }
     const onCreate = {
         open: open,
         post: post
@@ -98,10 +101,18 @@ var mdbm = function(exports) {
         }
         e.set("mdbm.Type", libraryName);
     }
-    function post(e) {}
+    function post(e) {
+        setIdsObject(e);
+    }
+    function setIdsObject(e) {
+        const idsObject = type.idsObject(typeName(e));
+        e.set("mdbm.Ids", JSON.stringify(idsObject, null));
+    }
     function create(typeName) {
         const object = libByName(typeName).create({});
         onCreate.open(object, libByName(typeName));
+        onCreate.post(object);
+        object.show();
     }
     const object = {
         create: create,
