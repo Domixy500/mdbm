@@ -100,15 +100,15 @@ var mdbm = function(exports) {
     }
     function post(e) {}
     function create(typeName) {
-        object = libByName(typeName).create({});
+        const object = libByName(typeName).create({});
         onCreate.open(object, libByName(typeName));
     }
-    const object$1 = {
+    const object = {
         create: create,
         onCreate: onCreate
     };
     exports.library = library;
-    exports.object = object$1;
+    exports.object = object;
     exports.type = type;
     return exports;
 }({});
