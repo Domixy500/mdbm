@@ -4,7 +4,7 @@
 import {onCreate} from "./onCreate";
 
 function create(typeName) {
-    object = libByName(typeName).create({});
+    const object = libByName(typeName).create({});
     onCreate.open(
         object,
         libByName(typeName)
