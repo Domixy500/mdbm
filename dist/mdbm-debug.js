@@ -50,7 +50,7 @@ var mdbm = function(exports) {
         addType(e, e.field("Name"));
         return e;
     }
-    function create(typeName, baseType) {
+    function create$1(typeName, baseType) {
         if (exists(typeName)) {
             throw messages.existsAlready(typeName);
         }
@@ -69,7 +69,7 @@ var mdbm = function(exports) {
     }
     const type = {
         check: check,
-        create: create,
+        create: create$1,
         isMissing: isMissing$1,
         messages: messages,
         onCreate: onCreate$1
@@ -99,11 +99,16 @@ var mdbm = function(exports) {
         e.set("mdbm.Type", libraryName);
     }
     function post(e) {}
-    const object = {
+    function create(typeName) {
+        onCreaobject = libByName(typeName).create({});
+        onCreate.open(object, libByName(typeName));
+    }
+    const object$1 = {
+        create: create,
         onCreate: onCreate
     };
     exports.library = library;
-    exports.object = object;
+    exports.object = object$1;
     exports.type = type;
     return exports;
 }({});
