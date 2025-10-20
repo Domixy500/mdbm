@@ -67,9 +67,16 @@ var mdbm = function(exports) {
         onCreate$1.post(typeEntry);
         return typeEntry;
     }
+    function emptyIds(typeName) {
+        const typeEntry = find(typeName);
+        const types = typeEntry.field("hasTypes");
+        const entries = types.map(x => [ x.field("Name"), null ]);
+        return Object.fromEntries(entries);
+    }
     const type = {
         check: check,
         create: create$1,
+        emptyIds: emptyIds,
         isMissing: isMissing$1,
         messages: messages,
         onCreate: onCreate$1
@@ -105,8 +112,8 @@ var mdbm = function(exports) {
         setIdsObject(e);
     }
     function setIdsObject(e) {
-        const idsObject = type.idsObject(typeName(e));
-        e.set("mdbm.Ids", JSON.stringify(idsObject, null));
+        const ids = type.emptyIds(typeName(e));
+        e.set("mdbm.Ids", JSON.stringify(ids, null, 2));
     }
     function create(typeName) {
         const object = libByName(typeName).create({});
