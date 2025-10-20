@@ -9,6 +9,8 @@ function create(typeName) {
         object,
         libByName(typeName)
     );
+    onCreate.post(object);
+    object.show();
 }
 
 export {

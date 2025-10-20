@@ -5,6 +5,7 @@
 */
 
 import {type} from "@type";
+import {typeName} from "./typeName";
 
 const onCreate = {
     open,
@@ -21,8 +22,17 @@ function open(e, activeLibrary) {
 }
 
 function post(e) {
-    
+    setIdsObject(e);
 }
+
+function setIdsObject(e) {
+    const idsObject = type.idsObject(typeName(e));
+    e.set(
+        "mdbm.Ids",
+        JSON.stringify(idsObject, null,)
+    );
+}
+
 
 export {
     onCreate
