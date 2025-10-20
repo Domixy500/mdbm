@@ -3,7 +3,7 @@
 
 import {find} from "./find";
 
-function idsObject(typeName) {
+function emptyIds(typeName) {
     const typeEntry = find(typeName);
     const types = typeEntry.field("hasTypes");
     const entries = types.map(
@@ -13,5 +13,5 @@ function idsObject(typeName) {
 }
 
 export {
-    idsObject
+    emptyIds
 };
