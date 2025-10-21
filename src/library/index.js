@@ -1,7 +1,7 @@
 /*jslint beta*/
 /*global*/
 
-import {createEntry} from "./getLibrary";
+import {createEntry} from "./createEntry";
 import {getLibrary} from "./getLibrary";
 import {onOpen} from "./onOpen";
 

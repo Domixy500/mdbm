@@ -3,6 +3,9 @@ var mdbm = function(exports) {
     function getLibrary(libraryName) {
         return libByName(libraryName);
     }
+    function createEntry(libraryName) {
+        return getLibrary(libraryName).create({});
+    }
     function checkAccess() {
         getLibrary("Object");
         getLibrary("mdbm.Type");
@@ -29,6 +32,7 @@ var mdbm = function(exports) {
         }
     }
     const library = {
+        createEntry: createEntry,
         get: getLibrary,
         onOpen: onOpen
     };
