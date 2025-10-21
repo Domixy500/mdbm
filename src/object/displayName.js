@@ -9,7 +9,7 @@ function displayName(e) {
         /\$\{(.*?)\}/g,
         (ignore, key) => getVal(e, key)
     );
-    e.set("DisplayName", value);
+    e.set("mdbm.DisplayName", value);
     return value;
 }
 
