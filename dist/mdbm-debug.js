@@ -126,6 +126,7 @@ var mdbm = function(exports) {
         const entryIds = getAll(e);
         const libNames = Object.keys(entryIds);
         libNames.forEach(addMissingEntry);
+        setAll(e, entryIds);
         function addMissingEntry(libraryName) {
             if (entryIds[libraryName] === null) {
                 const libEntry = libByName(libraryName).create({});
