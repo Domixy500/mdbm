@@ -30,6 +30,7 @@ function createMissing(e) {
     const entryIds = getAll(e);
     const libNames = Object.keys(entryIds);
     libNames.forEach(addMissingEntry);
+    setAll(e, entryIds);
     
     function addMissingEntry(libraryName) {
         if (entryIds[libraryName] === null) {
