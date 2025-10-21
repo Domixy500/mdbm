@@ -1,4 +1,4 @@
-var mdbm = function(exports, _object) {
+var mdbm = function(exports) {
     "use strict";
     function getLibrary(libraryName) {
         return libByName(libraryName);
@@ -114,8 +114,11 @@ var mdbm = function(exports, _object) {
     function emptyIds(typeName) {
         return hasTypesNames(typeName).reduce(addEmptyId, Object.create(null));
     }
+    function typeName(e) {
+        return e.field("mdbm.Type");
+    }
     function fromObjectEntry(e) {
-        return find(_object.object.typeName(e));
+        return find(typeName(e));
     }
     const type = {
         check: check,
@@ -126,9 +129,6 @@ var mdbm = function(exports, _object) {
         messages: messages,
         onCreate: onCreate$1
     };
-    function typeName(e) {
-        return e.field("mdbm.Type");
-    }
     const ids = {
         addMissing: addMissing,
         createMissing: createMissing,
@@ -229,5 +229,5 @@ var mdbm = function(exports, _object) {
     exports.object = object;
     exports.type = type;
     return exports;
-}({}, _object);
+}({});
 //# sourceMappingURL=mdbm-debug.js.map

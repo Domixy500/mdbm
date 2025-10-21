@@ -61,7 +61,7 @@ const config = {
                 find: "@library",
                 replacement: path.resolve(__dirname, "src/library")
             }, {
-                find: "@objec",
+                find: "@object",
                 replacement: path.resolve(__dirname, "src/object")
             }, {
                 find: "@type",

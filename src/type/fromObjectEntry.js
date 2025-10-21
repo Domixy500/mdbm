@@ -2,10 +2,10 @@
 /*global*/
 
 import {find} from "./find";
-import {object} from "@object";
+import {typeName} from "@object/typeName";
 
 function fromObjectEntry(e) {
-    return find(object.typeName(e));
+    return find(typeName(e));
 }
 
 export {
