@@ -5,7 +5,7 @@
 */
 
 import {type} from "@type";
-import {typeName} from "./typeName";
+import {ids} from "./ids";
 
 const onCreate = {
     open,
@@ -19,21 +19,12 @@ function open(e, activeLibrary) {
         throw type.messages.isMissing(libraryName);
     }
     e.set("mdbm.Type", libraryName);
-    setEmptyIds(e);
+    ids.setEmpty(e);
 }
 
 function post(e) {
-    
+    ids.setSelf(e);
 }
-
-function setEmptyIds(e) {
-    const ids = type.emptyIds(typeName(e));
-    e.set(
-        "mdbm.Ids",
-        JSON.stringify(ids, null, 2)
-    );
-}
-
 
 export {
     onCreate

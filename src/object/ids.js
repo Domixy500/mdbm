@@ -10,7 +10,8 @@ const ids = {
     getAll,
     set,
     setAll,
-    setEmpty
+    setEmpty,
+    setSelf
 };
 
 function get(e, typeName) {
@@ -33,6 +34,10 @@ function setAll(e, ids) {
         "mdbm.Ids",
         json.stringify(ids)
     );
+}
+
+function setSelf(e) {
+    set(e, typeName(e), e.id);
 }
 
 function set(e, typeName, value) {
