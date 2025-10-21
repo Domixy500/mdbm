@@ -1,9 +1,7 @@
 /*jslint beta*/
-/*global
-    cancel
-    lib
-*/
+/*global*/
 
+import {onSave} from "./onSave";
 import {type} from "@type";
 import {ids} from "./ids";
 
@@ -24,6 +22,7 @@ function open(e, activeLibrary) {
 
 function post(e) {
     ids.setSelf(e);
+    onSave.post(e);
 }
 
 export {
