@@ -39,13 +39,13 @@ var mdbm = function(exports) {
         }
     }
     const onCreate$1 = {
-        open: open$1,
-        post: post$2
+        open: open$2,
+        post: post$3
     };
-    function open$1(e) {
+    function open$2(e) {
         e.set("hasTypes", find("Object"));
     }
-    function post$2(e) {
+    function post$3(e) {
         addType(e, "Object");
         addType(e, e.field("Name"));
         return e;
@@ -84,9 +84,9 @@ var mdbm = function(exports) {
         onCreate: onCreate$1
     };
     const onOpen = {
-        post: post$1
+        post: post$2
     };
-    function post$1(library) {
+    function post$2(library) {
         checkAccess();
         if (type.isMissing(library.title)) {
             message("Type '" + library.title + "' is not defined!");
@@ -109,6 +109,8 @@ var mdbm = function(exports) {
         return e.field("mdbm.Type");
     }
     const ids = {
+        addMissing: addMissing,
+        createMissing: createMissing,
         get: get,
         getAll: getAll,
         set: set,
@@ -116,8 +118,23 @@ var mdbm = function(exports) {
         setEmpty: setEmpty,
         setSelf: setSelf
     };
-    function get(e, typeName) {
-        return getAll(e)[typeName];
+    function addMissing(e) {
+        const entryIds = Object.assign(Object.create(null), type.emptyIds(typeName(e)), getAll(e));
+        setAll(e, entryIds);
+    }
+    function createMissing(e) {
+        const entryIds = getAll(e);
+        const libNames = Object.keys(entryIds);
+        libNames.forEach(addMissingEntry);
+        function addMissingEntry(libraryName) {
+            if (entryIds[libraryName] === null) {
+                const libEntry = libByName(libraryName).create({});
+                entryIds[libraryName] = libEntry.id;
+            }
+        }
+    }
+    function get(e, libName) {
+        return getAll(e)[libName];
     }
     function getAll(e) {
         return json.parse(e.field("mdbm.Ids"));
@@ -132,10 +149,19 @@ var mdbm = function(exports) {
     function setSelf(e) {
         set(e, typeName(e), e.id);
     }
-    function set(e, typeName, value) {
+    function set(e, libName, value) {
         const ids = getAll(e);
-        ids[typeName] = value;
+        ids[libName] = value;
         setAll(e, ids);
+    }
+    const onSave = {
+        open: open$1,
+        post: post$1
+    };
+    function open$1(e, activeLibrary) {}
+    function post$1(e) {
+        ids.addMissing(e);
+        ids.createMissing(e);
     }
     const onCreate = {
         open: open,
@@ -152,6 +178,7 @@ var mdbm = function(exports) {
     }
     function post(e) {
         ids.setSelf(e);
+        onSave.post(e);
     }
     function create(typeName) {
         const object = libByName(typeName).create({});
