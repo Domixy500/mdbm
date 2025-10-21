@@ -179,7 +179,7 @@ var mdbm = function(exports) {
     function displayName(e) {
         const template = type.fromObjectEntry(e).field("DisplayNamePattern");
         const value = template.replace(/\$\{(.*?)\}/g, (ignore, key) => getVal(e, key));
-        e.set("DisplayName", value);
+        e.set("mdbm.DisplayName", value);
         return value;
     }
     function getVal(e, key) {
