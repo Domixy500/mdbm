@@ -1,4 +1,4 @@
-var mdbm = function(exports) {
+var mdbm = function(exports, json) {
     "use strict";
     function checkAccess() {
         libByName("Object");
@@ -98,6 +98,35 @@ var mdbm = function(exports) {
     function typeName(e) {
         return e.field("mdbm.Type");
     }
+    const ids = {
+        get: get,
+        getAll: getAll,
+        set: set,
+        setAll: setAll,
+        setEmpty: setEmpty,
+        setSelf: setSelf
+    };
+    function get(e, typeName) {
+        return getAll(e)[typeName];
+    }
+    function getAll(e) {
+        return json.json.parse(e.field("mdbm.Ids"));
+    }
+    function setEmpty(e) {
+        const ids = type.emptyIds(typeName(e));
+        setAll(e, ids);
+    }
+    function setAll(e, ids) {
+        e.set("mdbm.Ids", json.json.stringify(ids));
+    }
+    function setSelf(e) {
+        set(e, typeName(e), e.id);
+    }
+    function set(e, typeName, value) {
+        const ids = getAll(e);
+        ids[typeName] = value;
+        setAll(ids);
+    }
     const onCreate = {
         open: open,
         post: post
@@ -109,12 +138,10 @@ var mdbm = function(exports) {
             throw type.messages.isMissing(libraryName);
         }
         e.set("mdbm.Type", libraryName);
-        setEmptyIds(e);
+        ids.setEmpty(e);
     }
-    function post(e) {}
-    function setEmptyIds(e) {
-        const ids = type.emptyIds(typeName(e));
-        e.set("mdbm.Ids", JSON.stringify(ids, null, 2));
+    function post(e) {
+        ids.setSelf(e);
     }
     function create(typeName) {
         const object = libByName(typeName).create({});
@@ -130,5 +157,5 @@ var mdbm = function(exports) {
     exports.object = object;
     exports.type = type;
     return exports;
-}({});
+}({}, json);
 //# sourceMappingURL=mdbm-debug.js.map
