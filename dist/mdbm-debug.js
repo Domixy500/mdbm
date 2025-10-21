@@ -168,6 +168,15 @@ var mdbm = function(exports) {
     function setSelf(e) {
         set(e, typeName(e), e.id);
     }
+    function displayName(e) {
+        const template = type.fromObjectEntry(e).field("DisplayNamePattern");
+        const value = template.replace(/\$\{(.*?)\}/g, (ignore, key) => getVal(e, key));
+        e.set("DisplayName", value);
+        return value;
+    }
+    function getVal(e, key) {
+        return e.field(key);
+    }
     const onSave = {
         open: open$1,
         post: post$1
@@ -178,6 +187,7 @@ var mdbm = function(exports) {
     function post$1(e) {
         ids.addMissing(e);
         ids.createMissing(e);
+        message(displayName(e));
     }
     const onCreate = {
         open: open,
@@ -204,6 +214,7 @@ var mdbm = function(exports) {
     }
     const object = {
         create: create,
+        displayName: displayName,
         onCreate: onCreate
     };
     exports.library = library;

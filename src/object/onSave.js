@@ -2,6 +2,7 @@
 /*global*/
 
 import {ids} from "./ids";
+import {displayName} from "./displayName";
 
 const onSave = {
     open,
@@ -16,6 +17,7 @@ function open(e, activeLibrary) {
 function post(e) {
     ids.addMissing(e);
     ids.createMissing(e);
+    message(displayName(e));
 }
 
 export {
