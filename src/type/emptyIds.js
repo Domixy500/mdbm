@@ -1,19 +1,18 @@
 /*jslint beta*/
 /*global*/
 
-import {find} from "./find";
+import {hasTypesNames} from "./hasTypesNames";
+
+function addEmptyId(entryIds, name) {
+    entryIds[name] = null;
+    return entryIds;
+}
 
 function emptyIds(typeName) {
-    const typeEntry = find(typeName);
-    const types = typeEntry.field("hasTypes");
-    const typeNames = types.map(
-        (x) => x.field("Name")
+    return hasTypesNames(typeName).reduce(
+        addEmptyId,
+        Object.create(null)
     );
-    const ids = Object.create(null);
-    typeNames.forEach(
-        (x) => ids[x] = null
-    );
-    return ids;
 }
 
 export {

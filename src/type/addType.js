@@ -3,17 +3,22 @@
 
 import {find} from "./find";
 
+const hasTypesField = "hasTypes";
+
 function addType(typeEntry, typeName) {
-    const hasTypes = typeEntry.field("hasTypes");
-    const hasTypeNames = hasTypes.map(
+    const hasTypeNames = hasTypes(typeEntry).map(
         (e) => e.field("Name")
     );
     if (!hasTypeNames.includes(typeName)) {
         typeEntry.link(
-            "hasTypes",
+            hasTypesField,
             find(typeName)
         );
     }
+}
+
+function hasTypes(typeEntry) {
+    return typeEntry.field(hasTypesField);
 }
 
 export {

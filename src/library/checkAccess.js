@@ -1,11 +1,11 @@
 /*jslint beta*/
-/*global
-    libByName
-*/
+/*global*/
+
+import {getLibrary} from "./getLibrary";
 
 function checkAccess() {
-    libByName("Object");
-    libByName("mdbm.Type");
+    getLibrary("Object");
+    getLibrary("mdbm.Type");
 }
 
 export {

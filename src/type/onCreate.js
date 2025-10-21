@@ -6,7 +6,7 @@ import {find} from "./find";
 
 const onCreate = {
     open,
-post
+    post
 };
 
 function open(e) {

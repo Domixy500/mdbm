@@ -8,5 +8,5 @@ const common = {
 };
 
 export {
-    json
+    common
 };

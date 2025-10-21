@@ -4,7 +4,7 @@
 */
 
 import {checkAccess} from "./checkAccess";
-import {type} from "@type";
+import {isMissing} from "@type/isMissing";
 
 const onOpen = {
     post
@@ -12,7 +12,7 @@ const onOpen = {
 
 function post(library) {
     checkAccess();
-    if (type.isMissing(library.title)) {
+    if (isMissing(library.title)) {
         message("Type '" + library.title + "' is not defined!");
     }
 }

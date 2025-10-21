@@ -1,7 +1,8 @@
 /*jslint beta*/
 /*global*/
 
-import {json} from "@common/json";
+import {common} from "@common";
+import {library} from "@library";
 import {type} from "@type";
 import {typeName} from "./typeName";
 
@@ -16,6 +17,8 @@ const ids = {
     setSelf
 };
 
+const idsField = "mdbm.Ids";
+
 function addMissing(e) {
     const entryIds = Object.assign(
         Object.create(null),
@@ -23,7 +26,6 @@ function addMissing(e) {
         getAll(e)
     );
     setAll(e, entryIds);
-    
 }
 
 function createMissing(e) {
@@ -31,11 +33,10 @@ function createMissing(e) {
     const libNames = Object.keys(entryIds);
     libNames.forEach(addMissingEntry);
     setAll(e, entryIds);
-    
+
     function addMissingEntry(libraryName) {
         if (entryIds[libraryName] === null) {
-            const libEntry = libByName(libraryName).create({});
-            entryIds[libraryName] = libEntry.id;
+            entryIds[libraryName] = library.createEntry(libraryName).id;
         }
     }
 }
@@ -45,31 +46,31 @@ function get(e, libName) {
 }
 
 function getAll(e) {
-    return json.parse(
-        e.field("mdbm.Ids")
+    return common.json.parse(
+        e.field(idsField)
+    );
+}
+
+function set(e, libName, value) {
+    const entryIds = getAll(e);
+    entryIds[libName] = value;
+    setAll(e, entryIds);
+}
+
+function setAll(e, entryIds) {
+    e.set(
+        idsField,
+        common.json.stringify(entryIds)
     );
 }
 
 function setEmpty(e) {
-    const ids = type.emptyIds(typeName(e));
-    setAll(e, ids);
-}
-
-function setAll(e, ids) {
-    e.set(
-        "mdbm.Ids",
-        json.stringify(ids)
-    );
+    const entryIds = type.emptyIds(typeName(e));
+    setAll(e, entryIds);
 }
 
 function setSelf(e) {
     set(e, typeName(e), e.id);
-}
-
-function set(e, libName, value) {
-    const ids = getAll(e);
-    ids[libName] = value;
-    setAll(e, ids);
 }
 
 export {

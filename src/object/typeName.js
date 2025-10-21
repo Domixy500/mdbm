@@ -6,5 +6,5 @@ function typeName(e) {
 }
 
 export {
-  typeName
+    typeName
 };

@@ -4,6 +4,7 @@
 */
 
 import {exists} from "./exists";
+import {library} from "@library";
 import {messages} from "./messages";
 import {onCreate} from "./onCreate";
 
@@ -15,7 +16,7 @@ function create(typeName, baseType) {
 }
 
 function createType(typeName, baseType) {
-    const typeEntry = libByName("mdbm.Type").create({});
+    const typeEntry = library.createEntry("mdbm.Type");
     typeEntry.set("Name", typeName);
     if (baseType === undefined) {
         onCreate.open(typeEntry);

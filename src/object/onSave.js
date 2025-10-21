@@ -9,7 +9,8 @@ const onSave = {
 };
 
 function open(e, activeLibrary) {
-    
+    // do nothing
+    message("nothing");
 }
 
 function post(e) {

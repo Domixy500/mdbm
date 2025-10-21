@@ -1,13 +1,14 @@
 /*jslint beta*/
 /*global*/
 
+import {library} from "@library";
 import {onCreate} from "./onCreate";
 
-function create(typeName) {
-    const object = libByName(typeName).create({});
+function create(libraryName) {
+    const object = library.createEntry(libraryName);
     onCreate.open(
         object,
-        libByName(typeName)
+        library.get(libraryName)
     );
     onCreate.post(object);
     object.show();
