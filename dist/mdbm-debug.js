@@ -135,7 +135,7 @@ var mdbm = function(exports) {
     function set(e, typeName, value) {
         const ids = getAll(e);
         ids[typeName] = value;
-        setAll(ids);
+        setAll(e, ids);
     }
     const onCreate = {
         open: open,
