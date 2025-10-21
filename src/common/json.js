@@ -2,6 +2,7 @@
 /*global*/
 
 const json = {
+    parse,
     stringify
 };
 
@@ -12,6 +13,5 @@ function stringify(object) {
 }
 
 export {
-    parse,
-    stringify
+    json
 };
