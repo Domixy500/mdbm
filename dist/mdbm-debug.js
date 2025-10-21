@@ -99,7 +99,9 @@ var mdbm = function(exports) {
         parse: parse,
         stringify: stringify
     };
-    const parse = JSON.parse;
+    function parse(jsonString) {
+        return JSON.parse(jsonString);
+    }
     function stringify(object) {
         return JSON.stringify(object, null, 2);
     }
