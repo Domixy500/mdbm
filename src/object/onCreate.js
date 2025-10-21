@@ -19,13 +19,14 @@ function open(e, activeLibrary) {
         throw type.messages.isMissing(libraryName);
     }
     e.set("mdbm.Type", libraryName);
+    setEmptyIds(e);
 }
 
 function post(e) {
-    setIdsObject(e);
+    
 }
 
-function setIdsObject(e) {
+function setEmptyIds(e) {
     const ids = type.emptyIds(typeName(e));
     e.set(
         "mdbm.Ids",
