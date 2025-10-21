@@ -6,10 +6,14 @@ import {find} from "./find";
 function emptyIds(typeName) {
     const typeEntry = find(typeName);
     const types = typeEntry.field("hasTypes");
-    const entries = types.map(
-        (x) => [x.field("Name"), null]
+    const typeNames = types.map(
+        (x) => x.field("Name")
     );
-    return Object.fromEntries(entries);
+    const ids = Object.create(null);
+    typeNames.forEach(
+        (x) => ids[x] = null
+    );
+    return ids;
 }
 
 export {
