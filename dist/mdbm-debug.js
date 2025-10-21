@@ -70,8 +70,10 @@ var mdbm = function(exports) {
     function emptyIds(typeName) {
         const typeEntry = find(typeName);
         const types = typeEntry.field("hasTypes");
-        const entries = types.map(x => [x.field("Name"), null ]);
-        return Object.fromEntries(entries);
+        const typeNames = types.map(x => x.field("Name"));
+        const ids = Object.create(null);
+        typeNames.forEach(x => ids[x] = null);
+        return ids;
     }
     const type = {
         check: check,
