@@ -43,7 +43,7 @@ function setSelf(e) {
 function set(e, typeName, value) {
     const ids = getAll(e);
     ids[typeName] = value;
-    setAll(ids);
+    setAll(e, ids);
 }
 
 export {
