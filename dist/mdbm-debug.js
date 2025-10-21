@@ -1,4 +1,4 @@
-var mdbm = function(exports, json) {
+var mdbm = function(exports) {
     "use strict";
     function checkAccess() {
         libByName("Object");
@@ -95,6 +95,14 @@ var mdbm = function(exports, json) {
     const library = {
         onOpen: onOpen
     };
+    const json = {
+        parse: parse,
+        stringify: stringify
+    };
+    const parse = JSON.parse;
+    function stringify(object) {
+        return JSON.stringify(object, null, 2);
+    }
     function typeName(e) {
         return e.field("mdbm.Type");
     }
@@ -110,14 +118,14 @@ var mdbm = function(exports, json) {
         return getAll(e)[typeName];
     }
     function getAll(e) {
-        return json.json.parse(e.field("mdbm.Ids"));
+        return json.parse(e.field("mdbm.Ids"));
     }
     function setEmpty(e) {
         const ids = type.emptyIds(typeName(e));
         setAll(e, ids);
     }
     function setAll(e, ids) {
-        e.set("mdbm.Ids", json.json.stringify(ids));
+        e.set("mdbm.Ids", json.stringify(ids));
     }
     function setSelf(e) {
         set(e, typeName(e), e.id);
@@ -157,5 +165,5 @@ var mdbm = function(exports, json) {
     exports.object = object;
     exports.type = type;
     return exports;
-}({}, json);
+}({});
 //# sourceMappingURL=mdbm-debug.js.map
