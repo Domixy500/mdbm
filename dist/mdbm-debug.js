@@ -97,9 +97,9 @@ var mdbm = function(exports) {
         typeEntry.set("Name", typeName);
         if (baseType === undefined) {
             onCreate$1.open(typeEntry);
-            typeEntry.set("DisplayName", baseType.field("DisplayName"));
         } else {
             typeEntry.set("hasTypes", baseType.field("hasTypes"));
+            typeEntry.set("DisplayName", baseType.field("DisplayName"));
         }
         onCreate$1.post(typeEntry);
         return typeEntry;
