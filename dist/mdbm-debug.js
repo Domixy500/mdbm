@@ -97,6 +97,7 @@ var mdbm = function(exports) {
         typeEntry.set("Name", typeName);
         if (baseType === undefined) {
             onCreate$1.open(typeEntry);
+            typeEntry.set("DisplayName", baseType.field("DisplayName"));
         } else {
             typeEntry.set("hasTypes", baseType.field("hasTypes"));
         }
@@ -177,7 +178,7 @@ var mdbm = function(exports) {
         set(e, typeName(e), e.id);
     }
     function displayName(e) {
-        const template = type.fromObjectEntry(e).field("DisplayNamePattern");
+        const template = type.fromObjectEntry(e).field("DisplayName");
         const value = template.replace(/\$\{(.*?)\}/g, (ignore, key) => getVal(e, key));
         e.set("mdbm.DisplayName", value);
         return value;
