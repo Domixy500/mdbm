@@ -4,7 +4,7 @@
 import {type} from "@type";
 
 function displayName(e) {
-    const template = type.fromObjectEntry(e).field("DisplayNamePattern");
+    const template = type.fromObjectEntry(e).field("DisplayName");
     const value = template.replace(
         /\$\{(.*?)\}/g,
         (ignore, key) => getVal(e, key)
