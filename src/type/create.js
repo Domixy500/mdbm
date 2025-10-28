@@ -20,14 +20,14 @@ function createType(typeName, baseType) {
     typeEntry.set("Name", typeName);
     if (baseType === undefined) {
         onCreate.open(typeEntry);
-        typeEntry.set(
-            "DisplayName",
-            baseType.field("DisplayName")
-        );
     } else {
         typeEntry.set(
             "hasTypes",
             baseType.field("hasTypes")
+        );
+        typeEntry.set(
+            "DisplayName",
+            baseType.field("DisplayName")
         );
     }
     onCreate.post(typeEntry);
