@@ -13,10 +13,10 @@
     "license": "MIT",
     "author": "Domixy500",
     "type": "module",
-    "main": "dist/mdbm.js",
+    "main": "dist/mdbm.min.js",
     "scripts": {
         "build": "rollup -c",
-        "knip": "npx knip"
+        "check:unused": "knip"
     },
     "devDependencies": {
         "@rollup/plugin-node-resolve": "^16.0.3",
@@ -26,7 +26,9 @@
         "@typescript-eslint/eslint-plugin": "^8.46.3",
         "@typescript-eslint/parser": "^8.46.3",
         "eslint": "^9.39.1",
+        "knip": "^5.68.0",
         "rollup": "^4.53.1",
+        "tslib": "^2.8.1",
         "typescript": "^5.9.3"
     }
 }

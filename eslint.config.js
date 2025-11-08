@@ -4,13 +4,11 @@
 import eslintParserTs from "@typescript-eslint/parser";
 import eslintPluginTs from "@typescript-eslint/eslint-plugin";
 import stylistic from "@stylistic/eslint-plugin";
-import freezeExports from "./eslintRules/freezeExports.js";
 
 const rules = {
     "@typescript-eslint/explicit-function-return-type": "error",
     "@stylistic/indent": ["error", 4],
     "@stylistic/semi": ["error", "always"],
-    "local/freezeExports": "error"
 };
 
 const config = [
@@ -25,12 +23,7 @@ const config = [
         },
         plugins: {
             "@stylistic": stylistic,
-            "@typescript-eslint": eslintPluginTs,
-            local: {
-                rules: {
-                    "freezeExports": freezeExports
-                }
-            }
+            "@typescript-eslint": eslintPluginTs
         },
         rules
     }
