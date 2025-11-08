@@ -1,7 +1,5 @@
-import * as abc from "./helloWorld";
+import { hello } from "./helloWorld";
 
-const hello = abc.hello;
-
-export {
+export default Object.freeze({
     hello
-};
+});
