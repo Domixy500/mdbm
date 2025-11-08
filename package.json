@@ -16,7 +16,7 @@
     "main": "dist/mdbm.js",
     "scripts": {
         "build": "rollup -c",
-        "unimported": "npx unimported"
+        "knip": "npx knip"
     },
     "devDependencies": {
         "@rollup/plugin-node-resolve": "^16.0.3",
