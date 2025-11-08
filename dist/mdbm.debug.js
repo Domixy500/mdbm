@@ -1,10 +1,11 @@
-var mdbm = function(exports) {
+var mdbm = function() {
     "use strict";
-    function hello$1() {
+    function hello() {
         message("Hello World!");
     }
-    const hello = hello$1;
-    exports.hello = hello;
-    return exports;
-}({});
+    var index = Object.freeze({
+        hello: hello
+    });
+    return index;
+}();
 //# sourceMappingURL=mdbm.debug.js.map
