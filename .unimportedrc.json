@@ -2,6 +2,6 @@
     "aliases": {
     },
     "entry": [
-        "src/mdbm/index.js"
+        "src/index.ts"
     ]
 }
