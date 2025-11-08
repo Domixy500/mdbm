@@ -8,7 +8,8 @@ import stylistic from "@stylistic/eslint-plugin";
 const rules = {
     "@typescript-eslint/explicit-function-return-type": "error",
     "@stylistic/indent": ["error", 4],
-    "@stylistic/semi": ["error", "always"],
+    "@stylistic/object-curly-spacing": ["error", "never"],
+    "@stylistic/semi": ["error", "always"]
 };
 
 const config = [
