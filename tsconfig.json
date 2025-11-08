@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        // Main
+        "target": "es2015",
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "importHelpers": false,
+        "forceConsistentCasingInFileNames": true,
+        // Coding rules
+        "strict": true
+    },
+    "include": ["src"]
+}

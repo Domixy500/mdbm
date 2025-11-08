@@ -1,12 +1,7 @@
 {
-  "aliases": {
-    "@app": ["src/app"],
-    "@common": ["src/common"],
-    "@library": ["src/library"],
-    "@object": ["src/object"],
-    "@type": ["src/type"]
-  },
-  "entry": [
-    "src/mdbm/index.js"
-  ]
+    "aliases": {
+    },
+    "entry": [
+        "src/mdbm/index.js"
+    ]
 }

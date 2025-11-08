@@ -1,4 +1,8 @@
 {
+    "eslint.enable": true,
+    "eslint.useFlatConfig": true,
+    "eslint.validate": ["typescript", "javascript"],
+    "eslint.workingDirectories": [{ "mode": "auto" }],
 	"runOnSave.commands": [
         {
             "languages": ["javascript"],

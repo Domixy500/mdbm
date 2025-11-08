@@ -26,6 +26,9 @@ jobs:
 
       - name: Build with Rollup
         run: npm run build
+
+      - name: Copy and rename bundle file
+        run: cp dist/mdbm.debug.js dist/mdbm.js
         
       - name: Commit build artifacts
         run: |
