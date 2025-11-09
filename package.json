@@ -16,7 +16,8 @@
     "main": "dist/mdbm.min.js",
     "scripts": {
         "build": "rollup -c",
-        "check:unused": "knip"
+        "check:unused": "knip",
+        "lint": "eslint"
     },
     "devDependencies": {
         "@rollup/plugin-node-resolve": "^16.0.3",
