@@ -7,6 +7,7 @@ import stylistic from "@stylistic/eslint-plugin";
 
 const rules = {
     "@typescript-eslint/explicit-function-return-type": "error",
+    "@stylistic/eol-last": ["error", "always"],
     "@stylistic/indent": ["error", 4],
     "@stylistic/object-curly-spacing": ["error", "never"],
     "@stylistic/semi": ["error", "always"]
