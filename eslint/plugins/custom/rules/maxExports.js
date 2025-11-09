@@ -1,16 +1,22 @@
 /*jslint beta, node*/
 /*global*/
 
-const rule = Object.create(null);
-rule.docs = {
-    description: "Enforce a maximum number of exports per file",
-    recommended: false
-};
-rule.type = "suggestion";
-rule.messages = {
-    tooMany: "Too many exports ({{count}}). Maximum allowed is {{max}}."
+// Rule Information
+const rule = {
+    docs: {
+        description: "Enforce a maximum number of exports per file",
+        recommended: false
+    },
+    messages: {
+        tooMany: "Too many exports ({{count}}). Maximum allowed is {{max}}."
+    },
+    type: "suggestion"
 };
 
+// Rule Options
+const ruleDefaultOptions = {
+    max: 1
+};
 rule.schema = [{
     additionalProperties: false,
     properties: {
@@ -19,8 +25,11 @@ rule.schema = [{
     type: "object"
 }];
 
+// Further Rule Definitions
+
+// Rule Checking Methods
 function create(context) {
-    const {max} = options(context);
+    const {max} = getOptions(context);
     let exportCount = 0;
 
     function check(node) {
@@ -40,17 +49,16 @@ function create(context) {
     };
 }
 
-function options(context) {
-    const defaultOptions = {
-        max: 1
-    };
+// Options Helper
+function getOptions(context) {
     return Object.assign(
         {},
-        defaultOptions,
+        ruleDefaultOptions,
         context.options[0] || {}
     );
 }
 
+// Export Rule Structure
 export default Object.freeze({
     create,
     meta: rule
