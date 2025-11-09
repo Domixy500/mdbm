@@ -2,18 +2,10 @@
 /*global*/
 
 import eslintParserTs from "@typescript-eslint/parser";
-import eslintPluginTs from "@typescript-eslint/eslint-plugin";
-import stylistic from "@stylistic/eslint-plugin";
+import plugins from "./eslint/plugins/index.js";
+import rules from "./eslint/rules/index.js";
 
-const rules = {
-    "@typescript-eslint/explicit-function-return-type": "error",
-    "@stylistic/eol-last": ["error", "always"],
-    "@stylistic/indent": ["error", 4],
-    "@stylistic/object-curly-spacing": ["error", "never"],
-    "@stylistic/semi": ["error", "always"]
-};
-
-const config = [
+export default [
     {
         files: ["src/**/*.ts"],
         languageOptions: {
@@ -23,12 +15,7 @@ const config = [
                 sourceType: "module"
             }
         },
-        plugins: {
-            "@stylistic": stylistic,
-            "@typescript-eslint": eslintPluginTs
-        },
+        plugins,
         rules
     }
 ];
-
-export default config; //jslint-ignore-line
