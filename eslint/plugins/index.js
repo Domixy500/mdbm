@@ -1,9 +1,11 @@
 import eslintPluginTs from "@typescript-eslint/eslint-plugin";
+import eslintPluginImport from "eslint-plugin-import";
 import stylistic from "@stylistic/eslint-plugin";
 import custom from "./custom/index.js";
 
-export default {
-    "@typescript-eslint": eslintPluginTs,
+export default Object.freeze({
     "@stylistic": stylistic,
-    custom
-};
+    "@typescript-eslint": eslintPluginTs,
+    custom,
+    "import": eslintPluginImport
+});

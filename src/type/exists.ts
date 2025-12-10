@@ -1,9 +1,5 @@
 import {find} from "./find";
 
-function exists(name: string): boolean {
+export function exists(name: string): boolean {
     return find(name) !== undefined;;
 }
-
-export {
-    exists
-};
