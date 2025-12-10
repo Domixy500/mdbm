@@ -10,7 +10,9 @@
         
         // Coding rules
         "strict": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true
     },
     "include": ["src"]
 }
