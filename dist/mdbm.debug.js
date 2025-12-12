@@ -15,11 +15,15 @@ var mdbm = function() {
     function isMissing(name) {
         return !exists(name);
     }
+    function id(typeEntry) {
+        return typeEntry.id;
+    }
     function name(typeEntry) {
         return typeEntry.field("Name");
     }
     function fromEntry(typeEntry) {
         return Object.freeze({
+            id: () => id(typeEntry),
             name: () => name(typeEntry)
         });
     }
