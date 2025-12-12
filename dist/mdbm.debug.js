@@ -15,8 +15,17 @@ var mdbm = function() {
     function isMissing(name) {
         return !exists(name);
     }
+    function name(typeEntry) {
+        return typeEntry.field("Name");
+    }
+    function fromEntry(typeEntry) {
+        return Object.freeze({
+            name: () => name(typeEntry)
+        });
+    }
     var type = Object.freeze({
         __proto__: null,
+        fromEntry: fromEntry,
         isMissing: isMissing
     });
     var index = Object.freeze({
