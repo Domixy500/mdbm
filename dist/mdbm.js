@@ -20,7 +20,8 @@ var mdbm = function() {
     }
     function fromEntry(typeEntry) {
         return Object.freeze({
-            name: () => name(typeEntry)
+            name: () => name(typeEntry),
+            id: 5
         });
     }
     var type = Object.freeze({
