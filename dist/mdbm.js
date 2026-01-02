@@ -12,6 +12,24 @@ var mdbm = function() {
     function exists(name) {
         return find(name) !== undefined;
     }
+    function create(name, baseType) {
+        if (exists(name)) {
+            throw messages.existsAlready(typeName);
+        }
+        return createType(typeName, baseType);
+    }
+    function createType(typeName, baseType) {
+        const typeEntry = library.createEntry("mdbm.Type");
+        typeEntry.set("Name", typeName);
+        if (baseType === undefined) {
+            onCreate.open(typeEntry);
+        } else {
+            typeEntry.set("hasTypes", baseType.field("hasTypes"));
+            typeEntry.set("DisplayName", baseType.field("DisplayName"));
+        }
+        onCreate.post(typeEntry);
+        return typeEntry;
+    }
     function isMissing(name) {
         return !exists(name);
     }
@@ -29,6 +47,7 @@ var mdbm = function() {
     }
     var type = Object.freeze({
         __proto__: null,
+        create: create,
         fromEntry: fromEntry,
         isMissing: isMissing
     });
