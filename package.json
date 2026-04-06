@@ -13,9 +13,10 @@
     "scripts": {
         "build": "rollup -c",
         "dev": "rollup -c -w",
+        "knip": "knip",
         "lint": "eslint .",
-        "typecheck": "tsc --noEmit",
-        "knip": "knip"
+        "prebuild": "npm run lint && npm run typecheck",
+        "typecheck": "tsc --noEmit"
     },
     "devDependencies": {
         "@rollup/plugin-node-resolve": "^16.0.3",

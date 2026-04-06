@@ -3,5 +3,5 @@
 
 export default {
     "@custom/noFoo": "error",
-    "@stylistic/indent": "error"
+    "@stylistic/indent":  ["error", 4]
 };
