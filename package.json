@@ -1,0 +1,31 @@
+{
+    "name": "mdbm",
+    "version": "1.0.0",
+    "description": "",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Domixy500/mdbm.git"
+    },
+    "license": "MIT",
+    "author": "Domixy500",
+    "type": "module",
+    "main": "dist/mdbm.min.js",
+    "scripts": {
+        "build": "rollup -c",
+        "dev": "rollup -c -w",
+        "lint": "eslint .",
+        "typecheck": "tsc --noEmit",
+        "knip": "knip"
+    },
+    "devDependencies": {
+        "@rollup/plugin-node-resolve": "^16.0.3",
+        "@rollup/plugin-terser": "^1.0.0",
+        "@rollup/plugin-typescript": "^12.3.0",
+        "@typescript-eslint/eslint-plugin": "^8.58.0",
+        "@typescript-eslint/parser": "^8.58.0",
+        "eslint": "^10.2.0",
+        "knip": "^6.3.0",
+        "rollup": "^4.60.1",
+        "typescript": "^6.0.2"
+    }
+}
