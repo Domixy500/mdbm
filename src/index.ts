@@ -1,7 +1,7 @@
-import {hello} from "./helloWorld";
-import * as type from "./type";
+function toast(text: string) {
+    message(text)
+}
 
 export default Object.freeze({
-    hello,
-    type
+    toast
 });

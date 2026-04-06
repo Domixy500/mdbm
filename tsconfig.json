@@ -6,7 +6,6 @@
         "target": "es2015",
         "module": "esnext",
         "moduleResolution": "bundler",
-        "importHelpers": false,
         
         // Coding rules
         "strict": true,

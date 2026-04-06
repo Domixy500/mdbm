@@ -21,8 +21,7 @@ const config = {
                     },
                     mangle: false
                 })
-            ],
-            sourcemap: true
+            ]
         },
         {
             file: "dist/mdbm.min.js",
@@ -32,10 +31,10 @@ const config = {
                 terser({
                     format: {
                         comments: false
-                    },
-                    mangle: {
-                        properties: false
-                    }
+                    }//, test if can be removed
+                    // mangle: {
+                    //     properties: false
+                    // }
                 })
             ]
         }

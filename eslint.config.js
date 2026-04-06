@@ -1,9 +1,9 @@
-/*jslint beta, node, unordered*/
+/*jslint beta, node*/
 /*global*/
 
 import eslintParserTs from "@typescript-eslint/parser";
-import plugins from "./eslint/plugins/index.js";
-import rules from "./eslint/rules/index.js";
+import plugins from "./eslint/plugins.js";
+import rules from "./eslint/rules.js";
 
 export default [
     {
