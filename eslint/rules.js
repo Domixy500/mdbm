@@ -1,7 +1,7 @@
 /*jslint beta*/
 /*global*/
 
-export default {
+export default Object.freeze({
     "@custom/noFoo": "error",
-    "@stylistic/indent":  ["error", 4]
-};
+    "@stylistic/indent": ["error", 4]
+});
