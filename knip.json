@@ -1,5 +1,3 @@
 {
-  "entry": ["src/index.ts"],
-  "project": ["src/**/*.ts"],
-  "ignore": ["dist"]
+    "project": ["src/**/*.ts"]
 }
