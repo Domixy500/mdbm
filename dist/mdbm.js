@@ -1,10 +1,11 @@
 var mdbm = function() {
     "use strict";
-    function test(text) {
-        message(text);
+    function create(typeName) {
+        const library = libByName(typeName);
+        library.create();
     }
     var object = Object.freeze({
-        test: test
+        create: create
     });
     function toast(text) {
         message(text);
