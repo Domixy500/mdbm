@@ -1,5 +1,6 @@
-function test(text: string): void {
-    message(text);
+function create(typeName: string): void {
+    const library = libByName(typeName);
+    library.create();
 }
 
 export default Object.freeze({
