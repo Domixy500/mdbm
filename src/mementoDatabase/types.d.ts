@@ -1,6 +1,6 @@
 type Library = {
     /** Create new Entry in library */
-    create: (values: Record<string, unknown>) => Entry
+    create: (values: Record<string, unknown> = {}) => Entry
     /** The name of the library */
     name: string;
     /** Alias for name */
