@@ -1,14 +1,10 @@
-function toast(text: string): void {
-    message(text)
-}
+import object from "object";
 
-function test(libraryName: string): void {
-    const library = libByName(libraryName);
-    const entries = library.entries();
-    toast(entries.length.toString());
+function toast(text: string): void {
+    message(text);
 }
 
 export default Object.freeze({
-    test,
+    object,
     toast
 });

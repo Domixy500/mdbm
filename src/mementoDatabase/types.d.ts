@@ -1,4 +1,6 @@
 type Library = {
+    /** Create new Entry in library */
+    create: (values) => Entry
     /** The name of the library */
     name: string;
     /** Alias for name */
