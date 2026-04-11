@@ -4,5 +4,5 @@ function create(typeName: string): void {
 }
 
 export default Object.freeze({
-    test
+    create
 });
