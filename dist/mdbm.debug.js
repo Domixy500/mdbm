@@ -1,15 +1,16 @@
 var mdbm = function() {
     "use strict";
+    function test(text) {
+        message(text);
+    }
+    var object = Object.freeze({
+        test: test
+    });
     function toast(text) {
         message(text);
     }
-    function test(libraryName) {
-        const library = libByName(libraryName);
-        const entries = library.entries();
-        toast(entries.length.toString());
-    }
     var index = Object.freeze({
-        test: test,
+        object: object,
         toast: toast
     });
     return index;
