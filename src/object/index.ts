@@ -1,6 +1,7 @@
+import objectType from "../objectType";
+
 function create(typeName: string): void {
-    const library = libByName(typeName);
-    library.create();
+    const libraries
 }
 
 export default Object.freeze({
