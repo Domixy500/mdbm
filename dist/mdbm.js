@@ -6,10 +6,13 @@ var mdbm = function() {
     function test(typeName) {
         message(typeName);
     }
-    var object = Object.freeze({
-        __proto__: null,
+    var index$1 = Object.freeze({
         create: create,
         test: test
+    });
+    var object = Object.freeze({
+        __proto__: null,
+        default: index$1
     });
     function toast(text) {
         message(text);
