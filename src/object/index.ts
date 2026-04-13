@@ -8,7 +8,7 @@ function test(typeName: string): void {
     message(typeName);
 }
 
-export {
+export default Object.freeze({
     create,
     test
-}
+});
