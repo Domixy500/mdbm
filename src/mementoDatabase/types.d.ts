@@ -2,7 +2,7 @@ type Library = {
     /** Create new Entry in library */
     create: (values?: Record<string, unknown>) => Entry;
     /** Find Entry by unique name*/
-    findByKey: (name) => Entry;
+    findByKey: (name: string) => Entry;
     /** The name of the library */
     name: string;
     /** Alias for name */
@@ -14,5 +14,6 @@ type Library = {
 type Entry = {
     id: string;
     field: (name: string) => any;
+    name: string;
     set: (name: string, value: any) => void;
 };

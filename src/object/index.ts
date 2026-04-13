@@ -1,9 +1,14 @@
-import objectType from "../objectType";
+// import objectType from "../objectType";
 
 function create(typeName: string): void {
-    const libraries
+    message(typeName);
 }
 
-export default Object.freeze({
-    create
-});
+function test(typeName: string): void {
+    message(typeName);
+}
+
+export {
+    create,
+    test
+}
