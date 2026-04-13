@@ -1,4 +1,4 @@
-var mdbm = function() {
+var mdbm = function(exports) {
     "use strict";
     function create(typeName) {
         message(typeName);
@@ -6,20 +6,18 @@ var mdbm = function() {
     function test(typeName) {
         message(typeName);
     }
-    var index$1 = Object.freeze({
+    var index = Object.freeze({
         create: create,
         test: test
     });
-    var object = Object.freeze({
+    var index$1 = Object.freeze({
         __proto__: null,
-        default: index$1
+        default: index
     });
     function toast(text) {
         message(text);
     }
-    var index = Object.freeze({
-        object: object,
-        toast: toast
-    });
-    return index;
-}();
+    exports.object = index$1;
+    exports.toast = toast;
+    return exports;
+}({});
