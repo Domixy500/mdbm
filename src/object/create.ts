@@ -3,12 +3,12 @@ import objectType from "../objectType";
 
 function fromEntry(baseEntry: Entry, typeName: string): void {
     const ids = objectType.emptyIds(typeName);
-    log(ids.toString());
+    log(JSON.stringify(ids, null, 2));
     ids[typeName] = baseEntry.id;
     log(JSON.stringify(ids, null, 2));
     Object.keys(ids).forEach(
         function (key: string) {
-            if(ids[key] !== "") {
+            if(ids[key] === "") {
                 ids[key] = createEntry(key).id;
             }
         }
