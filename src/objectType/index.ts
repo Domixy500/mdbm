@@ -3,18 +3,24 @@ function typeEntry(typeName: string) {
     return library.findByKey(typeName);
 }
 
-function hasTypes(typeName: string) {
-    return typeEntry(typeName).field("hasTypes");
+function types(typeName: string) {
+    return typeEntry(typeName).field("Types");
+}
+
+function emptyIds(typename: string): Record<string, string> {
+    const keys = typeNames(typeName);
+    const entries = keys.map(
+        (x) => [x, null]
+    );
+    return Object.fromEntries(entries);
 }
 
 function typeNames(typeName: string) {
-    const types = hasTypes(typeName);
-    return types.map(
+    return types(typename).map(
         (x: Entry) => x.name
     );
 }
 
 export default Object.freeze({
-    hasTypes,
-    typeNames
+    emptyIds
 });
