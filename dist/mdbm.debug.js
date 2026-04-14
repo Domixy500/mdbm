@@ -1,16 +1,19 @@
 var mdbm = function() {
     "use strict";
-    function createEntry(libraryName) {
-        const library = libByName(libraryName);
-        const newEntry = library.create({});
-        return newEntry;
-    }
     function assignEmptyString(acc, key) {
         acc[key] = "";
         return acc;
     }
     function stringDictFromKeys(keys) {
         return keys.reduce(assignEmptyString, {});
+    }
+    function toJson(object) {
+        return JSON.stringify(object, null, 2);
+    }
+    function createEntry(libraryName) {
+        const library = libByName(libraryName);
+        const newEntry = library.create({});
+        return newEntry;
     }
     function typeEntry(typeName) {
         const library = libByName("ObjectType");
@@ -31,15 +34,13 @@ var mdbm = function() {
     });
     function fromEntry(baseEntry, typeName) {
         const ids = objectType.emptyIds(typeName);
-        log(JSON.stringify(ids, null, 2));
         ids[typeName] = baseEntry.id;
-        log(JSON.stringify(ids, null, 2));
         Object.keys(ids).forEach(function(key) {
             if (ids[key] === "") {
                 ids[key] = createEntry(key).id;
             }
         });
-        log(JSON.stringify(ids, null, 2));
+        baseEntry.set("mdbm.Ids", toJson(ids));
     }
     var create = Object.freeze({
         __proto__: null,
