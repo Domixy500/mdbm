@@ -4,7 +4,7 @@ function toast(text: string): void {
     message(text);
 }
 
-export {
+export default Object.freeze({
     object,
     toast
-};
+});
