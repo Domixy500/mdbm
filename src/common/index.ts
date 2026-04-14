@@ -3,6 +3,10 @@ function assignEmptyString(acc: StringDict, key: string): StringDict {
     return acc;
 }
 
+function findKeyByValue(dict: StringDict, value: string): string | undefined {
+    return Object.entries(dict).find(([_, v]) => v === value)?.[0];
+}
+
 function stringDictFromKeys(keys: string[]): StringDict {
     return keys.reduce(assignEmptyString, {});
 }
@@ -12,6 +16,7 @@ function toJson(object: any): string{
 }
 
 export {
+    findKeyByValue,
     stringDictFromKeys,
     toJson
 };

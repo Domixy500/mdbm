@@ -1,5 +1,9 @@
 import {stringDictFromKeys} from "../common";
 
+function displayName(typeName: string): string {
+    return typeEntry(typeName).field("DisplayName");
+}
+
 function typeEntry(typeName: string) {
     const library = libByName("ObjectType");
     return library.findByKey(typeName);
@@ -21,5 +25,6 @@ function typeNames(typeName: string) {
 }
 
 export default Object.freeze({
+    displayName,
     emptyIds
 });
