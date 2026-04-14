@@ -1,0 +1,1 @@
+type StringDict = Record<string, string>;
