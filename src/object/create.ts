@@ -1,11 +1,10 @@
+import { toJson } from "../common";
 import {createEntry} from "../mementoDatabase";
 import objectType from "../objectType";
 
 function fromEntry(baseEntry: Entry, typeName: string): void {
     const ids = objectType.emptyIds(typeName);
-    log(JSON.stringify(ids, null, 2));
     ids[typeName] = baseEntry.id;
-    log(JSON.stringify(ids, null, 2));
     Object.keys(ids).forEach(
         function (key: string) {
             if(ids[key] === "") {
@@ -13,7 +12,7 @@ function fromEntry(baseEntry: Entry, typeName: string): void {
             }
         }
     );
-    log(JSON.stringify(ids, null, 2));
+    baseEntry.set("mdbm.Ids", toJson(ids));
 }
     
 export {

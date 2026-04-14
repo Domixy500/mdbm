@@ -9,7 +9,7 @@ function types(typeName: string) {
     return typeEntry(typeName).field("Types");
 }
 
-function emptyIds(typeName: string): Record<string, string> {
+function emptyIds(typeName: string): StringDict {
     const keys = typeNames(typeName);
     return stringDictFromKeys(keys);
 }
