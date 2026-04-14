@@ -15,6 +15,10 @@ var mdbm = function() {
         const newEntry = library.create({});
         return newEntry;
     }
+    function getEntry(libraryName, id) {
+        const library = libByName(libraryName);
+        return library.findById(id);
+    }
     function typeEntry(typeName) {
         const library = libByName("ObjectType");
         return library.findByKey(typeName);
@@ -32,6 +36,14 @@ var mdbm = function() {
     var objectType = Object.freeze({
         emptyIds: emptyIds
     });
+    function entries(activeEntry) {
+        const ids = JSON.parse(activeEntry.field("mdbm.Ids"));
+        return Object.entries(ids).map(([libraryName, id]) => getEntry(libraryName, id));
+    }
+    function syncProperty(activeEntry, propertyName) {
+        const value = activeEntry.field(propertyName);
+        entries(activeEntry).forEach(x => x.set(propertyName, value));
+    }
     function fromEntry(baseEntry, typeName) {
         const ids = objectType.emptyIds(typeName);
         ids[typeName] = baseEntry.id;
@@ -41,6 +53,7 @@ var mdbm = function() {
             }
         });
         baseEntry.set("mdbm.Ids", toJson(ids));
+        syncProperty(baseEntry, "mdbm.Ids");
     }
     var create = Object.freeze({
         __proto__: null,
