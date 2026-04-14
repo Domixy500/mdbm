@@ -31,11 +31,11 @@ var mdbm = function() {
     });
     function fromEntry(baseEntry, typeName) {
         const ids = objectType.emptyIds(typeName);
-        log(ids.toString());
+        log(JSON.stringify(ids, null, 2));
         ids[typeName] = baseEntry.id;
         log(JSON.stringify(ids, null, 2));
         Object.keys(ids).forEach(function(key) {
-            if (ids[key] !== "") {
+            if (ids[key] === "") {
                 ids[key] = createEntry(key).id;
             }
         });
