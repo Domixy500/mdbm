@@ -1,5 +1,10 @@
 var mdbm = function() {
     "use strict";
+    function createEntry(libraryName) {
+        const library = libByName(libraryName);
+        const newEntry = library.create({});
+        return newEntry;
+    }
     function assignEmptyString(acc, key) {
         acc[key] = "";
         return acc;
@@ -27,6 +32,11 @@ var mdbm = function() {
     function fromEntry(baseEntry, typeName) {
         const ids = objectType.emptyIds(typeName);
         ids[typeName] = baseEntry.id;
+        Object.keys(ids).forEach(function(key) {
+            if (ids[key] !== "") {
+                ids[key] = createEntry(key).id;
+            }
+        });
     }
     var create = Object.freeze({
         __proto__: null,
@@ -35,12 +45,8 @@ var mdbm = function() {
     var object = Object.freeze({
         create: create
     });
-    function toast(text) {
-        message(text);
-    }
     var index = Object.freeze({
-        object: object,
-        toast: toast
+        object: object
     });
     return index;
 }();
