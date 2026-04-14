@@ -4,6 +4,7 @@
         "outDir": "dist",
         "rootDir": "src",
         "target": "es2015",
+        "lib": ["ESNext"],
         "module": "esnext",
         "moduleResolution": "bundler",
         

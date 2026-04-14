@@ -1,6 +1,7 @@
 import { toJson } from "../common";
 import {createEntry} from "../mementoDatabase";
 import objectType from "../objectType";
+import { syncProperty } from "./syncProperty";
 
 function fromEntry(baseEntry: Entry, typeName: string): void {
     const ids = objectType.emptyIds(typeName);
@@ -13,6 +14,7 @@ function fromEntry(baseEntry: Entry, typeName: string): void {
         }
     );
     baseEntry.set("mdbm.Ids", toJson(ids));
+    syncProperty(baseEntry, "mdbm.Ids");
 }
     
 export {
