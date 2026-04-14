@@ -10,14 +10,10 @@ var mdbm = function(exports) {
         create: create,
         test: test
     });
-    var index$1 = Object.freeze({
-        __proto__: null,
-        default: index
-    });
     function toast(text) {
         message(text);
     }
-    exports.object = index$1;
+    exports.object = index;
     exports.toast = toast;
     return exports;
 }({});
