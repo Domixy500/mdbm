@@ -12,10 +12,12 @@
     "main": "dist/mdbm.min.js",
     "scripts": {
         "build": "rollup -c",
+        "clean": "if exist dist rmdir /s /q dist",
         "dev": "rollup -c -w",
         "knip": "knip",
         "lint": "eslint .",
-        "prebuild": "npm run lint && npm run typecheck",
+        "prebuild": "npm run clean && npm run lint && npm run typecheck",
+        "tsTojs": "tsc",
         "typecheck": "tsc --noEmit"
     },
     "devDependencies": {
@@ -26,6 +28,7 @@
         "@typescript-eslint/eslint-plugin": "^8.58.0",
         "@typescript-eslint/parser": "^8.58.0",
         "eslint": "^10.2.0",
+        "eslint-plugin-perfectionist": "^5.8.0",
         "knip": "^6.3.0",
         "rollup": "^4.60.1",
         "typescript": "^6.0.2"
