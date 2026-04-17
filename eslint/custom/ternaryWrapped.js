@@ -32,23 +32,21 @@ export default Object.freeze({
                 const openParenText = source.lines[openParenLine - 1];
                 const baseIndent = openParenText.match(/^\s*/)[0].length;
 
-                // context.report({
-                //     message: `\n openParenLine: ${openParenLine} \n openParenText: ${openParenText} \n baseIndent: ${baseIndent}`,
-                //     node
-                // });
-
                 // Helper to check indentation
-                function checkIndent(partNode, label) {
+                function checkTernaryPart(partNode, label) {
                     const line = partNode.loc.start.line;
                     const text = source.lines[line - 1];
                     const indent = text.match(/^\s*/)[0].length;
 
                     const expected = baseIndent + 4;
 
-                    // context.report({
-                    //     message: `\n line: ${line} \n text: ${text} \n indent: ${indent}`,
-                    //     node: partNode
-                    // });
+                    if (line === openParenLine) {
+                        context.report({
+                            message: `Expected ${label} of ternary to be in a new line.`, //jslint-ignore-line
+                            node: partNode
+                        });
+                        return;
+                    }
 
                     if (indent !== expected) {
                         context.report({
@@ -59,9 +57,9 @@ export default Object.freeze({
                 }
 
                 // 3. Check indentation of all three parts
-                checkIndent(node.test, "Condition");
-                checkIndent(node.consequent, "Consequent");
-                checkIndent(node.alternate, "Alternate");
+                checkTernaryPart(node.test, "Condition");
+                checkTernaryPart(node.consequent, "Consequent");
+                checkTernaryPart(node.alternate, "Alternate");
             }
         };
     },
