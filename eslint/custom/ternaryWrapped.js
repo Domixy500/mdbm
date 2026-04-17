@@ -1,75 +1,89 @@
 /*jslint*/
 /*global*/
 
-export default Object.freeze({
-    create(context) {
-        const source = context.sourceCode;
-
-        return {
-            ConditionalExpression(node) {
-                const first = source.getFirstToken(node);
-                const before = source.getTokenBefore(first);
-
-                const last = source.getLastToken(node);
-                const after = source.getTokenAfter(last);
-
-                // 1. Check parentheses
-                const isWrapped = (
-                    before && before.value === "(" &&
-                    after && after.value === ")"
-                );
-
-                if (!isWrapped) {
-                    context.report({
-                        message: "Ternary must be wrapped in parentheses. ",
-                        node
-                    });
-                    return;
-                }
-
-                // 2. Base indentation (line of the '(')
-                const openParenLine = before.loc.start.line;
-                const openParenText = source.lines[openParenLine - 1];
-                const baseIndent = openParenText.match(/^\s*/)[0].length;
-
-                // Helper to check indentation
-                function checkTernaryPart(partNode, label) {
-                    const line = partNode.loc.start.line;
-                    const text = source.lines[line - 1];
-                    const indent = text.match(/^\s*/)[0].length;
-
-                    const expected = baseIndent + 4;
-
-                    if (line === openParenLine) {
-                        context.report({
-                            message: `Expected ${label} of ternary to be in a new line.`, //jslint-ignore-line
-                            node: partNode
-                        });
-                        return;
-                    }
-
-                    if (indent !== expected) {
-                        context.report({
-                            message: `${label} of ternary must be indented ${expected} spaces (found ${indent}).`, //jslint-ignore-line
-                            node: partNode
-                        });
-                    }
-                }
-
-                // 3. Check indentation of all three parts
-                checkTernaryPart(node.test, "Condition");
-                checkTernaryPart(node.consequent, "Consequent");
-                checkTernaryPart(node.alternate, "Alternate");
-            }
-        };
+const meta = {
+    docs: {
+        description: "Enforce consistent ternary operator"
     },
+    type: "layout"
+};
 
-    meta: {
-        docs: {
-            description: "Enforce JSLint-style multiline ternary formatting and indentation", //jslint-ignore-line
-            recommended: false
-        },
-        schema: [],
-        type: "layout"
+function checkTernary(context, node) {
+    const source = context.sourceCode;
+    const ternary = getTernary(node, source);
+
+    if (!ternary.isWrapped()) {
+        context.report({
+            message: "Ternary must be wrapped in parentheses.",
+            node
+        });
+        return;
     }
+
+    if (ternary)
+}
+
+function getIndent(line) {
+    return line.match(/^\s*/)[0].length;
+}
+
+function getLine(node) {
+    return node.loc.start.line;
+}
+
+function getLines(node) {
+    return {
+        alternate: getLine(node.alternate),
+        consequent: getLine(node.consequent),
+        test: getLine(node.test)
+    };
+}
+
+function getTernary(node, source) {
+    const tokens = getTokens(node, source);
+    const openParenLine = tokens.before.loc.start.line;
+    const expectedIndent = 4 + getIndent(source.lines[openParenLine - 1]);
+    const lines = getLines(node);
+
+    return {
+        expectedIndent,
+        isWrapped: () => isWrapped(tokens.before, tokens.after),
+        lines,
+        tokens
+    };
+}
+
+function getTokens(node, source) {
+    const first = source.getFirstToken(node);
+    const last = source.getLastToken(node);
+    const before = source.getTokenBefore(first);
+    const after = source.getTokenAfter(last);
+
+    return {
+        after,
+        before,
+        first,
+        last
+    };
+}
+
+function isWrapped(tokenBefore, tokenAfter) {
+    const isBefore = tokenBefore?.value === "(";
+    const isAfter = tokenAfter?.value === ")";
+    return isBefore && isAfter;
+}
+
+function create(context) {
+    const ConditionalExpression = function (node) {
+        return checkTernary(context, node);
+    };
+
+    return {
+        ConditionalExpression
+    };
+}
+
+export default Object.freeze({
+    create,
+    meta
 });
