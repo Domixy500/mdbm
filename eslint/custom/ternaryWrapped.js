@@ -9,18 +9,37 @@ const meta = {
 };
 
 function checkTernary(context, node) {
-    const source = context.sourceCode;
-    const ternary = getTernary(node, source);
+    const ternary = processTernary(node, context.sourceCode);
 
-    if (!ternary.isWrapped()) {
+    if (ternary.notWrapped || ternary.noNewLine) {
         context.report({
-            message: "Ternary must be wrapped in parentheses.",
+            message: "Wrap a ternary expression in parentheses, with a line break after the left parentheses", //jslint-ignore-line
             node
         });
         return;
     }
 
-    if (ternary)
+    if (getColumn(ternary.test) !== ternary.expectedIndent) {
+        context.report({
+            message: "Wrap a ternary expression in parentheses, with a line break after the left parentheses", //jslint-ignore-line
+            node
+        });
+        return;
+    }
+}
+
+function create(context) {
+    const ConditionalExpression = function (node) {
+        return checkTernary(context, node);
+    };
+
+    return {
+        ConditionalExpression
+    };
+}
+
+function getColumn(node) {
+    return node.loc.start.column + 1;
 }
 
 function getIndent(line) {
@@ -31,25 +50,12 @@ function getLine(node) {
     return node.loc.start.line;
 }
 
-function getLines(node) {
+function getLines(node, openParen) {
     return {
         alternate: getLine(node.alternate),
         consequent: getLine(node.consequent),
+        openParen,
         test: getLine(node.test)
-    };
-}
-
-function getTernary(node, source) {
-    const tokens = getTokens(node, source);
-    const openParenLine = tokens.before.loc.start.line;
-    const expectedIndent = 4 + getIndent(source.lines[openParenLine - 1]);
-    const lines = getLines(node);
-
-    return {
-        expectedIndent,
-        isWrapped: () => isWrapped(tokens.before, tokens.after),
-        lines,
-        tokens
     };
 }
 
@@ -73,13 +79,20 @@ function isWrapped(tokenBefore, tokenAfter) {
     return isBefore && isAfter;
 }
 
-function create(context) {
-    const ConditionalExpression = function (node) {
-        return checkTernary(context, node);
-    };
+function processTernary(node, source) {
+    const tokens = getTokens(node, source);
+    const openParenLine = tokens.before.loc.start.line;
+    const expectedIndent = 4 + getIndent(source.lines[openParenLine - 1]);
+    const lines = getLines(node, openParenLine);
+    const notWrapped = isWrapped(tokens.before, tokens.after) === false;
+    const noNewLine = lines.test !== lines.openParen + 1;
 
     return {
-        ConditionalExpression
+        expectedIndent,
+        lines,
+        noNewLine,
+        notWrapped,
+        tokens
     };
 }
 
