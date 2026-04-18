@@ -3,6 +3,11 @@
     console
 */
 
+const create = function (context) {
+    return {
+        ConditionalExpression: (node) => checkTernary(context, node)
+    };
+};
 const meta = {
     docs: {
         description: "Enforce consistent ternary operator"
@@ -25,12 +30,6 @@ function checkTernary(context, node) {
     checkPosition("condition", 1);
     checkPosition("questionMark", 2);
     checkPosition("colon", 3);
-}
-
-function create(context) {
-    return {
-        ConditionalExpression: (node) => checkTernary(context, node)
-    };
 }
 
 function expectedColumn(source, lineNumber) {
