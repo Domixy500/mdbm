@@ -11,7 +11,8 @@ function ids(e: Entry): StringDict {
     return (
         data === ""
         ? defaultIds(e)
-        : JSON.parse(data));
+        : JSON.parse(data)
+    );
 }
 
 function mdbmField(e: Entry, fieldName:string) {
