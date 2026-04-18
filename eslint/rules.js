@@ -3,7 +3,7 @@
 
 export default Object.freeze({
     "@custom/noFoo": "error",
-    "@custom/ternaryWrapped": "error",
+    "@custom/ternaryWrapped": "warn",
     "@perfectionist/sort-modules": ["error", {order: "asc"}],
     "@stylistic/indent": ["error", 4, {
         "ignoredNodes": ["ConditionalExpression"]

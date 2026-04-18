@@ -108,8 +108,30 @@ function expectedColumn(source, lineNumber) {
     return startIndent + 5;
 }
 
-const generateMessage = (text, expectedLine, expectedColumn, actualLine, actualColumn) =>
-    `Expected '${text}' at line ${expectedLine} and column ${expectedColumn}, not line ${actualLine} and column ${actualColumn}`;
+function generateMessage(
+    text,
+    expectedLine,
+    expectedColumn
+) {
+    return (
+        `'${text}' should be at `
+        + `Ln ${expectedLine}, Col ${expectedColumn}`
+    );
+}
+
+function generateMessage2(
+    text,
+    expectedLine,
+    expectedColumn,
+    actualLine,
+    actualColumn
+) {
+    return (
+        `Expected '${text}' at `
+        + `Ln ${expectedLine}, Col ${expectedColumn}, `
+        + `not Ln ${actualLine}, Col ${actualColumn} `
+    );
+}
 
 function isWrapped(tokens) {
     const isAfter = tokens.after?.value === ")";
@@ -204,7 +226,10 @@ function positionChecker(context, ternary, node) {
         const actualLine = location.line;
         const actualColumn = location.column + 1;
 
-        if (actualLine !== expectedLine || actualColumn !== expectedColumn) {
+        const lineIsWrong = actualLine !== expectedLine;
+        const columnIsWrong = actualColumn !== expectedColumn;
+
+        if ( lineIsWrong || columnIsWrong) {
             context.report({
                 message: generateMessage(
                     text,
