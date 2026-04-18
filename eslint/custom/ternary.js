@@ -1,7 +1,5 @@
 /*jslint beta*/
-/*global
-    console
-*/
+/*global*/
 
 const create = function (context) {
     return {
@@ -18,7 +16,6 @@ const meta = {
 function checkTernary(context, node) {
     const ternary = parseTernary(node, context.sourceCode);
     const checkPosition = positionChecker(context, ternary, node); //jslint-ignore-line
-    logObject(ternary);
 
     if (ternary.notWrapped) {
         context.report({
@@ -27,9 +24,10 @@ function checkTernary(context, node) {
         });
     }
 
-    checkPosition("condition", 1);
-    checkPosition("questionMark", 2);
-    checkPosition("colon", 3);
+    checkPosition("condition", 1, 0);
+    checkPosition("questionMark", 2, 0);
+    checkPosition("colon", 3, 0);
+    checkPosition("closingParen", 4, -4);
 }
 
 function expectedColumn(source, lineNumber) {
@@ -59,10 +57,6 @@ function lineIndent(line) {
     return line.match(/^\s*/)[0].length;
 }
 
-function logObject(object) {
-    console.log(toJson(object));
-}
-
 function nodeTokens(source, node) {
     const first = source.getFirstToken(node);
     const last = source.getLastToken(node);
@@ -78,12 +72,14 @@ function nodeTokens(source, node) {
 function parseTernary(node, source) {
     const tokens = nodeTokens(source, node);
     const locations = { //jslint-ignore-line
+        closingParen: tokens.after.loc,
         colon: tokens.colon.loc,
         condition: node.test.loc,
         questionMark: tokens.questionMark.loc
     };
     const startLine = tokens.before.loc.start.line;
     const texts = {
+        closingParen: tokens.after.value,
         colon: tokens.colon.value,
         condition: source.getText(node.test),
         questionMark: tokens.questionMark.value
@@ -99,34 +95,31 @@ function parseTernary(node, source) {
 }
 
 function positionChecker(context, ternary, node) {
-    return function (part, lineOffset) {
+    return function (part, lineOffset, columnOffset) {
         const location = ternary.locations[part].start;
         const text = ternary.texts[part];
 
-        const expectedLine = ternary.startLine + lineOffset; //jslint-ignore-line
+        const targetColumn = ternary.expectedColumn + columnOffset; //jslint-ignore-line
+        const targetLine = ternary.startLine + lineOffset; //jslint-ignore-line
 
         const actualColumn = location.column + 1; //jslint-ignore-line
         const actualLine = location.line;
 
-        const columnIsWrong = actualColumn !== ternary.expectedColumn;
-        const lineIsWrong = actualLine !== expectedLine;
+        const columnIsWrong = actualColumn !== targetColumn;
+        const lineIsWrong = actualLine !== targetLine;
 
 
         if (lineIsWrong || columnIsWrong) {
             context.report({
                 message: generateMessage(
                     text,
-                    expectedLine,
-                    ternary.expectedColumn
+                    targetLine,
+                    targetColumn
                 ),
                 node
             });
         }
     };
-}
-
-function toJson(object) {
-    return JSON.stringify(object, null, 2);
 }
 
 export default Object.freeze({
