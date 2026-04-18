@@ -2,13 +2,11 @@
 /*global*/
 
 import noFoo from "./noFoo.js";
-import ternaryJsLint from "./ternaryJsLint.js";
-import ternaryWrapped from "./ternaryWrapped.js";
+import ternary from "./ternary.js";
 
 export default {
     rules: {
         noFoo,
-        ternaryJsLint,
-        ternaryWrapped
+        ternary
     }
 };
