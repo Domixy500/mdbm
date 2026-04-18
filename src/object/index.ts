@@ -8,7 +8,10 @@ function defaultIds(e: Entry): StringDict {
 
 function ids(e: Entry): StringDict {
     const data = mdbmField(e, "Ids");
-    return (data === "" ? defaultIds(e) : JSON.parse(data));
+    return (
+        data === "" ? defaultIds(e)
+        : JSON.parse(data)
+    );
 }
 
 function mdbmField(e: Entry, fieldName:string) {
